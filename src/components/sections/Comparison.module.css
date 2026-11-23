@@ -1,0 +1,153 @@
+.section {
+  padding: calc(110 * var(--u)) 0 calc(130 * var(--u));
+  background: var(--black);
+}
+
+/* Garantía: una franja con el número grande. */
+.guarantee {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: calc(48 * var(--u));
+  margin-bottom: calc(120 * var(--u));
+  padding: calc(40 * var(--u)) calc(48 * var(--u));
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-panel);
+}
+
+.guaranteeNumber {
+  font-family: var(--font-display);
+  font-stretch: 112%;
+  font-weight: 640;
+  font-size: clamp(96px, calc(180 * var(--u)), 220px);
+  line-height: 0.8;
+  letter-spacing: -0.07em;
+}
+
+.guaranteeTitle {
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.guaranteeText {
+  max-width: 30ch;
+  margin-top: 10px;
+  font-size: clamp(22px, calc(32 * var(--u)), 40px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.guaranteeLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.title {
+  max-width: 14ch;
+  margin-top: 20px;
+}
+
+.tableWrap {
+  margin-top: calc(56 * var(--u));
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.table th,
+.table td {
+  padding: 18px 16px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.table thead th {
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.table thead th[data-ours] {
+  color: var(--black);
+  background: var(--text);
+  border-radius: 10px 10px 0 0;
+}
+
+.table tbody th {
+  width: 24%;
+  font-weight: 600;
+}
+
+.table td {
+  color: var(--text-muted);
+}
+
+.table td[data-ours] {
+  color: var(--text);
+  font-weight: 550;
+  background: var(--night-2);
+}
+
+.cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.yes,
+.no {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.yes {
+  background: var(--text);
+  color: var(--black);
+}
+
+.no {
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
+@media (max-width: 760px) {
+  .section {
+    padding: 64px 0 80px;
+  }
+
+  .guarantee {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 72px;
+    padding: 26px 22px;
+  }
+
+  .guaranteeNumber {
+    font-size: 96px;
+  }
+
+  .guaranteeText {
+    font-size: 22px;
+  }
+}

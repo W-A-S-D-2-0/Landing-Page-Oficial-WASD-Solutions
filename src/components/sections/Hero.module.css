@@ -1,0 +1,761 @@
+/* ───────── Hero (lienzo 1440 × 938u, papel gris) ───────── */
+
+.hero {
+  position: relative;
+  height: calc(938 * var(--u));
+  min-height: 640px;
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  isolation: isolate;
+}
+
+/* Grano muy suave: unifica el papel y evita bandas. */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.clock {
+  position: absolute;
+  top: calc(66 * var(--u));
+  right: calc(var(--gutter) + 200 * var(--u));
+  font-size: max(12px, calc(13 * var(--u)));
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink-muted);
+}
+
+/* Título: Archivo ancho, líneas que suben desde su máscara. */
+.title {
+  position: absolute;
+  top: calc(228 * var(--u));
+  left: var(--gutter);
+  z-index: 3;
+  font-family: var(--font-display);
+  font-stretch: 100%;
+  font-weight: 640;
+  font-size: calc(98 * var(--u));
+  line-height: 0.86;
+  letter-spacing: -0.06em;
+  word-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.lineInner {
+  display: inline-block;
+  white-space: nowrap;
+  animation: lineRise 1s var(--ease-out) both;
+  animation-delay: calc(120ms + var(--i) * 110ms);
+}
+
+.mark {
+  margin-left: 0.25em;
+  vertical-align: top;
+  position: relative;
+  top: 0.35em;
+  font-family: var(--font-ui);
+  font-size: max(12px, calc(15 * var(--u)));
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+@keyframes lineRise {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+/* Entradas escalonadas del resto del hero. */
+.rise {
+  animation: rise 800ms var(--ease-out) both;
+  animation-delay: calc(450ms + var(--d, 0) * 55ms);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+.about {
+  position: absolute;
+  top: calc(456 * var(--u));
+  left: var(--gutter);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(14 * var(--u));
+  width: max(280px, calc(330 * var(--u)));
+}
+
+.aboutText {
+  font-size: max(15px, calc(15.5 * var(--u)));
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  margin-bottom: calc(10 * var(--u));
+}
+
+/* ───────── Teclas (en lugar de la foto del original) ───────── */
+
+.visual {
+  position: absolute;
+  top: calc(196 * var(--u));
+  left: calc(478 * var(--u));
+  width: calc(640 * var(--u));
+  height: calc(720 * var(--u));
+  z-index: 2;
+  animation: visualIn 1.3s var(--ease-out) both;
+  animation-delay: 200ms;
+}
+
+@keyframes visualIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(10px);
+  }
+}
+
+.keys {
+  position: relative;
+  width: 100%;
+  height: calc(436 * var(--u));
+}
+
+.keyLink {
+  position: absolute;
+  border-radius: calc(24 * var(--u));
+}
+
+.cap {
+  --cap: calc(204 * var(--u));
+}
+
+.keyW {
+  top: 0;
+  left: calc(218 * var(--u));
+}
+
+.keyA {
+  top: calc(218 * var(--u));
+  left: 0;
+}
+
+.keyS {
+  top: calc(218 * var(--u));
+  left: calc(218 * var(--u));
+}
+
+.keyD {
+  top: calc(218 * var(--u));
+  left: calc(436 * var(--u));
+}
+
+.keyLink:hover .cap {
+  transform: translateY(-2px);
+}
+
+.keysHint {
+  position: absolute;
+  top: calc(120 * var(--u));
+  left: 0;
+  width: calc(190 * var(--u));
+  font-size: max(11px, calc(12 * var(--u)));
+  line-height: 1.35;
+  color: var(--ink-muted);
+  text-align: right;
+}
+
+.keysHint::before {
+  content: "";
+  display: block;
+  width: calc(48 * var(--u));
+  height: 1px;
+  margin: 0 0 10px auto;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+@media (hover: none) {
+  .keysHint {
+    display: none;
+  }
+}
+
+/* Placa oscura con la marca (en el original va sobre la espalda). */
+.plate {
+  position: absolute;
+  top: calc(492 * var(--u));
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: calc(16 * var(--u));
+  width: calc(364 * var(--u));
+  height: calc(73 * var(--u));
+  padding: 0 calc(22 * var(--u));
+  border-radius: calc(12 * var(--u));
+  background: rgb(17 17 17 / 0.86);
+  color: var(--text);
+  box-shadow: 0 18px 40px rgb(0 0 0 / 0.25), inset 0 1px 0 rgb(255 255 255 / 0.08);
+  transform: translateX(-50%);
+  backdrop-filter: blur(12px);
+}
+
+.plateName {
+  flex: 1;
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: calc(21 * var(--u));
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.plateMenu {
+  display: grid;
+  gap: 5px;
+}
+
+.plateMenu span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: currentColor;
+}
+
+.strip {
+  position: absolute;
+  top: calc(640 * var(--u));
+  left: 50%;
+  display: flex;
+  gap: calc(26 * var(--u));
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-stretch: 115%;
+  font-weight: 560;
+  font-size: max(11px, calc(13 * var(--u)));
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink-muted);
+}
+
+.strip span + span::before {
+  content: "·";
+  margin-right: calc(26 * var(--u));
+  opacity: 0.6;
+}
+
+/* ───────── Marco de cifras (abajo a la izquierda) ───────── */
+
+.frame {
+  position: absolute;
+  left: var(--gutter);
+  bottom: calc(37 * var(--u));
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1.08fr 1fr;
+  gap: calc(6 * var(--u));
+  width: calc(360 * var(--u));
+  min-width: 330px;
+  height: calc(208 * var(--u));
+  min-height: 196px;
+  padding: calc(6 * var(--u));
+  border-radius: calc(10 * var(--u));
+  background: var(--paper-2);
+}
+
+.offer,
+.entry {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-card);
+  padding: 12px;
+}
+
+.offer {
+  background: var(--ink);
+  color: var(--text);
+}
+
+.offerValue,
+.entryValue {
+  font-family: var(--font-display);
+  font-stretch: 104%;
+  font-weight: 600;
+  font-size: max(30px, calc(38 * var(--u)));
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.offerLabel,
+.entryLabel {
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.offerLabel {
+  color: var(--text-muted);
+}
+
+.offerKeys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.offerKeys li {
+  padding: 2px 7px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font-size: 10.5px;
+  font-weight: 550;
+  letter-spacing: 0.02em;
+}
+
+.offerBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  min-height: 34px;
+  padding: 0 10px 0 12px;
+  border-radius: 6px;
+  background: var(--text);
+  color: var(--black);
+  font-size: 12.5px;
+  font-weight: 600;
+  transition: transform 200ms var(--ease-state);
+}
+
+.offerBar:hover {
+  transform: translateY(-1px);
+}
+
+.entry {
+  background: #e9e9e9;
+  justify-content: flex-end;
+}
+
+.entryTag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line-ink);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.entryLabel {
+  color: var(--ink-muted);
+}
+
+/* ───────── Columna derecha ───────── */
+
+.side {
+  position: absolute;
+  top: calc(252 * var(--u));
+  right: var(--gutter);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: calc(240 * var(--u));
+  min-width: 220px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 16px 5px 5px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.5);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.6);
+  backdrop-filter: blur(10px);
+  font-size: 13px;
+  font-weight: 550;
+  white-space: nowrap;
+}
+
+.badgeDisc {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.available {
+  margin-top: calc(130 * var(--u));
+  font-size: max(20px, calc(27 * var(--u)));
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  text-align: right;
+}
+
+.availableDot {
+  display: inline-block;
+  width: 0.36em;
+  height: 0.36em;
+  margin-right: 0.1em;
+  border-radius: 50%;
+  background: var(--whatsapp);
+  vertical-align: 0.14em;
+  box-shadow: 0 0 0 4px rgb(37 211 102 / 0.18);
+}
+
+.now {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: calc(56 * var(--u));
+}
+
+.nowHead {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+.nowEyebrow {
+  color: var(--ink-muted);
+}
+
+.nowTitle {
+  font-weight: 600;
+}
+
+.nowYear {
+  grid-column: 2;
+  color: var(--ink-muted);
+}
+
+.nowCard {
+  position: relative;
+  display: block;
+  height: calc(196 * var(--u));
+  min-height: 170px;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: #1b1b1b;
+}
+
+/* Mini web de cafetería, en gris: es una demo, no un cliente. */
+.nowMock {
+  position: absolute;
+  inset: 14px 14px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 8px 8px 0 0;
+  background: #ededed;
+  color: var(--ink);
+  transform-origin: 50% 0;
+  transition: transform 600ms var(--ease-out);
+}
+
+.now:hover .nowMock {
+  transform: scale(1.05);
+}
+
+.nowMockBar {
+  width: 34%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--ink);
+}
+
+.nowMockTitle {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.nowMockLine {
+  width: 84%;
+  height: 5px;
+  border-radius: 3px;
+  background: #c2c2c2;
+}
+
+.nowMockBtn {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.nowArrow {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.55);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.6);
+  backdrop-filter: blur(8px);
+  transition: transform 300ms var(--ease-out);
+}
+
+.now:hover .nowArrow {
+  transform: rotate(45deg);
+}
+
+.nowProgress {
+  display: block;
+  height: 2px;
+  margin-top: 10px;
+  background: rgb(17 17 17 / 0.18);
+}
+
+.nowProgress span {
+  display: block;
+  width: 38%;
+  height: 100%;
+  background: var(--ink);
+  transform-origin: 0 50%;
+  animation: draw 1.2s var(--ease-out) 1s both;
+}
+
+@keyframes draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* ───────── Pantallas medianas ───────── */
+
+@media (min-width: 761px) and (max-width: 1100px) {
+  .hero {
+    height: auto;
+    min-height: 0;
+    padding: 120px var(--gutter) 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .title,
+  .about,
+  .visual,
+  .frame,
+  .side,
+  .clock {
+    position: relative;
+    inset: auto;
+  }
+
+  .clock {
+    display: none;
+  }
+
+  .title {
+    grid-column: 1 / -1;
+    font-size: 10vw;
+  }
+
+  .about {
+    width: auto;
+  }
+
+  .visual {
+    --u: calc((50vw - 60px) / 640);
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    width: 100%;
+    height: calc(700 * var(--u));
+  }
+
+  .frame {
+    align-self: end;
+  }
+
+  .side {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    gap: 24px;
+  }
+
+  .available {
+    margin: 0;
+  }
+
+  .now {
+    width: 260px;
+    margin: 0;
+  }
+}
+
+/* ───────── Celular (lienzo de 390u) ───────── */
+
+@media (max-width: 760px) {
+  .hero {
+    height: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: calc(96 * var(--u)) var(--gutter) calc(28 * var(--u));
+  }
+
+  .title,
+  .about,
+  .visual,
+  .frame,
+  .side {
+    position: relative;
+    inset: auto;
+  }
+
+  .clock {
+    position: relative;
+    inset: auto;
+    order: -1;
+    margin-bottom: calc(16 * var(--u));
+    font-size: 12px;
+  }
+
+  .title {
+    font-size: calc(62 * var(--u));
+  }
+
+  .mark {
+    display: none;
+  }
+
+  .about {
+    width: auto;
+    margin-top: calc(22 * var(--u));
+    gap: 12px;
+  }
+
+  .aboutText {
+    font-size: 15.5px;
+    margin-bottom: 4px;
+  }
+
+  /* Las teclas usan su propia escala dentro del celular. */
+  .visual {
+    --u: calc(100vw / 390 * 0.52);
+    width: 100%;
+    height: calc(700 * var(--u));
+    margin-top: calc(56 * var(--u));
+  }
+
+  .visual .keys {
+    width: calc(640 * var(--u));
+    margin-inline: auto;
+  }
+
+  .keysHint {
+    display: none;
+  }
+
+  .plate {
+    top: calc(486 * var(--u));
+    width: calc(600 * var(--u));
+    height: calc(116 * var(--u));
+    padding: 0 calc(34 * var(--u));
+  }
+
+  .plateName {
+    font-size: calc(34 * var(--u));
+  }
+
+  .strip {
+    top: calc(640 * var(--u));
+    left: 0;
+    right: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 4px;
+    gap: 8px;
+    transform: none;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    white-space: normal;
+  }
+
+  .strip span + span::before {
+    margin-right: 8px;
+  }
+
+  .side {
+    order: 4;
+    width: auto;
+    min-width: 0;
+    align-items: stretch;
+    margin-top: 18px;
+  }
+
+  .badge {
+    align-self: flex-start;
+  }
+
+  .available {
+    display: none;
+  }
+
+  .now {
+    margin-top: 18px;
+  }
+
+  .nowCard {
+    height: 170px;
+  }
+
+  .frame {
+    order: 5;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: 196px;
+    margin-top: 14px;
+  }
+}

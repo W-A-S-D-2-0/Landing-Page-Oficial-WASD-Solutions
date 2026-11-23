@@ -1,0 +1,56 @@
+.main {
+  padding: 150px 0 100px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.inner {
+  max-width: 820px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-stretch: 104%;
+  font-weight: 640;
+  font-size: clamp(38px, 6vw, 72px);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.updated {
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+.body {
+  display: grid;
+  gap: 18px;
+  margin-top: 40px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.body h2 {
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.body p {
+  max-width: 65ch;
+  color: var(--ink-muted);
+}
+
+.body ul {
+  display: grid;
+  gap: 6px;
+  padding-left: 22px;
+  list-style: disc;
+  color: var(--ink-muted);
+}
+
+.body .lead {
+  color: var(--ink);
+}

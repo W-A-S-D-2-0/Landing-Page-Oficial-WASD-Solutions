@@ -1,0 +1,267 @@
+.section {
+  padding: calc(140 * var(--u)) 0 calc(150 * var(--u));
+  border-top: 1px solid var(--line);
+  background: var(--black);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 40px;
+}
+
+.title {
+  margin-top: 20px;
+  max-width: 12ch;
+}
+
+.intro {
+  max-width: 400px;
+  justify-self: end;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.tabs {
+  display: flex;
+  gap: calc(28 * var(--u));
+  margin-top: calc(80 * var(--u));
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: none;
+  text-align: left;
+}
+
+.cap {
+  --cap: max(84px, calc(150 * var(--u)));
+}
+
+.tab:hover .cap:not([data-pressed]) {
+  transform: translateY(-3px);
+}
+
+.tabName {
+  font-size: 14px;
+  font-weight: 550;
+  color: var(--text-muted);
+  transition: color 200ms var(--ease-state);
+}
+
+.tab[aria-selected="true"] .tabName {
+  color: var(--text);
+}
+
+.hint {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: calc(56 * var(--u));
+  margin-top: calc(60 * var(--u));
+  padding-top: calc(48 * var(--u));
+  border-top: 1px solid var(--line);
+  animation: panelIn 500ms var(--ease-out) both;
+}
+
+.panel:focus-visible {
+  outline-offset: 8px;
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.panelText {
+  position: relative;
+}
+
+.panelKey {
+  position: absolute;
+  top: -0.12em;
+  right: 0;
+  font-family: var(--font-display);
+  font-stretch: 112%;
+  font-weight: 640;
+  font-size: calc(220 * var(--u));
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  color: var(--night-3);
+  pointer-events: none;
+}
+
+.panelName {
+  position: relative;
+  font-family: var(--font-display);
+  font-stretch: 104%;
+  font-weight: 600;
+  font-size: clamp(28px, calc(44 * var(--u)), 56px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.panelDesc {
+  position: relative;
+  max-width: 34ch;
+  margin-top: 14px;
+  font-size: 18px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.benefits {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.benefits li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+}
+
+.check {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--black);
+}
+
+/* Vista de ejemplo: una tarjeta de papel. */
+.preview {
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+  padding: 24px;
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.previewTitle {
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.previewLines {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.previewLines li {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #ececec;
+  font-size: 15px;
+  line-height: 1.35;
+  animation: lineIn 450ms var(--ease-out) both;
+}
+
+.previewLines li:first-child {
+  font-weight: 600;
+}
+
+.previewLines li[data-chat] {
+  max-width: 80%;
+  font-weight: 450;
+}
+
+.previewLines li[data-chat="out"] {
+  justify-self: end;
+  background: var(--ink);
+  color: var(--text);
+}
+
+@keyframes lineIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.previewNote {
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+
+.closing {
+  margin-top: calc(72 * var(--u));
+  font-size: clamp(20px, calc(28 * var(--u)), 34px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+@media (max-width: 760px) {
+  .section {
+    padding: 80px 0;
+  }
+
+  .head {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .intro {
+    justify-self: start;
+    font-size: 16px;
+  }
+
+  .tabs {
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 36px;
+  }
+
+  .cap {
+    --cap: calc(76 * var(--u));
+  }
+
+  .tabName {
+    font-size: 12px;
+  }
+
+  .panel {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-top: 32px;
+    padding-top: 28px;
+  }
+
+  .panelKey {
+    font-size: 120px;
+  }
+
+  .closing {
+    margin-top: 40px;
+    font-size: 20px;
+  }
+}
