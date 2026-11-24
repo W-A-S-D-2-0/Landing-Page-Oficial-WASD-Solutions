@@ -98,14 +98,14 @@ Con `NEXT_PUBLIC_GA_ID` y/o `NEXT_PUBLIC_META_PIXEL_ID` se cargan GA4 y Meta Pix
 
 1. Importa el repositorio en [vercel.com/new](https://vercel.com/new).
 2. En **Settings → Environment Variables**, agrega las variables de `.env.example`.
-3. `main` publica el sitio y `develop` genera una URL de vista previa.
+3. `main` publica el sitio y cada pull request genera una URL de vista previa.
 4. En **Settings → Domains**, conecta el dominio y actualiza `NEXT_PUBLIC_SITE_URL`.
 
 ---
 
 ## Cómo colaborar
 
-Ramas fijas `develop` (integración) y `main` (producción). Detalle en [CONTRIBUTING.md](CONTRIBUTING.md). Cada pull request y cada push a `develop` o `main` pasa por CI (lint, TypeScript y build).
+Una sola rama fija, `main` (producción). Cada cambio va en su propia rama y entra a `main` por pull request. Detalle en [CONTRIBUTING.md](CONTRIBUTING.md). Cada pull request y cada push a `main` pasa por CI (lint, TypeScript y build).
 
 ## Estructura
 

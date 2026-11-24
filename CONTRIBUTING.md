@@ -2,33 +2,25 @@
 
 ## Ramas
 
-Trabajamos con dos ramas fijas:
+Trabajamos con **una sola rama fija: `main`**. Lo que está en `main` es lo que se publica.
 
-| Rama | Qué es |
-| --- | --- |
-| `main` | Producción: lo que está en `main` es lo que se publica. Solo recibe cambios desde `develop` (o un `hotfix/` urgente). |
-| `develop` | Integración: aquí se juntan y se revisan los cambios antes de publicarlos. Todas las ramas de trabajo salen de `develop` y vuelven a `develop`. |
-
-- **Nadie trabaja directo en `main` ni en `develop`.** Cada cambio va en su propia rama y entra con un pull request.
+- **Nadie trabaja directo en `main`.** Cada cambio va en su propia rama, sale de `main` y vuelve a `main` con un pull request (así el CI revisa todo antes de publicar).
 - Nombra las ramas con un prefijo y una descripción corta en minúsculas, separada por guiones:
 
-| Prefijo | Para qué | Sale de y vuelve a | Ejemplo |
-| --- | --- | --- | --- |
-| `feature/` | Nueva sección, componente o funcionalidad | `develop` | `feature/seccion-testimonios` |
-| `content/` | Textos, FAQ, datos de contacto | `develop` | `content/faq-noviembre` |
-| `fix/` | Corrección de un error | `develop` | `fix/menu-movil-escape` |
-| `style/` | Ajustes visuales sin cambiar contenido | `develop` | `style/espaciado-proyectos` |
-| `chore/` | Configuración, dependencias, CI, SEO | `develop` | `chore/actualizar-next` |
-| `hotfix/` | Error urgente que ya está publicado | `main` | `hotfix/link-whatsapp-roto` |
+| Prefijo | Para qué | Ejemplo |
+| --- | --- | --- |
+| `feature/` | Nueva sección, componente o funcionalidad | `feature/seccion-testimonios` |
+| `content/` | Textos, FAQ, datos de contacto | `content/faq-noviembre` |
+| `fix/` | Corrección de un error | `fix/menu-movil-escape` |
+| `style/` | Ajustes visuales sin cambiar contenido | `style/espaciado-proyectos` |
+| `chore/` | Configuración, dependencias, CI, SEO | `chore/actualizar-next` |
 
 Cuando una rama ya se fusionó, se borra (GitHub ofrece el botón "Delete branch" al hacer merge).
 
 ## Flujo
 
-### 1. Trabajar en un cambio
-
 ```bash
-git checkout develop
+git checkout main
 git pull
 git checkout -b content/faq-noviembre
 # … cambios …
@@ -38,32 +30,9 @@ git commit -m "content: agrega pregunta sobre facturación"
 git push -u origin content/faq-noviembre
 ```
 
-Luego abre un pull request **hacia `develop`**, completa la plantilla y espera que el CI pase en verde. Revisa el resultado en `develop` antes de publicarlo.
+Luego abre un pull request **hacia `main`**, completa la plantilla y espera que el CI pase en verde. Al fusionarlo, se publica.
 
-### 2. Publicar (develop → main)
-
-Cuando lo que está en `develop` está revisado y listo para salir, abre un pull request de `develop` hacia `main` con el título `release: …` y un resumen de lo que incluye. Al fusionarlo, se publica.
-
-### 3. Error urgente en producción (hotfix)
-
-```bash
-git checkout main
-git pull
-git checkout -b hotfix/link-whatsapp-roto
-# … corrección …
-npm run check
-git commit -am "fix: corrige el link de WhatsApp del footer"
-git push -u origin hotfix/link-whatsapp-roto
-```
-
-Abre el pull request hacia `main`. Después de fusionarlo, lleva la corrección a `develop` para que no se pierda:
-
-```bash
-git checkout develop
-git pull
-git merge origin/main
-git push
-```
+Si es un error urgente que ya está publicado, el camino es el mismo con una rama `fix/`: lo importante es que el CI pase antes de fusionar.
 
 ## Mensajes de commit
 
