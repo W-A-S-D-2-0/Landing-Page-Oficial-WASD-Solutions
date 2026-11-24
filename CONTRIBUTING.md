@@ -15,9 +15,9 @@ Trabajamos con dos ramas fijas:
 | Prefijo | Para qué | Sale de y vuelve a | Ejemplo |
 | --- | --- | --- | --- |
 | `feature/` | Nueva sección, componente o funcionalidad | `develop` | `feature/seccion-testimonios` |
-| `content/` | Textos, precios, FAQ, datos de contacto | `develop` | `content/precios-octubre` |
+| `content/` | Textos, FAQ, datos de contacto | `develop` | `content/faq-noviembre` |
 | `fix/` | Corrección de un error | `develop` | `fix/menu-movil-escape` |
-| `style/` | Ajustes visuales sin cambiar contenido | `develop` | `style/espaciado-precios` |
+| `style/` | Ajustes visuales sin cambiar contenido | `develop` | `style/espaciado-proyectos` |
 | `chore/` | Configuración, dependencias, CI, SEO | `develop` | `chore/actualizar-next` |
 | `hotfix/` | Error urgente que ya está publicado | `main` | `hotfix/link-whatsapp-roto` |
 
@@ -30,12 +30,12 @@ Cuando una rama ya se fusionó, se borra (GitHub ofrece el botón "Delete branch
 ```bash
 git checkout develop
 git pull
-git checkout -b content/precios-octubre
+git checkout -b content/faq-noviembre
 # … cambios …
 npm run check
 git add .
-git commit -m "content: actualiza precios del Nivel 2"
-git push -u origin content/precios-octubre
+git commit -m "content: agrega pregunta sobre facturación"
+git push -u origin content/faq-noviembre
 ```
 
 Luego abre un pull request **hacia `develop`**, completa la plantilla y espera que el CI pase en verde. Revisa el resultado en `develop` antes de publicarlo.
@@ -73,7 +73,7 @@ Formato: `tipo: descripción en presente y en minúsculas`, con el mismo tipo qu
 feature: agrega sección de testimonios
 content: actualiza respuestas de preguntas frecuentes
 fix: corrige foco del menú móvil al cerrar
-style: reduce espaciado entre tarjetas de precios
+style: reduce espaciado en la sección de proyectos
 chore: actualiza dependencias
 ```
 
@@ -84,25 +84,25 @@ src/
 ├── app/                  # rutas de Next.js (page.tsx, layout.tsx, sitemap.ts…)
 ├── components/
 │   ├── sections/         # una sección por archivo + su .module.css
-│   └── ui/               # piezas reutilizables (KeyCap, CountUp, Icons…)
+│   └── ui/               # piezas reutilizables (Logo, ThemeToggle, KeyCap, Icons…)
 ├── data/                 # TODO el contenido editable
 └── lib/                  # lógica sin interfaz (whatsapp, analytics, lead)
 ```
 
 | Qué | Convención | Ejemplo |
 | --- | --- | --- |
-| Componentes | `PascalCase.tsx`, un componente principal por archivo, exportación con nombre | `PlanCard`, `export function Pricing()` |
+| Componentes | `PascalCase.tsx`, un componente principal por archivo, exportación con nombre | `KeyCap`, `export function Services()` |
 | Secciones nuevas | En `components/sections/` y agregadas en orden en `src/app/page.tsx` | `Testimonials.tsx` |
-| Datos | En `src/data/`, archivos en minúscula, exportaciones en `camelCase` | `plans.ts` → `export const plans` |
+| Datos | En `src/data/`, archivos en minúscula, exportaciones en `camelCase` | `faq.ts` → `export const faq` |
 | Helpers | En `src/lib/`, archivos en minúscula | `whatsapp.ts` |
 | Rutas | Carpetas en español y minúsculas | `app/privacidad/page.tsx` |
 | Ids de secciones (anclas) | En español, minúsculas y con guiones | `#como-funciona` |
 
 ## Reglas que no se rompen
 
-1. **Textos y precios solo en `src/data/`.** Los precios viven únicamente en `src/data/plans.ts`.
-2. **Colores y medidas solo con tokens** de `src/app/globals.css` (`var(--paper)`, `var(--ink)`, `var(--text-muted)`, `calc(N * var(--u))`…). Estilos en el `.module.css` de cada componente.
+1. **Textos solo en `src/data/`.** La landing no publica precios de WASD.
+2. **Colores y medidas solo con tokens** de `src/app/globals.css` (`var(--surface)`, `var(--text)`, `var(--primary)`, `var(--cta-bg)`…), que cambian solos con el tema claro/oscuro. Estilos en el `.module.css` de cada componente.
 3. **Animaciones con intención:** usa `data-reveal` para la aparición al hacer scroll. Entradas de 0.6–1.2 s con `ease-out`, nada en bucle infinito, siempre respetando `prefers-reduced-motion` y sin depender del JavaScript para ver el contenido.
-4. **Nada inventado:** ni clientes, ni testimonios, ni reseñas, ni logos, ni cifras de resultados. Los ejemplos van rotulados como "Demo".
+4. **Nada inventado:** ni clientes, ni testimonios, ni reseñas, ni logos, ni cifras de resultados. Lo ilustrativo va rotulado como "Ejemplo ilustrativo" y los clientes reales se muestran con su permiso.
 5. **Accesibilidad:** HTML semántico, un solo H1, todo usable con teclado, áreas táctiles de al menos 44 px.
 6. **Antes de cada PR:** `npm run check` sin errores.

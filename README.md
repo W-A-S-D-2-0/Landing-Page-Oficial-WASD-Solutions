@@ -2,9 +2,9 @@
 
 Landing page oficial de **WASD Solutions**, startup de Lima que ayuda a PYMEs a conseguir, atender y fidelizar clientes por internet: web, WhatsApp con IA y reservas.
 
-**Stack:** Next.js 16 (App Router) + TypeScript + CSS Modules. Se exporta como sitio estático (`/out`). Fuentes desde npm (`@fontsource-variable`), sin depender de Google Fonts. Animaciones con CSS y un poco de JavaScript propio, sin librerías.
+**Stack:** Next.js 16 (App Router) + TypeScript + CSS Modules. Se exporta como sitio estático (`/out`). Fuentes Plus Jakarta Sans e Inter desde npm (`@fontsource-variable`), sin depender de Google Fonts. Animaciones con CSS y un poco de JavaScript propio, sin librerías.
 
-**Diseño base:** "Orvante" (editorial monocromo) de MotionSites, adaptado a la marca: la foto del original se reemplazó por las cuatro teclas W·A·S·D, que son el logo y responden al teclado.
+**Diseño:** limpio y con los colores del logo (azul petróleo y ámbar). Dos temas con interruptor en el header: **claro** (blanco cálido) y **oscuro** (azul petróleo profundo, botones ámbar). Sin elección guardada, se usa el tema del sistema. El logo es la versión A de la hoja de marca (teclas juntas) y está en `src/components/ui/Logo.tsx`.
 
 ---
 
@@ -31,22 +31,21 @@ En WebStorm: abre la carpeta, deja que instale las dependencias y usa la pestañ
 
 ---
 
-## Cómo editar textos y precios
+## Cómo editar textos
 
 Todo el contenido está en `src/data/`. **No hace falta tocar componentes.**
 
 | Archivo | Qué contiene |
 | --- | --- |
 | `src/data/site.ts` | Marca, WhatsApp, email, redes, razón social, RUC, Libro de Reclamaciones, menú y SEO |
-| `src/data/plans.ts` | **Planes y precios** (único lugar donde se definen) |
-| `src/data/content.ts` | Textos de cada sección: hero, manifiesto, panel "un solo equipo", servicios W·A·S·D, pasos, demos, garantía, comparativa, formulario, equipo (oculto), cierre y footer |
+| `src/data/content.ts` | Textos de cada sección: header, hero y franja de garantías, "¿Te pasa esto?", servicios W·A·S·D, pasos, proyecto Woodland Perú, garantía, comparativa, formulario, equipo (oculto), preguntas, cierre y footer |
 | `src/data/faq.ts` | Preguntas frecuentes (también alimentan el JSON-LD `FAQPage`) |
 | `src/data/testimonials.ts` | Testimonios (preparado y **oculto** hasta tener datos reales) |
 
-- **Precios:** en `src/data/plans.ts`, cada plan tiene `prices.mensual` y, opcionalmente, `prices.unico`. El interruptor "Mensual / Pago único" solo cambia los planes que tienen `unico`.
-- **WhatsApp:** todos los links salen de `src/lib/whatsapp.ts`, con un mensaje distinto para consulta general, demo, plan y formulario.
+- **Precios:** la landing no muestra precios de WASD; se conversan por WhatsApp. Los montos en el celular de ejemplo del hero (por ejemplo, "Capuchino · S/ 12") son contenido ilustrativo.
+- **WhatsApp:** todos los links salen de `src/lib/whatsapp.ts`, con un mensaje distinto para consulta general, demo, proyecto y formulario.
 - **Formulario:** `src/lib/lead.ts` valida y tiene la función aislada `submitLead()`. Hoy abre WhatsApp con el mensaje armado; para conectar un backend, reemplaza el cuerpo de `submitLead()`.
-- **Colores y medidas:** solo los tokens de `src/app/globals.css`. El diseño se dibuja sobre un lienzo de 1440 px con la unidad `--u` (en celular, 390 px).
+- **Colores:** solo los tokens de `src/app/globals.css`. Cada token tiene su valor claro en `:root` y su valor oscuro en `:root[data-theme="dark"]`; un componente nuevo funciona en los dos temas si usa tokens.
 
 ---
 
@@ -68,7 +67,9 @@ Todo el contenido está en `src/data/`. **No hace falta tocar componentes.**
 | GA4 y Meta Pixel | `.env.local` → `NEXT_PUBLIC_GA_ID`, `NEXT_PUBLIC_META_PIXEL_ID` |
 | Imagen para redes (`public/og-image.png`) | Es la del prototipo, con la paleta anterior: hay que rehacerla en blanco y negro |
 
-**Qué no se inventó:** no hay clientes, testimonios, reseñas, logos ni cifras de resultados. Las cifras visibles (48 h, S/ 0, 60 días, 4 servicios) son condiciones de la oferta. Las demos van rotuladas como "Demo" y el reporte semanal dice "Ejemplo ilustrativo".
+**Qué no se inventó:** no hay clientes, testimonios, reseñas, logos ni cifras de resultados. Las cifras visibles (48 h, 60 días, 4 servicios) son condiciones de la oferta. El único cliente que se muestra es Woodland Perú, con datos del proyecto que hicimos y capturas de su web publicada (`public/proyectos/`), sin cifras de ventas. El celular del hero y el reporte semanal dicen "Ejemplo ilustrativo".
+
+**Antes de publicar:** confirmar con Woodland Perú que autoriza mostrar su nombre y las capturas de su web.
 
 ---
 
@@ -76,12 +77,12 @@ Todo el contenido está en `src/data/`. **No hace falta tocar componentes.**
 
 | Sección | Archivo | Qué se mueve |
 | --- | --- | --- |
-| Header flotante | `sections/Header.tsx` | Píldora negra que se desliza al enlace señalado o a la sección visible |
-| Hero | `sections/Hero.tsx`, `HeroKeys.tsx` | Título que sube desde su máscara, teclas que se presionan W·A·S·D al cargar y con el teclado físico; tocarlas lleva a ese servicio. Reloj de Lima en vivo |
-| Manifiesto | `sections/Statement.tsx` | Las palabras pasan de gris a blanco con el scroll |
-| Un solo equipo | `sections/OneTeam.tsx` | Cifras que cuentan y mini teclas que aparecen |
-| Servicios | `sections/Services.tsx` | Pestañas con forma de tecla (clic, flechas, W/A/S/D) |
-| Cómo funciona, Demos, Precios, Comparativa, Formulario, Preguntas, Cierre, Footer | `sections/*.tsx` | Aparición suave al entrar en pantalla |
+| Header | `sections/Header.tsx` | Fijo, gana fondo al bajar; interruptor de tema y menú en celular |
+| Hero | `sections/Hero.tsx` | El celular sube, el chat de la recepcionista con IA aparece mensaje a mensaje y las barras del reporte crecen |
+| ¿Te pasa esto? | `sections/Problem.tsx` | Aparición suave al entrar en pantalla |
+| Servicios | `sections/Services.tsx` | Las teclas en la forma del logo son las pestañas (clic, flechas o W/A/S/D en el teclado) |
+| Proyecto Woodland | `sections/Project.tsx` | Capturas reales de su web (escritorio y celular) y lo que construimos, por tecla |
+| Cómo funciona, Comparativa, Formulario, Preguntas, Cierre, Footer | `sections/*.tsx` | Aparición suave al entrar en pantalla |
 
 Con `prefers-reduced-motion` todo se ve en su estado final.
 
@@ -89,7 +90,7 @@ Con `prefers-reduced-motion` todo se ve en su estado final.
 
 ## Medición
 
-Con `NEXT_PUBLIC_GA_ID` y/o `NEXT_PUBLIC_META_PIXEL_ID` se cargan GA4 y Meta Pixel. Eventos: `whatsapp_click` (Contact), `demo_cta_click`, `lead_submit` (Lead) y `plan_click`. Para medir un botón nuevo, agrégale `data-track="evento"` y `data-track-label="etiqueta"`.
+Con `NEXT_PUBLIC_GA_ID` y/o `NEXT_PUBLIC_META_PIXEL_ID` se cargan GA4 y Meta Pixel. Eventos: `whatsapp_click` (Contact), `demo_cta_click` y `lead_submit` (Lead). Para medir un botón nuevo, agrégale `data-track="evento"` y `data-track-label="etiqueta"`.
 
 ---
 
@@ -113,7 +114,7 @@ src/
 ├── app/                  # layout, página, páginas legales, sitemap, robots, ícono, tokens (globals.css)
 ├── components/
 │   ├── sections/         # una sección por archivo, cada una con su .module.css
-│   ├── ui/               # KeyCap, CountUp, LimaClock, Icons, Logo, RevealObserver, TrackClicks
+│   ├── ui/               # Logo, ThemeToggle, KeyCap, Icons, RevealObserver, TrackClicks
 │   ├── Analytics.tsx     # GA4 + Meta Pixel
 │   ├── JsonLd.tsx        # ProfessionalService + FAQPage
 │   └── LegalPage.tsx     # plantilla de páginas legales
