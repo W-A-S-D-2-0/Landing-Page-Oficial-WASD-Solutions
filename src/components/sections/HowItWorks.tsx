@@ -1,30 +1,48 @@
 import type { CSSProperties } from "react";
-import { howItWorks } from "@/data/content";
+import Link from "next/link";
+import { guarantee, howItWorks } from "@/data/content";
+import { ArrowRight } from "@/components/ui/Icons";
 import styles from "./HowItWorks.module.css";
 
-/** Cuatro pasos numerados unidos por una línea (vertical en el celular). */
+/** Cuatro pasos en una línea que se dibuja al entrar, y la garantía. */
 export function HowItWorks() {
   return (
     <section id="como-funciona" className="section" aria-labelledby="como-funciona-title">
       <div className="container">
-        <header className="section-head center">
-          <p className="eyebrow">{howItWorks.eyebrow}</p>
-          <h2 id="como-funciona-title" className="section-title">
+        <header className="section-head">
+          <h2 id="como-funciona-title" className="section-title" data-reveal="mask">
             {howItWorks.title}
           </h2>
-          <p className="section-intro">{howItWorks.intro}</p>
+          <p className="section-aside" data-reveal="">
+            {howItWorks.aside}
+          </p>
         </header>
-        <ol className={styles.steps}>
+
+        <ol className={styles.steps} data-reveal="">
           {howItWorks.steps.map((step, i) => (
-            <li key={step.title} className={styles.step} data-reveal="" style={{ "--reveal-delay": `${i * 100}ms` } as CSSProperties}>
+            <li key={step.title} className={styles.step} style={{ "--i": i } as CSSProperties}>
               <span className={styles.number} aria-hidden="true">
-                {i + 1}
+                {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className={styles.title}>{step.title}</h3>
               <p className={styles.text}>{step.text}</p>
             </li>
           ))}
         </ol>
+
+        <div className={styles.guarantee} data-reveal="">
+          <span className={styles.days} aria-hidden="true">
+            60
+          </span>
+          <p>
+            <b>{guarantee.title}</b>
+            {guarantee.text}
+          </p>
+          <Link href={guarantee.href} className={styles.link}>
+            {guarantee.linkLabel}
+            <ArrowRight size={15} />
+          </Link>
+        </div>
       </div>
     </section>
   );

@@ -1,29 +1,38 @@
 "use client";
 
 import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
-import { services, type KeyLetter } from "@/data/content";
-import { Check } from "@/components/ui/Icons";
+import { hero, services, type KeyLetter } from "@/data/content";
 import { KeyCap } from "@/components/ui/KeyCap";
+import { toDomain } from "@/lib/domain";
 import { SELECT_KEY_EVENT, isTyping, toKeyLetter } from "@/lib/keys";
+import { HeroPreview } from "./HeroPreview";
 import styles from "./Services.module.css";
 
+const LAST_STEP = 5;
+
 /**
- * Servicios W·A·S·D como pestañas accesibles con forma de tecla.
- * Responden al clic, a las flechas, a W/A/S/D en el teclado (mientras la
- * sección está en pantalla) y a las teclas del hero.
+ * Servicios W·A·S·D como pestañas con forma de tecla. Al elegir una, el
+ * ejemplo de la derecha se vuelve a armar en vivo con un negocio de muestra.
+ * Responden al clic, a las flechas y a W/A/S/D (mientras la sección está en
+ * pantalla). Sin JavaScript se ve el ejemplo terminado.
  */
 export function Services() {
   const [selected, setSelected] = useState<KeyLetter>("W");
   const [pressed, setPressed] = useState<KeyLetter | null>(null);
+  const [step, setStep] = useState(LAST_STEP);
   const sectionRef = useRef<HTMLElement>(null);
   const tabsRef = useRef<Record<string, HTMLButtonElement | null>>({});
-  const pressTimer = useRef(0);
+  const timers = useRef<number[]>([]);
 
   const choose = (key: KeyLetter, focus = false) => {
     setSelected(key);
     setPressed(key);
-    clearTimeout(pressTimer.current);
-    pressTimer.current = window.setTimeout(() => setPressed(null), 170);
+    timers.current.forEach(clearTimeout);
+    timers.current = [window.setTimeout(() => setPressed(null), 170)];
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setStep(0);
+      for (let s = 1; s <= LAST_STEP; s++) timers.current.push(window.setTimeout(() => setStep(s), 120 + s * 200));
+    }
     if (focus) tabsRef.current[key]?.focus();
   };
 
@@ -41,11 +50,13 @@ export function Services() {
       if (rect.top > window.innerHeight * 0.6 || rect.bottom < window.innerHeight * 0.3) return;
       choose(key);
     };
+    const pending = timers.current;
     window.addEventListener(SELECT_KEY_EVENT, onSelect);
     window.addEventListener("keydown", onKey);
     return () => {
       window.removeEventListener(SELECT_KEY_EVENT, onSelect);
       window.removeEventListener("keydown", onKey);
+      pending.forEach(clearTimeout);
     };
   }, []);
 
@@ -69,80 +80,72 @@ export function Services() {
   return (
     <section id="servicios" ref={sectionRef} className="section section-alt" aria-labelledby="servicios-title">
       <div className="container">
-        <header className="section-head center">
-          <p className="eyebrow">{services.eyebrow}</p>
-          <h2 id="servicios-title" className="section-title">
+        <header className="section-head">
+          <h2 id="servicios-title" className="section-title" data-reveal="mask">
             {services.title}
           </h2>
-          <p className="section-intro">{services.intro}</p>
+          <p className="section-aside" data-reveal="">
+            {services.aside}
+          </p>
         </header>
 
         <div className={styles.layout}>
-        <div className={styles.controls}>
-        <div role="tablist" aria-label={services.tablistLabel} className={styles.tabs} data-reveal="">
-          {services.items.map((s) => (
-            <button
-              key={s.key}
-              ref={(el) => {
-                tabsRef.current[s.key] = el;
-              }}
-              id={`tab-${s.key}`}
-              role="tab"
-              type="button"
-              aria-selected={selected === s.key}
-              aria-controls={`panel-${s.key}`}
-              tabIndex={selected === s.key ? 0 : -1}
-              className={`${styles.tab} ${styles[`tab${s.key}`]}`}
-              onClick={() => choose(s.key)}
-              onKeyDown={onTabKeyDown}
+          <div className={styles.side}>
+            <div role="tablist" aria-label={services.tablistLabel} className={styles.tabs} data-reveal="">
+              {services.items.map((s) => (
+                <button
+                  key={s.key}
+                  ref={(el) => {
+                    tabsRef.current[s.key] = el;
+                  }}
+                  id={`tab-${s.key}`}
+                  role="tab"
+                  type="button"
+                  aria-selected={selected === s.key}
+                  aria-controls="panel-servicio"
+                  tabIndex={selected === s.key ? 0 : -1}
+                  className={`${styles.tab} ${styles[`tab${s.key}`]}`}
+                  onClick={() => choose(s.key)}
+                  onKeyDown={onTabKeyDown}
+                >
+                  <KeyCap letter={s.key} active={selected === s.key} pressed={pressed === s.key} className={styles.cap} />
+                  <span className="sr-only">{s.name}</span>
+                </button>
+              ))}
+            </div>
+
+            <div
+              key={item.key}
+              id="panel-servicio"
+              role="tabpanel"
+              aria-labelledby={`tab-${item.key}`}
+              tabIndex={0}
+              className={styles.panel}
             >
-              <KeyCap letter={s.key} active={selected === s.key} pressed={pressed === s.key} className={styles.cap} />
-              <span className={styles.tabName}>{s.name}</span>
-            </button>
-          ))}
-        </div>
-        <p className={styles.hint}>{services.hint}</p>
-        </div>
-
-        <div
-          key={item.key}
-          id={`panel-${item.key}`}
-          role="tabpanel"
-          aria-labelledby={`tab-${item.key}`}
-          tabIndex={0}
-          className={styles.panel}
-        >
-          <div className={styles.panelText}>
-            <h3 className={styles.panelName}>{item.name}</h3>
-            <p className={styles.panelDesc}>{item.description}</p>
-            <ul className={styles.benefits}>
-              {item.benefits.map((b) => (
-                <li key={b}>
-                  <span className={styles.check}>
-                    <Check size={13} />
-                  </span>
-                  {b}
-                </li>
-              ))}
-            </ul>
+              <h3 className={styles.name}>{item.name}</h3>
+              <p className={styles.desc}>{item.description}</p>
+              <ul className={styles.tags}>
+                {item.tags.map((tag, i) => (
+                  <li key={tag} style={{ animationDelay: `${160 + i * 70}ms` }}>
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div className={styles.preview} aria-label={`Vista de ejemplo: ${item.preview.title}`}>
-            <p className={styles.previewTitle}>{item.preview.title}</p>
-            <ul className={styles.previewLines}>
-              {item.preview.lines.map((line, i) => (
-                <li key={line} style={{ animationDelay: `${120 + i * 90}ms` }} data-chat={item.key === "A" ? (i % 2 ? "out" : "in") : undefined}>
-                  {line}
-                </li>
-              ))}
-            </ul>
-            <p className={styles.previewNote}>Ejemplo ilustrativo</p>
+
+          <div className={styles.preview} aria-hidden="true" data-reveal="zoom">
+            <HeroPreview
+              key={item.key}
+              service={item.key}
+              name={item.sample.name}
+              description={item.sample.description}
+              domain={toDomain(item.sample.name, hero.defaultDomain)}
+              step={step}
+              typing={null}
+            />
           </div>
         </div>
-        </div>
-
-        <p className={styles.closing} data-reveal="">
-          {services.closing}
-        </p>
       </div>
     </section>
   );

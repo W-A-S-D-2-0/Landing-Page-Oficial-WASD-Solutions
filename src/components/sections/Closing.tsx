@@ -1,8 +1,8 @@
+import type { CSSProperties } from "react";
 import { faq } from "@/data/faq";
-import { faqSection, finalCta } from "@/data/content";
+import { faqSection } from "@/data/content";
 import { whatsappUrl } from "@/lib/whatsapp";
-import { ArrowRight, Plus } from "@/components/ui/Icons";
-import { LogoMark } from "@/components/ui/Logo";
+import { Plus } from "@/components/ui/Icons";
 import styles from "./Closing.module.css";
 
 /** Preguntas frecuentes (acordeón nativo con <details>). */
@@ -11,11 +11,10 @@ export function Faq() {
     <section id="preguntas" className="section section-alt" aria-labelledby="preguntas-title">
       <div className={`container ${styles.faqGrid}`}>
         <header>
-          <p className="eyebrow">{faqSection.eyebrow}</p>
-          <h2 id="preguntas-title" className="section-title">
+          <h2 id="preguntas-title" className="section-title" data-reveal="mask">
             {faqSection.title}
           </h2>
-          <p className={styles.more}>
+          <p className={styles.more} data-reveal="">
             {faqSection.more}{" "}
             <a href={whatsappUrl({ type: "general" })} target="_blank" rel="noopener noreferrer" data-track="whatsapp_click" data-track-label="faq">
               {faqSection.moreCta}
@@ -23,8 +22,8 @@ export function Faq() {
           </p>
         </header>
         <div className={styles.list}>
-          {faq.map((item) => (
-            <details key={item.question} className={styles.item}>
+          {faq.map((item, i) => (
+            <details key={item.question} className={styles.item} data-reveal="" style={{ "--reveal-delay": `${i * 60}ms` } as CSSProperties}>
               <summary className={styles.question}>
                 {item.question}
                 <span className={styles.toggle} aria-hidden="true">
@@ -34,44 +33,6 @@ export function Faq() {
               <p className={styles.answer}>{item.answer}</p>
             </details>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/** Llamado final: bloque azul petróleo con el logo y el botón a WhatsApp. */
-export function FinalCta() {
-  return (
-    <section className="section" aria-labelledby="final-title">
-      <div className="container">
-        <div className={styles.final} data-reveal="">
-          <div className={styles.finalMark} aria-hidden="true">
-            <LogoMark width={150} />
-          </div>
-          <div className={styles.finalCopy}>
-            <h2 id="final-title" className={styles.finalTitle}>
-              {finalCta.title}
-            </h2>
-            <p className={styles.finalText}>{finalCta.text}</p>
-            <div className={styles.finalActions}>
-              <a
-                href={whatsappUrl({ type: "demo" })}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`btn ${styles.finalPrimary}`}
-                data-track="whatsapp_click"
-                data-track-label="cta-final"
-              >
-                {finalCta.button}
-                <ArrowRight size={17} />
-                <span className="sr-only">(se abre WhatsApp)</span>
-              </a>
-              <a href="#diagnostico" className={`btn ${styles.finalGhost}`} data-track="demo_cta_click" data-track-label="cta-final-form">
-                {finalCta.secondary}
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </section>
