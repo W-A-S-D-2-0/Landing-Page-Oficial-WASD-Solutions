@@ -1,108 +1,109 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { header } from "@/data/content";
 import { site } from "@/data/site";
-import { hero } from "@/data/content";
 import { whatsappUrl } from "@/lib/whatsapp";
-import { ArrowUpRight, WhatsAppIcon } from "@/components/ui/Icons";
-import { LogoMark } from "@/components/ui/Logo";
+import { Close, Menu } from "@/components/ui/Icons";
+import { Logo } from "@/components/ui/Logo";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import styles from "./Header.module.css";
 
-const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
-
 /**
- * Header flotante: píldora blanca con una píldora negra que se desliza hasta
- * el enlace señalado (o hasta la sección en la que estás) y botón de contacto.
+ * Header fijo: logo, enlaces, interruptor de tema y botón a WhatsApp.
+ * Al bajar gana un fondo con borde. En celular, menú desplegable accesible.
  */
-export function Header({ home = true }: { home?: boolean }) {
-  const linksRef = useRef<Array<HTMLAnchorElement | null>>([]);
-  // En páginas internas (legales) ningún enlace queda marcado.
-  const [active, setActive] = useState(home ? 0 : -1);
-  const [hover, setHover] = useState<number | null>(null);
-  const [pill, setPill] = useState<{ x: number; w: number } | null>(null);
-
-  const current = hover ?? active;
-
-  const measure = useCallback(() => {
-    const el = current >= 0 ? linksRef.current[current] : null;
-    setPill(el ? { x: el.offsetLeft, w: el.offsetWidth } : null);
-  }, [current]);
-
-  useIsoLayoutEffect(() => {
-    measure();
-  }, [measure]);
+export function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("resize", measure);
-    document.fonts?.ready.then(measure).catch(() => {});
-    return () => window.removeEventListener("resize", measure);
-  }, [measure]);
-
-  // Marca la sección visible según el scroll (solo en la página principal).
-  useEffect(() => {
-    if (!home) return;
-    const ids = site.nav.map((item) => item.href.split("#")[1]);
-    const sections = ids.map((id) => document.getElementById(id)).filter((s): s is HTMLElement => Boolean(s));
-    const onScroll = () => {
-      const y = window.scrollY + window.innerHeight * 0.35;
-      let index = 0;
-      sections.forEach((section) => {
-        const i = ids.indexOf(section.id);
-        if (section.offsetTop <= y) index = i;
-      });
-      setActive(index);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [home]);
+  }, []);
+
+  // Cierra el menú con Escape o al pasar a escritorio.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onResize = () => window.innerWidth > 960 && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [open]);
 
   return (
-    <header className={styles.header}>
-      <nav aria-label="Principal" className={styles.nav} onMouseLeave={() => setHover(null)}>
-        <Link href="/#inicio" className={styles.brand} aria-label={`${site.name}, ir al inicio`}>
-          <LogoMark size={18} />
+    <header className={styles.header} data-scrolled={scrolled || open ? "" : undefined}>
+      <div className={`container ${styles.bar}`}>
+        <Link href="/" className={styles.brand} aria-label={`${site.name}, ir al inicio`}>
+          <Logo width={60} />
         </Link>
-        <div className={styles.links}>
-          {pill && (
-            <span aria-hidden="true" className={styles.pill} style={{ transform: `translateX(${pill.x}px)`, width: pill.w }} />
-          )}
-          {site.nav.map((item, i) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              ref={(el) => {
-                linksRef.current[i] = el;
-              }}
-              className={styles.link}
-              data-on={current === i ? "" : undefined}
-              aria-current={home && active === i ? "location" : undefined}
-              onMouseEnter={() => setHover(i)}
-              onFocus={() => setHover(i)}
-              onBlur={() => setHover(null)}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
-      </nav>
 
-      <a
-        href={whatsappUrl({ type: "general" })}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`btn ${styles.contact}`}
-        data-track="whatsapp_click"
-        data-track-label="header"
-      >
-        <span className={styles.contactLabel}>{hero.contactCta}</span>
-        <span className={`btn-arrow ${styles.contactArrow}`}>
-          <ArrowUpRight size={15} className={styles.arrowIcon} />
-          <WhatsAppIcon size={18} className={styles.waIcon} />
-        </span>
-        <span className="sr-only">(se abre WhatsApp)</span>
-      </a>
+        <nav aria-label="Principal" className={styles.nav}>
+          <ul>
+            {site.nav.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href}>{item.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className={styles.actions}>
+          <ThemeToggle labels={header.theme} />
+          <a
+            href={whatsappUrl({ type: "general" })}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`btn btn-primary btn-sm ${styles.cta}`}
+            data-track="whatsapp_click"
+            data-track-label="header"
+          >
+            {header.cta}
+            <span className="sr-only">(se abre WhatsApp)</span>
+          </a>
+          <button
+            type="button"
+            className={styles.menuButton}
+            aria-expanded={open}
+            aria-controls="menu-movil"
+            aria-label={open ? header.menuClose : header.menuOpen}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <Close size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </div>
+
+      <div id="menu-movil" className={styles.mobile} hidden={!open}>
+        <nav aria-label="Menú" className="container">
+          <ul>
+            {site.nav.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} onClick={() => setOpen(false)}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={whatsappUrl({ type: "general" })}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary"
+            data-track="whatsapp_click"
+            data-track-label="menu-movil"
+          >
+            {header.cta}
+          </a>
+        </nav>
+      </div>
     </header>
   );
 }

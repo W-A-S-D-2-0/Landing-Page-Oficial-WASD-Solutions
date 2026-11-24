@@ -5,14 +5,15 @@
 Lee `README.md` antes de cambios grandes. Prototipo anterior (solo referencia): repo `W-A-S-D-2-0/Landing_Page_WASD`.
 
 Reglas clave:
-- Textos, precios, preguntas y contacto viven en `src/data/`. No escribas textos dentro de los componentes.
-- Precios: solo en `src/data/plans.ts`.
-- Colores y medidas: solo tokens de `src/app/globals.css`. Medidas del diseño en unidades del lienzo: `calc(N * var(--u))` (1440 px en escritorio, 390 px en celular).
-- Dirección visual: editorial monocromo (diseño base "Orvante" de MotionSites). Papel gris `--paper` arriba y en precios, negro en el resto. Un solo acento (`--accent`), con moderación. Títulos en Archivo ancho (`--font-display`), interfaz en Inter Tight (`--font-ui`).
+- Textos, preguntas y contacto viven en `src/data/`. No escribas textos dentro de los componentes.
+- La landing no publica precios de WASD (decisión del equipo). Los precios del celular de ejemplo del hero son contenido ilustrativo.
+- Colores: solo tokens de `src/app/globals.css`. Todo debe verse bien en los dos temas: claro (`:root`) y oscuro (`:root[data-theme="dark"]`, azul petróleo). Nunca colores fijos en componentes, salvo los mockups y capturas de webs, que siempre son claros.
+- Marca: azul petróleo (`--primary`) y ámbar (`--accent`), como el logo. El logo oficial es la versión A (teclas juntas) en `src/components/ui/Logo.tsx`. Títulos en Plus Jakarta Sans (`--font-display`), texto en Inter (`--font-body`).
+- Estilo: limpio y confiable para dueños de PYME, no de agencia de diseño. Tarjetas con sombra suave, botones con radio 12 px, mucho aire.
 - Las teclas W·A·S·D son la firma de la marca (`KeyCap`): úsalas con intención, no como adorno en todas partes.
-- Animaciones que muestran algo (teclas, manifiesto, cifras), con entradas de 0.6–1.2 s y `ease-out`. Nada en bucle infinito. Siempre respetar `prefers-reduced-motion` y que todo se vea si falla el JavaScript.
-- Fotos y video: solo reales del equipo y de negocios con permiso, en blanco y negro para combinar. Nunca personas o lugares generados con IA ni fotos de stock.
-- No inventar clientes, testimonios, reseñas, logos ni cifras de resultados. Los proyectos van rotulados como "Demo".
+- Animaciones que muestran el producto (chat, reporte, teclas), con entradas de 0.6–1.2 s y `ease-out`. Nada en bucle infinito. Siempre respetar `prefers-reduced-motion` y que todo se vea si falla el JavaScript.
+- Fotos y video: solo reales del equipo y de negocios con permiso. Nunca personas o lugares generados con IA ni fotos de stock.
+- No inventar clientes, testimonios, reseñas, logos ni cifras de resultados. Proyectos reales (hoy, Woodland Perú) solo con datos verificables y con permiso del cliente; las cifras del cliente no se publican sin su validación.
 - WhatsApp siempre a un toque en el celular (botón flotante). Links solo con `whatsappUrl()`.
 - Antes de entregar: `npm run check` (lint + TypeScript + build).
 - Ramas: `main` es producción y `develop` es integración. Las ramas de trabajo (`feature/`, `content/`, `fix/`, `style/`, `chore/`) salen de `develop` y vuelven por pull request. Detalle en `CONTRIBUTING.md`.

@@ -24,8 +24,6 @@ export const site = {
     whatsappDisplay: "[WHATSAPP]",
     email: "[EMAIL]",
     city: "Lima, Perú",
-    /** Zona horaria para el reloj del hero. */
-    timeZone: "America/Lima",
   },
 
   social: [
@@ -41,11 +39,11 @@ export const site = {
     complaintsBookUrl: "[URL LIBRO DE RECLAMACIONES]",
   },
 
-  /** Menú principal (la píldora del header). */
+  /** Menú principal del header. */
   nav: [
-    { label: "Inicio", href: "/#inicio" },
     { label: "Servicios", href: "/#servicios" },
-    { label: "Precios", href: "/#precios" },
+    { label: "Cómo funciona", href: "/#como-funciona" },
+    { label: "Proyectos", href: "/#proyectos" },
     { label: "Preguntas", href: "/#preguntas" },
   ],
 

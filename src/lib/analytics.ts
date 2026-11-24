@@ -10,8 +10,7 @@ export const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "";
 export type AnalyticsEvent =
   | "whatsapp_click"
   | "demo_cta_click"
-  | "lead_submit"
-  | "plan_click";
+  | "lead_submit";
 
 type Params = Record<string, string | number | undefined>;
 

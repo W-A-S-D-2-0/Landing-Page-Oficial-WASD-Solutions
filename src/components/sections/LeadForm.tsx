@@ -4,7 +4,7 @@ import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { leadForm } from "@/data/content";
 import { emptyLead, submitLead, validateLead, type Lead, type LeadErrors } from "@/lib/lead";
 import { track } from "@/lib/analytics";
-import { ArrowUpRight } from "@/components/ui/Icons";
+import { ArrowRight, Check } from "@/components/ui/Icons";
 import styles from "./LeadForm.module.css";
 
 type Field = Exclude<keyof Lead, "privacy">;
@@ -69,14 +69,24 @@ export function LeadForm() {
   );
 
   return (
-    <section id="diagnostico" className={styles.section} aria-labelledby="diagnostico-title">
+    <section id="diagnostico" className="section" aria-labelledby="diagnostico-title">
       <div className={`container ${styles.grid}`}>
         <div className={styles.intro}>
           <p className="eyebrow">{leadForm.eyebrow}</p>
-          <h2 id="diagnostico-title" className={`section-title ${styles.title}`} data-reveal="">
+          <h2 id="diagnostico-title" className="section-title">
             {leadForm.title}
           </h2>
-          <p className={styles.text}>{leadForm.intro}</p>
+          <p className="section-intro">{leadForm.intro}</p>
+          <ul className={styles.points}>
+            {leadForm.points.map((p) => (
+              <li key={p}>
+                <span className={styles.pointIcon}>
+                  <Check size={13} />
+                </span>
+                {p}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className={styles.card}>
@@ -84,11 +94,9 @@ export function LeadForm() {
             <div className={styles.success} role="status">
               <p className={styles.successTitle}>{leadForm.success.title}</p>
               <p className={styles.successText}>{leadForm.success.text}</p>
-              <a href={sentUrl} target="_blank" rel="noopener noreferrer" className="btn">
+              <a href={sentUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                 {leadForm.success.fallback}
-                <span className="btn-arrow">
-                  <ArrowUpRight size={15} />
-                </span>
+                <ArrowRight size={16} />
               </a>
             </div>
           ) : (
@@ -148,11 +156,9 @@ export function LeadForm() {
                 )}
               </div>
 
-              <button type="submit" className={`btn ${styles.submit}`} disabled={sending}>
+              <button type="submit" className={`btn btn-primary ${styles.submit}`} disabled={sending}>
                 {leadForm.submit}
-                <span className="btn-arrow">
-                  <ArrowUpRight size={15} />
-                </span>
+                <ArrowRight size={16} />
               </button>
             </form>
           )}
