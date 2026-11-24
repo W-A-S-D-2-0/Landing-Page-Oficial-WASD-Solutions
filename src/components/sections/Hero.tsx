@@ -1,27 +1,16 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
-import { hero, trustStrip, type KeyLetter } from "@/data/content";
+import { hero, heroFacts, type KeyLetter } from "@/data/content";
 import { site } from "@/data/site";
+import { toDomain } from "@/lib/domain";
 import { whatsappUrl } from "@/lib/whatsapp";
-import { ArrowRight, BarChart, Check, Clock } from "@/components/ui/Icons";
+import { ArrowRight, Check } from "@/components/ui/Icons";
 import { KeyCap } from "@/components/ui/KeyCap";
 import { HeroPreview } from "./HeroPreview";
 import styles from "./Hero.module.css";
 
-const stripIcons = { check: Check, clock: Clock, chart: BarChart } as const;
 const LAST_STEP = 5;
-
-/** "Dulce Antojo" → "dulceantojo.pe" */
-function toDomain(name: string): string {
-  const slug = name
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, "")
-    .slice(0, 22);
-  return slug ? `${slug}.pe` : hero.defaultDomain;
-}
 
 /**
  * Hero "tu solución, en vivo". El visitante escribe el nombre de su negocio,
@@ -144,16 +133,13 @@ export function Hero() {
   const isUser = mode === "user";
   const shownName = name || (isUser ? hero.defaults.name : "");
   const shownDesc = description || (isUser ? hero.defaults.description : "");
-  const domain = toDomain(isUser ? userName : name);
+  const domain = toDomain(isUser ? userName : name, hero.defaultDomain);
 
   return (
     <section id="inicio" ref={sectionRef} className={styles.hero} aria-labelledby="hero-title">
       <div className={`container ${styles.grid}`}>
         <div className={styles.copy}>
-          <p className={`${styles.badge} ${styles.rise}`}>
-            <b>{hero.badge.tag}</b> {hero.badge.text}
-          </p>
-          <h1 id="hero-title" className={`${styles.title} ${styles.rise}`} style={{ "--d": 1 } as CSSProperties}>
+          <h1 id="hero-title" className={`${styles.title} ${styles.rise}`}>
             {hero.title.before} <span className={styles.highlight}>{hero.title.highlight}</span>
             {hero.title.after && ` ${hero.title.after}`}
             <span className="sr-only">. {site.description}</span>
@@ -224,9 +210,14 @@ export function Hero() {
               {hero.secondaryCta}
             </a>
           </div>
-          <p className={`${styles.note} ${styles.rise}`} style={{ "--d": 5 } as CSSProperties}>
-            {hero.note}
-          </p>
+          <ul className={`${styles.facts} ${styles.rise}`} style={{ "--d": 5 } as CSSProperties}>
+            {heroFacts.map((fact) => (
+              <li key={fact}>
+                <Check size={14} />
+                {fact}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div
@@ -234,6 +225,10 @@ export function Hero() {
           role="img"
           aria-label={`${hero.previewLabel}: ${serviceData.chip} para ${shownName || hero.samples[sampleIdx].name}`}
         >
+          <p className={styles.live} aria-hidden="true">
+            <b>{hero.live}</b>
+            {hero.note}
+          </p>
           <div aria-hidden="true">
             <HeroPreview
               key={service}
@@ -258,24 +253,6 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="container">
-        <ul className={styles.strip}>
-          {trustStrip.map((item, i) => {
-            const Icon = stripIcons[item.icon];
-            return (
-              <li key={item.title} data-reveal="" style={{ "--reveal-delay": `${i * 90}ms` } as CSSProperties}>
-                <span className={styles.stripIcon}>
-                  <Icon size={20} />
-                </span>
-                <span>
-                  <b>{item.title}</b>
-                  <span>{item.text}</span>
-                </span>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
     </section>
   );
 }

@@ -10,28 +10,40 @@
   top: calc(var(--header-h) + 32px);
 }
 
-.points {
-  display: grid;
-  gap: 12px;
-  margin-top: 28px;
+.lead {
+  max-width: 24rem;
+  margin-top: 18px;
+  font-size: 18px;
+  color: var(--text-muted);
 }
 
-.points li {
+.direct {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  font-size: 16px;
-  font-weight: 500;
+  gap: 8px 14px;
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-size: 15px;
+  color: var(--text-muted);
 }
 
-.pointIcon {
-  display: grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--primary-soft);
-  color: var(--primary);
+.direct a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.direct a svg {
+  color: var(--success);
+}
+
+.direct a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .card {

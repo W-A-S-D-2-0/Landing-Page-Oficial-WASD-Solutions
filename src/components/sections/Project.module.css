@@ -1,23 +1,120 @@
-.layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: 64px;
-  align-items: center;
-  margin-top: 56px;
+/* Bloque petróleo profundo (igual en los dos temas) */
+.band {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(50rem 30rem at 85% 20%, var(--deep-glow), transparent 70%),
+    linear-gradient(160deg, var(--deep), var(--deep-2));
+  color: var(--deep-text);
+  --text-muted: var(--deep-muted);
+  --cta-bg: var(--deep-cta);
+  --cta-bg-hover: var(--deep-cta-hover);
+  --cta-fg: var(--deep-cta-fg);
+  --cta-shadow: 0 10px 26px var(--deep-shadow);
 }
 
-/* Captura de escritorio en una ventana de navegador + celular encima */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 72px;
+  align-items: center;
+}
+
+.label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--deep-cta);
+}
+
+.label span {
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--deep-muted);
+}
+
+.title {
+  margin-top: 14px;
+  color: var(--deep-title);
+}
+
+.intro {
+  max-width: 28rem;
+  margin-top: 16px;
+  font-size: 17px;
+  color: var(--deep-muted);
+}
+
+.items {
+  display: grid;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.items li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cap {
+  --cap: 46px;
+  flex: none;
+}
+
+.items h3 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--deep-title);
+}
+
+.items p {
+  font-size: 14.5px;
+  color: var(--deep-muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  margin-top: 40px;
+}
+
+.visit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--deep-title);
+}
+
+.visit:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Captura de escritorio en una ventana + celular encima (siempre claras) */
 .visual {
   position: relative;
   margin: 0 0 40px;
-  padding-right: 56px;
+  padding-right: 48px;
 }
 
 .browser {
   overflow: hidden;
   border-radius: 14px;
   background: var(--mock-bg);
-  box-shadow: 0 0 0 1px var(--border), var(--shadow-card);
+  box-shadow:
+    0 0 0 1px var(--deep-border),
+    0 40px 80px var(--deep-shadow);
 }
 
 .browserBar {
@@ -55,11 +152,13 @@
   position: absolute;
   right: 0;
   bottom: -40px;
-  width: 180px;
+  width: 170px;
   padding: 7px;
   border-radius: 28px;
-  background: var(--device);
-  box-shadow: 0 24px 50px rgb(0 0 0 / 0.28);
+  background: var(--deep-device);
+  box-shadow:
+    0 0 0 1px var(--deep-border),
+    0 30px 60px var(--deep-shadow);
 }
 
 .phoneShot {
@@ -69,79 +168,14 @@
   border-radius: 21px;
 }
 
-.client {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.client span {
-  display: block;
-  margin-top: 2px;
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--accent-ink);
-}
-
-.items {
-  display: grid;
-  gap: 22px;
-  margin-top: 28px;
-}
-
-.items li {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 18px;
-  align-items: start;
-}
-
-.cap {
-  --cap: 52px;
-}
-
-.itemTitle {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
-}
-
-.itemText {
-  margin-top: 4px;
-  font-size: 15.5px;
-  line-height: 1.5;
-  color: var(--text-muted);
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 32px;
-}
-
 @media (max-width: 1060px) {
   .layout {
     grid-template-columns: minmax(0, 1fr);
     gap: 56px;
   }
-
-  .visual {
-    max-width: 720px;
-    width: 100%;
-    margin-inline: auto;
-  }
 }
 
 @media (max-width: 760px) {
-  .layout {
-    margin-top: 36px;
-  }
-
   .visual {
     padding-right: 28px;
   }
@@ -150,15 +184,9 @@
     width: 112px;
     padding: 5px;
     border-radius: 20px;
-    bottom: -32px;
   }
 
   .phoneShot {
     border-radius: 15px;
-  }
-
-  .actions :global(.btn) {
-    flex: 1 1 100%;
-    white-space: normal;
   }
 }

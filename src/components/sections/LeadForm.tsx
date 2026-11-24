@@ -4,7 +4,8 @@ import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { leadForm } from "@/data/content";
 import { emptyLead, submitLead, validateLead, type Lead, type LeadErrors } from "@/lib/lead";
 import { track } from "@/lib/analytics";
-import { ArrowRight, Check } from "@/components/ui/Icons";
+import { ArrowRight, WhatsAppIcon } from "@/components/ui/Icons";
+import { whatsappUrl } from "@/lib/whatsapp";
 import styles from "./LeadForm.module.css";
 
 type Field = Exclude<keyof Lead, "privacy">;
@@ -72,24 +73,29 @@ export function LeadForm() {
     <section id="diagnostico" className="section" aria-labelledby="diagnostico-title">
       <div className={`container ${styles.grid}`}>
         <div className={styles.intro}>
-          <p className="eyebrow">{leadForm.eyebrow}</p>
-          <h2 id="diagnostico-title" className="section-title">
+          <h2 id="diagnostico-title" className="section-title" data-reveal="mask">
             {leadForm.title}
           </h2>
-          <p className="section-intro">{leadForm.intro}</p>
-          <ul className={styles.points}>
-            {leadForm.points.map((p) => (
-              <li key={p}>
-                <span className={styles.pointIcon}>
-                  <Check size={13} />
-                </span>
-                {p}
-              </li>
-            ))}
-          </ul>
+          <p className={styles.lead} data-reveal="">
+            {leadForm.intro}
+          </p>
+          <p className={styles.direct} data-reveal="">
+            {leadForm.orWhatsapp}
+            <a
+              href={whatsappUrl({ type: "demo" })}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track="whatsapp_click"
+              data-track-label="formulario-directo"
+            >
+              <WhatsAppIcon size={18} />
+              {leadForm.whatsappCta}
+              <span className="sr-only">(se abre WhatsApp)</span>
+            </a>
+          </p>
         </div>
 
-        <div className={styles.card}>
+        <div className={styles.card} data-reveal="zoom">
           {sentUrl ? (
             <div className={styles.success} role="status">
               <p className={styles.successTitle}>{leadForm.success.title}</p>

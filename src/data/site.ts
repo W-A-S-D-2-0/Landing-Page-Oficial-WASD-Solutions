@@ -42,8 +42,8 @@ export const site = {
   /** Menú principal del header. */
   nav: [
     { label: "Servicios", href: "/#servicios" },
-    { label: "Cómo funciona", href: "/#como-funciona" },
-    { label: "Proyectos", href: "/#proyectos" },
+    { label: "Proyecto", href: "/#proyectos" },
+    { label: "Cómo trabajamos", href: "/#como-funciona" },
     { label: "Preguntas", href: "/#preguntas" },
   ],
 

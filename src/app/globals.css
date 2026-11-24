@@ -1,119 +1,171 @@
 /* Primera regla: fondo en html y body para que nunca haya un destello. */
 html,
 body {
-  background: var(--bg, #fafaf7);
-  color: var(--text, #1c2128);
+  background: var(--bg, #f6f5f1);
+  color: var(--text, #0f2229);
 }
 
 /*
- * Tokens del sitio. Colores solo desde aquí: nunca colores fijos en los
- * componentes. Dos temas con la paleta del logo:
- *   claro  → blanco cálido, azul petróleo y ámbar (boceto 1)
- *   oscuro → azul petróleo profundo con botones ámbar (boceto 3)
- * El tema se elige con el interruptor del header (data-theme en <html>);
- * sin elección, se respeta prefers-color-scheme.
+ * Paleta WASD. Colores solo desde aquí: nunca colores fijos en componentes.
+ * Sale del logo y se ordena en tres familias:
+ *   petróleo  #071a21 · #0d2630 · #123e4c · #1a5466 · #74c0d2 · #e2eef1
+ *   ámbar     #8a5818 · #c7852f · #e6a95c · #f6e7d1
+ *   papel     #f6f5f1 · #eeece6 · #e3e0d8 · #ffffff
+ * Regla de uso: el petróleo manda (texto, botones, superficies oscuras), el
+ * ámbar es el único acento (máximo un detalle por bloque) y el papel da aire.
+ * Contrastes de texto ≥ 4.5:1 en los dos temas.
  */
 :root {
   color-scheme: light;
-  --bg: #fafaf7;
+  --bg: #f6f5f1;
   --surface: #ffffff;
-  --surface-alt: #f2f3ef;
-  --border: #e4e5e0;
-  --border-strong: #cfd3cc;
-  --text: #1c2128;
-  --text-muted: #5b6470;
+  --surface-alt: #eeece6;
+  --border: #e3e0d8;
+  --border-strong: #cdc9bf;
+  --text: #0f2229;
+  --text-muted: #4f636b;
 
-  --primary: #1f4e5f; /* azul petróleo: enlaces, acentos, números */
-  --primary-soft: #e3edf0;
-  --primary-ink: #163e4b;
-  --accent: #c98a3d; /* ámbar: detalles puntuales */
-  --accent-soft: #f4e4cc;
-  --accent-ink: #8f5e1f;
-  --success: #2a7353;
+  --primary: #1a5466;
+  --primary-soft: #e2eef1;
+  --primary-ink: #123e4c;
+  --accent: #c7852f;
+  --accent-soft: #f6e7d1;
+  --accent-ink: #8a5818;
+  --success: #24704f;
+  --live: #d9443f;
   --whatsapp: #25d366;
 
   /* Botón principal */
-  --cta-bg: #1f4e5f;
-  --cta-bg-hover: #163e4b;
+  --cta-bg: #123e4c;
+  --cta-bg-hover: #0d3140;
   --cta-fg: #ffffff;
-  --cta-shadow: 0 6px 18px rgb(31 78 95 / 0.22);
+  --cta-shadow: 0 8px 22px rgb(18 62 76 / 0.24);
 
   /* Palabra destacada del título */
-  --highlight: #1f4e5f;
+  --highlight: #1a5466;
 
-  /* Fondo con patrón (puntos en claro, cuadrícula en oscuro) */
-  --pattern: radial-gradient(circle, #d6dad3 1.2px, transparent 1.3px);
-  --pattern-size: 26px 26px;
+  /* Bloque oscuro (proyecto y cierre): petróleo profundo en los dos temas */
+  --deep: #0b2530;
+  --deep-2: #123e4c;
+  --deep-text: #eef5f6;
+  --deep-muted: #a7bec5;
+  --deep-border: rgb(255 255 255 / 0.12);
+  --deep-title: #ffffff;
+  --deep-glow: rgb(116 192 210 / 0.14);
+  --deep-cta: #e6a95c;
+  --deep-cta-hover: #efb874;
+  --deep-cta-fg: #1b1206;
+  --deep-shadow: rgb(0 0 0 / 0.45);
+  --deep-device: #04121a;
 
-  --shadow-card: 0 1px 0 var(--border), 0 18px 40px rgb(28 33 40 / 0.1);
-  --shadow-soft: 0 1px 0 var(--border), 0 10px 24px rgb(28 33 40 / 0.06);
+  /* Brillos suaves de fondo */
+  --glow-1: rgb(26 84 102 / 0.12);
+  --glow-2: rgb(199 133 47 / 0.1);
 
-  /* Logo (versión clara de la hoja de marca) */
-  --logo-w: #c98a3d;
-  --logo-w-bar: #efd9b8;
-  --logo-k: #1f4e5f;
-  --logo-k-bar: #b7c6cb;
+  --pattern: radial-gradient(circle, #d9d6cd 1.1px, transparent 1.2px);
+  --pattern-size: 28px 28px;
+
+  --shadow-card: 0 1px 0 var(--border), 0 22px 48px rgb(15 34 41 / 0.1);
+  --shadow-soft: 0 1px 0 var(--border), 0 10px 26px rgb(15 34 41 / 0.06);
+
+  /* Logo */
+  --logo-w: #c7852f;
+  --logo-w-bar: #efd8b6;
+  --logo-k: #1a5466;
+  --logo-k-bar: #b4c7cd;
   --logo-bg: transparent;
-  --logo-word: #1c2128;
-  --logo-sub: #3a434d;
+  --logo-word: #0f2229;
+  --logo-sub: #36484f;
 
   /* Mockups de las demos: siempre claros, son webs de ejemplo */
   --mock-bg: #ffffff;
   --mock-ink: #1c2128;
   --mock-muted: #6b7480;
   --mock-line: #e8eae5;
-  --device: #1c2128;
+  --device: #0f2229;
+
+  /* Pantalla de entrada: siempre en petróleo profundo */
+  --intro-bg: #071a21;
+  --intro-glow: rgb(43 115 137 / 0.42);
+  --intro-ring: rgb(116 192 210 / 0.16);
+  --intro-text: #eef5f6;
+  --intro-muted: #8fb0b9;
 
   --font-display: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", system-ui, sans-serif;
   --font-body: "Inter Variable", "Inter", system-ui, sans-serif;
 
   --radius: 12px;
-  --radius-lg: 18px;
+  --radius-lg: 20px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-state: cubic-bezier(0.4, 0, 0.2, 1);
   --header-h: 76px;
+  /* Cuánto espera la entrada del hero (lo que dura la pantalla de entrada) */
+  --intro-delay: 1.6s;
 }
 
-/* Tema oscuro: azul petróleo del boceto 3. */
+/* Tema oscuro: petróleo profundo, botones ámbar. */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #0f2b35;
-  --surface: #163a46;
-  --surface-alt: #12323d;
-  --border: rgb(255 255 255 / 0.12);
-  --border-strong: rgb(255 255 255 / 0.24);
-  --text: #f3f6f7;
-  --text-muted: #b9cdd3;
+  --bg: #071a21;
+  --surface: #0d2630;
+  --surface-alt: #0a2029;
+  --border: rgb(255 255 255 / 0.09);
+  --border-strong: rgb(255 255 255 / 0.18);
+  --text: #eef5f6;
+  --text-muted: #9fb6bd;
 
-  --primary: #6fb3c4;
-  --primary-soft: rgb(111 179 196 / 0.16);
-  --primary-ink: #a9d3de;
-  --accent: #e0a85e;
-  --accent-soft: rgb(224 168 94 / 0.18);
-  --accent-ink: #f0c68e;
+  --primary: #74c0d2;
+  --primary-soft: rgb(116 192 210 / 0.14);
+  --primary-ink: #a8dbe6;
+  --accent: #e6a95c;
+  --accent-soft: rgb(230 169 92 / 0.16);
+  --accent-ink: #f2c68d;
   --success: #5cc197;
 
-  --cta-bg: #e0a85e;
-  --cta-bg-hover: #ebb873;
-  --cta-fg: #1c1307;
-  --cta-shadow: 0 6px 18px rgb(0 0 0 / 0.25);
+  --cta-bg: #e6a95c;
+  --cta-bg-hover: #efb874;
+  --cta-fg: #1b1206;
+  --cta-shadow: 0 8px 22px rgb(0 0 0 / 0.3);
 
-  --highlight: #e0a85e;
+  --highlight: #e6a95c;
 
-  --pattern: linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  --deep: #0d2630;
+  --deep-2: #123e4c;
+  --deep-border: rgb(255 255 255 / 0.1);
+
+  --glow-1: rgb(116 192 210 / 0.1);
+  --glow-2: rgb(230 169 92 / 0.07);
+
+  --pattern: linear-gradient(rgb(255 255 255 / 0.04) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.04) 1px, transparent 1px);
   --pattern-size: 56px 56px;
 
-  --shadow-card: 0 1px 0 rgb(255 255 255 / 0.04), 0 24px 50px rgb(0 0 0 / 0.35);
-  --shadow-soft: 0 12px 28px rgb(0 0 0 / 0.25);
+  --shadow-card: 0 1px 0 rgb(255 255 255 / 0.04), 0 26px 54px rgb(0 0 0 / 0.4);
+  --shadow-soft: 0 14px 30px rgb(0 0 0 / 0.28);
 
-  --logo-w: #e0a85e;
-  --logo-w-bar: #6b5130;
-  --logo-k: #6fb3c4;
-  --logo-k-bar: #2f5a66;
+  --logo-w: #e6a95c;
+  --logo-w-bar: #6a4f2c;
+  --logo-k: #74c0d2;
+  --logo-k-bar: #23505d;
   --logo-word: #ffffff;
-  --logo-sub: #b9cdd3;
+  --logo-sub: #a7bec5;
 
-  --device: #08171d;
+  --device: #04121a;
+}
+
+/* Logo sobre fondos oscuros fijos (entrada y bloques petróleo). */
+.on-deep {
+  --logo-w: #e6a95c;
+  --logo-w-bar: #6a4f2c;
+  --logo-k: #74c0d2;
+  --logo-k-bar: #23505d;
+  --logo-word: #ffffff;
+  --logo-sub: #a7bec5;
+  --surface: transparent;
+}
+
+/* Visita repetida en la misma sesión: sin pantalla de entrada ni espera. */
+.intro-seen {
+  --intro-delay: 0s;
 }
 
 *,
@@ -137,7 +189,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
-  transition: background-color 300ms var(--ease-state), color 300ms var(--ease-state);
 }
 
 h1,
@@ -224,6 +275,26 @@ video {
   transform: none;
 }
 
+/* Cambio de tema con un círculo que se abre desde el interruptor. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  animation: theme-reveal 700ms var(--ease-out);
+}
+
+@keyframes theme-reveal {
+  from {
+    clip-path: circle(0 at var(--vt-x, 50%) var(--vt-y, 0%));
+  }
+  to {
+    clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 50%) var(--vt-y, 0%));
+  }
+}
+
 /* ───────── Piezas compartidas ───────── */
 
 .container {
@@ -240,7 +311,7 @@ video {
 }
 
 .section {
-  padding-block: 112px;
+  padding-block: 120px;
 }
 
 .section-alt {
@@ -249,68 +320,68 @@ video {
 
 @media (max-width: 760px) {
   .section {
-    padding-block: 72px;
+    padding-block: 80px;
   }
 }
 
-/* Encabezado de sección: etiqueta + título + intro */
+/* Encabezado de sección: solo el título, alineado a la izquierda. */
 .section-head {
-  max-width: 720px;
-}
-
-.section-head.center {
-  margin-inline: auto;
-  text-align: center;
-}
-
-.eyebrow {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 40px;
+  margin-bottom: 48px;
 }
 
 .section-title {
-  margin-top: 12px;
+  max-width: 16ch;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(30px, 4vw, 44px);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-size: clamp(34px, 4.6vw, 56px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
-.section-intro {
-  margin-top: 16px;
-  font-size: 18px;
-  line-height: 1.55;
+.section-aside {
+  max-width: 30rem;
+  font-size: 16px;
   color: var(--text-muted);
   text-wrap: pretty;
 }
 
+@media (max-width: 760px) {
+  .section-head {
+    margin-bottom: 32px;
+  }
+}
+
 /* Botones */
 .btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  min-height: 50px;
+  min-height: 52px;
   padding: 0 24px;
   border: 0;
   border-radius: var(--radius);
   font: 600 16px/1.2 var(--font-body);
   white-space: nowrap;
   transition:
-    transform 200ms var(--ease-state),
+    transform 220ms var(--ease-out),
     background-color 200ms var(--ease-state),
     box-shadow 200ms var(--ease-state);
 }
 
+.btn:hover {
+  transform: translateY(-1px);
+}
+
 .btn:active {
-  transform: scale(0.98);
+  transform: translateY(0) scale(0.98);
 }
 
 .btn svg {
@@ -348,22 +419,43 @@ video {
   border-radius: 10px;
 }
 
-/* Aparición suave al hacer scroll (la activa RevealObserver). */
+/*
+ * Aparición al hacer scroll (la activa RevealObserver).
+ *   data-reveal=""      sube y aparece
+ *   data-reveal="mask"  el texto sube desde una línea invisible (títulos)
+ *   data-reveal="zoom"  la pieza crece un poco (capturas y mockups)
+ */
 .js [data-reveal] {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(22px);
   transition:
-    opacity 650ms var(--ease-out),
-    transform 650ms var(--ease-out);
+    opacity 800ms var(--ease-out),
+    transform 900ms var(--ease-out),
+    clip-path 900ms var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal="mask"] {
+  opacity: 1;
+  transform: translateY(0.35em);
+  clip-path: inset(0 0 100% 0);
+}
+
+.js [data-reveal="zoom"] {
+  transform: translateY(28px) scale(0.96);
 }
 
 .js [data-reveal].is-visible {
   opacity: 1;
   transform: none;
+  clip-path: inset(0 0 -10% 0);
 }
 
 @media (prefers-reduced-motion: reduce) {
+  :root {
+    --intro-delay: 0s;
+  }
+
   html {
     scroll-behavior: auto;
   }
@@ -379,5 +471,6 @@ video {
   .js [data-reveal] {
     opacity: 1;
     transform: none;
+    clip-path: none;
   }
 }

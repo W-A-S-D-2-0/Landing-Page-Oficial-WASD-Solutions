@@ -4,7 +4,7 @@ Landing page oficial de **WASD Solutions**, startup de Lima que ayuda a PYMEs a 
 
 **Stack:** Next.js 16 (App Router) + TypeScript + CSS Modules. Se exporta como sitio estático (`/out`). Fuentes Plus Jakarta Sans e Inter desde npm (`@fontsource-variable`), sin depender de Google Fonts. Animaciones con CSS y un poco de JavaScript propio, sin librerías.
 
-**Diseño:** limpio y con los colores del logo (azul petróleo y ámbar). Dos temas con interruptor en el header: **claro** (blanco cálido) y **oscuro** (azul petróleo profundo, botones ámbar). Sin elección guardada, se usa el tema del sistema. El logo es la versión A de la hoja de marca (teclas juntas) y está en `src/components/ui/Logo.tsx`.
+**Diseño:** limpio, con poco texto y los colores del logo. Paleta en `src/app/globals.css`: el petróleo manda (texto, botones, bloques oscuros), el ámbar es el único acento y el papel cálido da aire. Dos temas con interruptor en el header: **claro** (blanco cálido) y **oscuro** (azul petróleo profundo, botones ámbar). Sin elección guardada, se usa el tema del sistema. El logo es la versión A de la hoja de marca (teclas juntas) y está en `src/components/ui/Logo.tsx`.
 
 ---
 
@@ -38,7 +38,7 @@ Todo el contenido está en `src/data/`. **No hace falta tocar componentes.**
 | Archivo | Qué contiene |
 | --- | --- |
 | `src/data/site.ts` | Marca, WhatsApp, email, redes, razón social, RUC, Libro de Reclamaciones, menú y SEO |
-| `src/data/content.ts` | Textos de cada sección: header, hero y franja de garantías, "¿Te pasa esto?", servicios W·A·S·D, pasos, proyecto Woodland Perú, garantía, comparativa, formulario, equipo (oculto), preguntas, cierre y footer |
+| `src/data/content.ts` | Textos de cada sección: header, entrada, hero, servicios W·A·S·D, proyecto Woodland Perú, pasos y garantía, formulario de cierre, equipo (oculto), preguntas y footer. Regla: pocas palabras; que los ejemplos expliquen |
 | `src/data/faq.ts` | Preguntas frecuentes (también alimentan el JSON-LD `FAQPage`) |
 | `src/data/testimonials.ts` | Testimonios (preparado y **oculto** hasta tener datos reales) |
 
@@ -77,12 +77,13 @@ Todo el contenido está en `src/data/`. **No hace falta tocar componentes.**
 
 | Sección | Archivo | Qué se mueve |
 | --- | --- | --- |
-| Header | `sections/Header.tsx` | Fijo, gana fondo al bajar; interruptor de tema y menú en celular |
+| Entrada | `ui/Intro.tsx` | Pantalla petróleo de ≈2 s: las teclas caen, aparece la marca y la página se abre en círculo. Solo CSS, una vez por sesión, nunca con movimiento reducido |
+| Header | `sections/Header.tsx` | Fijo, gana fondo al bajar; interruptor de tema (el tema nuevo se abre en círculo desde el botón) y menú en celular |
 | Hero | `sections/Hero.tsx`, `HeroPreview.tsx` | El visitante escribe el nombre de su negocio, a qué se dedica y qué necesita (W web, A agente especializado en su web, S reservas y pedidos, D app). A la derecha se arma en vivo un ejemplo distinto por servicio, con su nombre, su descripción y un color propio. Sin datos, una demo automática recorre negocios de rubros variados. El botón abre WhatsApp con lo que escribió. Textos en `hero` de `src/data/content.ts` |
-| ¿Te pasa esto? | `sections/Problem.tsx` | Aparición suave al entrar en pantalla |
-| Servicios | `sections/Services.tsx` | Las teclas en la forma del logo son las pestañas (clic, flechas o W/A/S/D en el teclado) |
-| Proyecto Woodland | `sections/Project.tsx` | Capturas reales de su web (escritorio y celular) y lo que construimos, por tecla |
-| Cómo funciona, Comparativa, Formulario, Preguntas, Cierre, Footer | `sections/*.tsx` | Aparición suave al entrar en pantalla |
+| Servicios | `sections/Services.tsx` | Las teclas en la forma del logo son las pestañas (clic, flechas o W/A/S/D en el teclado); cada una arma en vivo su ejemplo con un negocio de muestra |
+| Proyecto Woodland | `sections/Project.tsx` | Bloque petróleo con capturas reales de su web (escritorio y celular) y lo que construimos, por tecla |
+| Así trabajamos | `sections/HowItWorks.tsx` | La línea de pasos se dibuja y los pasos entran uno a uno; garantía de 60 días en una franja |
+| Preguntas, Formulario (cierre), Footer | `sections/*.tsx` | Títulos que suben desde una máscara y bloques que aparecen al entrar en pantalla |
 
 Con `prefers-reduced-motion` todo se ve en su estado final.
 

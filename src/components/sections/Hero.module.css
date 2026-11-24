@@ -1,11 +1,22 @@
 .hero {
   position: relative;
   margin-top: calc(var(--header-h) * -1);
-  padding: calc(var(--header-h) + 36px) 0 0;
+  padding: calc(var(--header-h) + 40px) 0 80px;
   isolation: isolate;
 }
 
 /* Patrón de fondo: puntos en claro, cuadrícula en oscuro. */
+/* Brillos de marca detrás del hero */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(42rem 30rem at 78% 30%, var(--glow-1), transparent 70%),
+    radial-gradient(30rem 22rem at 8% 70%, var(--glow-2), transparent 70%);
+}
+
 .hero::before {
   content: "";
   position: absolute;
@@ -26,54 +37,19 @@
 
 /* Entrada escalonada (solo CSS: todo visible aunque falle el JavaScript). */
 .rise {
-  animation: rise 700ms var(--ease-out) both;
-  animation-delay: calc(80ms + var(--d, 0) * 80ms);
+  animation: rise 900ms var(--ease-out) both;
+  animation-delay: calc(var(--intro-delay) + var(--d, 0) * 90ms);
 }
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(24px);
+    filter: blur(6px);
   }
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 14px 6px 6px;
-  border-radius: 999px;
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--border);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-muted);
-}
-
-.badge b {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 3px 10px;
-  border-radius: 999px;
-  background: var(--accent-soft);
-  color: var(--accent-ink);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-/* Punto "en vivo" */
-.badge b::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #e5484d;
-  box-shadow: 0 0 0 3px rgb(229 72 77 / 0.2);
-}
-
 .title {
-  margin-top: 18px;
   font-family: var(--font-display);
   font-weight: 800;
   font-size: clamp(38px, 4.6vw, 58px);
@@ -99,7 +75,7 @@
   background: var(--accent);
   opacity: 0.55;
   transform-origin: 0 50%;
-  animation: underline 900ms var(--ease-out) 700ms both;
+  animation: underline 1000ms var(--ease-out) calc(var(--intro-delay) + 600ms) both;
 }
 
 @keyframes underline {
@@ -219,17 +195,62 @@
   margin-top: 20px;
 }
 
-.note {
-  margin-top: 12px;
-  font-size: 13.5px;
+/* Tres datos de la oferta */
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 18px;
+  font-size: 14px;
+  font-weight: 500;
   color: var(--text-muted);
+}
+
+.facts li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.facts svg {
+  color: var(--success);
+}
+
+/* Etiqueta "En vivo" sobre la vista previa */
+.live {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.live b {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.live b::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--live);
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 /* ───────── Vista previa + pasos ───────── */
 
 .stage {
   position: relative;
-  animation: rise 900ms var(--ease-out) 200ms both;
+  animation: rise 1100ms var(--ease-out) calc(var(--intro-delay) + 250ms) both;
 }
 
 .steps {
@@ -286,52 +307,6 @@
   background: var(--success);
 }
 
-/* ───────── Franja de garantías ───────── */
-
-.strip {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 40px;
-  padding-bottom: 8px;
-}
-
-.strip li {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 22px 24px;
-  border-radius: 16px;
-  background: var(--surface);
-  box-shadow: var(--shadow-card);
-}
-
-.strip b {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.strip li > span:last-child > span {
-  display: block;
-  margin-top: 2px;
-  font-size: 14px;
-  color: var(--text-muted);
-}
-
-.stripIcon {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: var(--primary-soft);
-  color: var(--primary);
-}
-
 /* ───────── Tablet y celular ───────── */
 
 @media (max-width: 1060px) {
@@ -362,7 +337,7 @@
     order: 5;
   }
 
-  .note {
+  .facts {
     order: 6;
   }
 }
@@ -418,8 +393,4 @@
     font-size: 12.5px;
   }
 
-  .strip {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
 }

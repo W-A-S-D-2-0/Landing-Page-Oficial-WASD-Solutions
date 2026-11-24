@@ -16,11 +16,19 @@
 }
 
 .bar {
+  animation: headerIn 900ms var(--ease-out) calc(var(--intro-delay) - 150ms) both;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
   height: var(--header-h);
+}
+
+@keyframes headerIn {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
 }
 
 .brand {

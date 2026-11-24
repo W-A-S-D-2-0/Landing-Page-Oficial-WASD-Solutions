@@ -3,6 +3,7 @@ import "@fontsource-variable/plus-jakarta-sans";
 import "@fontsource-variable/inter";
 import { site } from "@/data/site";
 import { Analytics } from "@/components/Analytics";
+import { Intro } from "@/components/ui/Intro";
 import { RevealObserver } from "@/components/ui/RevealObserver";
 import { themeInitScript } from "@/components/ui/ThemeToggle";
 import { TrackClicks } from "@/components/ui/TrackClicks";
@@ -38,8 +39,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafaf7" },
-    { media: "(prefers-color-scheme: dark)", color: "#0f2b35" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f5f1" },
+    { media: "(prefers-color-scheme: dark)", color: "#071a21" },
   ],
 };
 
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
+        <Intro />
         <a className="skip-link" href="#contenido">
           Saltar al contenido
         </a>

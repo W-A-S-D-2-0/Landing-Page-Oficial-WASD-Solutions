@@ -30,7 +30,7 @@ export function Footer() {
                 </li>
               ))}
               <li>
-                <Link href="/#diagnostico">Diagnóstico gratis</Link>
+                <Link href="/#diagnostico">{footer.demoLink}</Link>
               </li>
             </ul>
           </nav>

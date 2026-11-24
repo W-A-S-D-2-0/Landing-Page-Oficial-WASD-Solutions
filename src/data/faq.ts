@@ -1,49 +1,34 @@
 /**
  * Preguntas frecuentes. Se usan en el acordeón y en los datos
- * estructurados FAQPage (SEO), así que escribe respuestas completas.
+ * estructurados FAQPage (SEO): respuestas cortas pero completas.
  */
 
 export type FaqItem = { question: string; answer: string };
 
 export const faq: FaqItem[] = [
   {
-    question: "¿Qué pasa si no me gusta la demo?",
-    answer:
-      "No pagas nada. La demo es gratis y sin compromiso. Si quieres, la ajustamos con tus comentarios; si no te convence, quedamos como amigos.",
+    question: "¿Y si no me gusta la demo?",
+    answer: "No pagas nada. La ajustamos con tus comentarios y, si no te convence, ahí queda.",
   },
   {
     question: "¿Necesito saber de tecnología?",
-    answer:
-      "No. Nosotros nos encargamos de todo: diseño, dominio, publicación y ajustes. Tú solo nos cuentas de tu negocio y revisas la demo desde tu celular.",
+    answer: "No. Nos encargamos del diseño, el dominio y la publicación. Tú revisas todo desde tu celular.",
   },
   {
     question: "¿La web es mía?",
-    answer:
-      "Sí. El contenido, las fotos y el dominio son de tu negocio. Si algún día decides irte, te entregamos tus textos, imágenes y el dominio.",
+    answer: "Sí. El contenido, las fotos y el dominio son de tu negocio, y te los entregamos si algún día te vas.",
   },
   {
-    question: "¿Qué pasa si dejo de pagar la mensualidad?",
+    question: "¿Cómo funciona el agente?",
     answer:
-      "Te avisamos con anticipación. Si no se regulariza, los servicios mensuales (IA, reservas, reportes y hosting) se pausan. Puedes reactivarlos cuando quieras o pedirnos tus archivos.",
+      "Lo preparamos con tus servicios, precios y horarios. Responde en tu web (o en WhatsApp), registra solicitudes y te pasa lo que necesita a una persona.",
   },
   {
-    question: "¿Cómo funciona un agente especializado?",
-    answer:
-      "Lo preparamos con la información de tu negocio: servicios, precios, horarios y preguntas frecuentes. Atiende en tu web (y en WhatsApp, si lo quieres), responde al instante, registra solicitudes y, cuando algo necesita a una persona, te pasa la conversación.",
+    question: "¿Puedo pedir cambios?",
+    answer: "Sí. Nos escribes por WhatsApp y lo actualizamos. Los cambios pequeños están incluidos.",
   },
   {
-    question: "¿Puedo cambiar textos y fotos?",
-    answer:
-      "Sí. Nos escribes por WhatsApp lo que quieres cambiar y lo actualizamos. Los cambios pequeños están incluidos en tu plan.",
-  },
-  {
-    question: "¿Emiten factura?",
-    answer:
-      "Sí, emitimos boleta o factura electrónica.",
-  },
-  {
-    question: "¿Trabajan fuera de Lima?",
-    answer:
-      "Sí. Todo el proceso es por WhatsApp y videollamada, así que podemos trabajar con negocios de cualquier ciudad del Perú.",
+    question: "¿Emiten factura y trabajan fuera de Lima?",
+    answer: "Sí a las dos. Emitimos boleta o factura electrónica y trabajamos con negocios de todo el Perú.",
   },
 ];

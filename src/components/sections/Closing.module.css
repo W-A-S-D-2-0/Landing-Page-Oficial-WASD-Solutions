@@ -20,15 +20,27 @@
   text-underline-offset: 3px;
 }
 
+/* Lista con divisores: menos cajas, más aire */
 .list {
-  display: grid;
-  gap: 12px;
+  border-top: 1px solid var(--border-strong);
 }
 
 .item {
-  border-radius: 14px;
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+  border-bottom: 1px solid var(--border-strong);
+  interpolate-size: allow-keywords;
+}
+
+/* Apertura suave donde el navegador lo permite */
+.item::details-content {
+  height: 0;
+  overflow: clip;
+  transition:
+    height 450ms var(--ease-out),
+    content-visibility 450ms allow-discrete;
+}
+
+.item[open]::details-content {
+  height: auto;
 }
 
 .question {
@@ -36,13 +48,19 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  min-height: 64px;
-  padding: 16px 20px;
-  font-size: 17px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  min-height: 72px;
+  padding: 18px 0;
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
   list-style: none;
   cursor: pointer;
+  transition: color 200ms var(--ease-state);
+}
+
+.question:hover {
+  color: var(--primary);
 }
 
 .question::-webkit-details-marker {
@@ -53,133 +71,45 @@
   display: grid;
   place-items: center;
   flex: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background: var(--primary-soft);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px var(--border-strong);
   color: var(--primary);
   transition:
-    transform 300ms var(--ease-out),
-    background-color 200ms var(--ease-state);
+    transform 400ms var(--ease-out),
+    background-color 200ms var(--ease-state),
+    box-shadow 200ms var(--ease-state);
 }
 
 .item[open] .toggle {
   transform: rotate(45deg);
   background: var(--cta-bg);
+  box-shadow: none;
   color: var(--cta-fg);
 }
 
 .answer {
-  max-width: 62ch;
-  padding: 0 20px 20px;
-  font-size: 16px;
+  max-width: 58ch;
+  padding: 0 48px 22px 0;
+  font-size: 16.5px;
   line-height: 1.6;
   color: var(--text-muted);
-}
-
-/* ───────── Llamado final ───────── */
-
-.final {
-  position: relative;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  gap: 56px;
-  padding: 56px 64px;
-  overflow: hidden;
-  border-radius: 24px;
-  background: #0f2b35;
-  color: #fff;
-  /* El logo dentro va siempre en su versión oscura. */
-  --logo-w: #e0a85e;
-  --logo-w-bar: #6b5130;
-  --logo-k: #6fb3c4;
-  --logo-k-bar: #2f5a66;
-}
-
-:global([data-theme="dark"]) .final {
-  background: #163a46;
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
-}
-
-.final::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
-  background-size: 48px 48px;
-  pointer-events: none;
-}
-
-.finalMark,
-.finalCopy {
-  position: relative;
-}
-
-.finalTitle {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(30px, 4vw, 44px);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
-}
-
-.finalText {
-  max-width: 44ch;
-  margin-top: 14px;
-  font-size: 18px;
-  line-height: 1.55;
-  color: #b9cdd3;
-}
-
-.finalActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 28px;
-}
-
-.finalPrimary {
-  background: #e0a85e;
-  color: #1c1307;
-}
-
-.finalPrimary:hover {
-  background: #ebb873;
-}
-
-.finalGhost {
-  color: #fff;
-  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.3);
-}
-
-.finalGhost:hover {
-  box-shadow: inset 0 0 0 1.5px #fff;
 }
 
 @media (max-width: 900px) {
   .faqGrid {
     grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  .final {
-    grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 40px 28px;
+    gap: 32px;
   }
 }
 
 @media (max-width: 560px) {
-  .finalActions :global(.btn) {
-    width: 100%;
-    white-space: normal;
+  .question {
+    font-size: 17px;
   }
 
-  .question {
-    font-size: 16px;
+  .answer {
+    padding-right: 0;
   }
 }
