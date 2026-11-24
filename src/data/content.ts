@@ -17,40 +17,97 @@ export const header = {
 
 /* ───────────────────────── Hero ───────────────────────── */
 
+/**
+ * Hero "tu solución, en vivo": el visitante escribe el nombre de su negocio,
+ * a qué se dedica y qué necesita (W, A, S o D), y a la derecha se arma un
+ * ejemplo distinto según el servicio. Sin datos, una demo automática recorre
+ * negocios de rubros variados. Todo es ilustrativo.
+ */
+export type HeroService = {
+  key: KeyLetter;
+  /** Texto del botón para elegir el servicio. */
+  chip: string;
+  /** Cómo se nombra el servicio en el mensaje de WhatsApp. */
+  name: string;
+  /** Pasos que se marcan mientras se arma el ejemplo (siempre 5). */
+  steps: [string, string, string, string, string];
+};
+
 export const hero = {
-  badge: { tag: "Lima", text: "Webs para PYMEs, listas en 48 horas" },
-  /** El título se arma así: before + highlight (resaltado en color). */
-  title: { before: "Tu negocio atendiendo y vendiendo", highlight: "las 24 horas" },
-  subtitle: "Web, WhatsApp con IA y reservas con un solo equipo. Te mostramos tu web antes de pagar.",
+  badge: { tag: "En vivo", text: "Funciona para cualquier rubro" },
+  /** El título se arma así: before + highlight (resaltado) + after. */
+  title: { before: "Cuéntanos de tu negocio y", highlight: "míralo cobrar vida", after: "" },
+  subtitle:
+    "Escribe cómo se llama, a qué se dedica y qué necesitas. Mientras escribes, armamos un adelanto aquí mismo. La versión real te la mostramos gratis antes de que pagues un sol.",
+  fields: {
+    name: { label: "¿Cómo se llama tu negocio?", placeholder: "Ej.: Dulce Antojo" },
+    description: { label: "¿A qué se dedica?", placeholder: "Ej.: Repostería artesanal con delivery en Surco" },
+    service: { label: "¿Qué necesitas?" },
+  },
+  defaults: {
+    name: "Tu negocio",
+    description: "Lo que hace tu negocio, contado en una línea",
+  },
   primaryCta: "Quiero mi demo gratis",
-  secondaryCta: "Ver proyecto",
-  guarantees: ["Demo gratis antes de pagar", "Publicada en 48 h", "Reporte semanal"],
-  /** Mockups del lado derecho. Son ilustrativos: no representan a un cliente real. */
-  mockLabel:
-    "Ejemplo ilustrativo: la web de una cafetería en un celular, una conversación con la recepcionista con IA y el reporte semanal",
-  phone: {
-    place: "Tu cafetería · Barranco",
-    headline: "Café de especialidad y postres de la casa",
-    action: "Reservar mesa",
-    menu: [
-      { name: "Capuchino", price: "S/ 12" },
-      { name: "Cheesecake", price: "S/ 14" },
-      { name: "Sándwich de pollo", price: "S/ 18" },
-    ],
-  },
-  chat: {
-    name: "Tu cafetería",
-    status: "Recepcionista IA · en línea",
-    messages: [
-      { from: "customer", text: "Hola, ¿tienen mesa para 4 hoy a las 8 p. m.?" },
-      { from: "agent", text: "¡Sí! Te la separo. ¿A nombre de quién?" },
-    ] as Array<{ from: "customer" | "agent"; text: string }>,
-    confirmation: "Reserva confirmada · Hoy, 8 p. m.",
-  },
-  report: {
-    title: "Tu reporte semanal",
-    note: "Ejemplo ilustrativo",
-    rows: ["Visitas", "Clics a WhatsApp", "Reservas"],
+  secondaryCta: "Ver un proyecto real",
+  note: "Adelanto ilustrativo. Tu demo real la armamos contigo en 48 horas.",
+  previewLabel: "Vista previa que se arma en vivo",
+  readyLabel: "Lista para publicar",
+  defaultDomain: "tunegocio.pe",
+
+  services: [
+    { key: "W", chip: "Página web", name: "una página web", steps: ["Tu marca", "Portada", "Servicios", "Botón de WhatsApp", "Lista"] },
+    { key: "A", chip: "WhatsApp con IA", name: "un WhatsApp con IA", steps: ["Tu marca", "Tu oferta", "Respuestas", "Aviso al equipo", "Lista"] },
+    { key: "S", chip: "Reservas y pedidos", name: "un sistema de reservas y pedidos", steps: ["Tu marca", "Resumen del día", "Agenda", "Pagos y avisos", "Lista"] },
+    { key: "D", chip: "App web o móvil", name: "una app web o móvil", steps: ["Tu marca", "Pantallas", "Catálogo", "Notificaciones", "Lista"] },
+  ] as HeroService[],
+
+  /** Negocios de ejemplo (rubros variados) para la demo automática. */
+  samples: [
+    { name: "Dulce Antojo", description: "Repostería artesanal con delivery en Surco", service: "W" },
+    { name: "Taller Rápido", description: "Mecánica y mantenimiento de autos en San Miguel", service: "A" },
+    { name: "Estudio Vida", description: "Clases de pilates y yoga para todas las edades", service: "S" },
+    { name: "Ferretería Central", description: "Materiales de construcción con envío a obra", service: "D" },
+  ] as Array<{ name: string; description: string; service: KeyLetter }>,
+
+  /** Textos de las vistas previas (genéricos: sirven para cualquier rubro). */
+  preview: {
+    web: {
+      items: ["Lo que ofrecemos", "Horarios y ubicación", "Opiniones de clientes"],
+      action: "Escríbenos por WhatsApp",
+      bubble: "Hola, ¿en qué te ayudamos?",
+      bubbleFrom: "Recepcionista IA",
+    },
+    chat: {
+      status: "Recepcionista IA · en línea",
+      customer1: "Hola, ¿qué ofrecen?",
+      /** La respuesta se arma con el nombre y la descripción del negocio. */
+      agent1Before: "¡Hola! Soy la recepcionista virtual de",
+      agent1Middle: "Nos dedicamos a:",
+      customer2: "¿Atienden hoy?",
+      agent2: "Sí, hoy atendemos. ¿Te separo un espacio o prefieres que te llame alguien del equipo?",
+      handoff: "Aviso enviado al equipo: cliente interesado",
+      instant: "Respondido al instante",
+    },
+    system: {
+      panel: "Panel de",
+      kpis: [
+        { label: "Reservas de hoy", value: "8" },
+        { label: "Pedidos", value: "5" },
+        { label: "Pagos por confirmar", value: "2" },
+      ],
+      agendaTitle: "Agenda de hoy",
+      agenda: ["10:00 a. m. · Reserva confirmada", "12:30 p. m. · Pedido para recoger", "4:00 p. m. · Cita nueva desde la web"],
+      payment: "Adelanto por Yape recibido",
+      reminder: "Recordatorio enviado por WhatsApp",
+    },
+    app: {
+      tabs: ["Inicio", "Catálogo", "Pedidos", "Perfil"],
+      cards: ["Lo nuevo", "Lo más pedido"],
+      list: ["Producto destacado", "Promoción de la semana", "Arma tu pedido"],
+      action: "Pedir ahora",
+      notification: "Tu pedido está en camino",
+    },
   },
 };
 
