@@ -43,7 +43,7 @@ Todo el contenido está en `src/data/`. **No hace falta tocar componentes.**
 | `src/data/testimonials.ts` | Testimonios (preparado y **oculto** hasta tener datos reales) |
 
 - **Precios:** la landing no muestra precios de WASD; se conversan por WhatsApp. Los montos en el celular de ejemplo del hero (por ejemplo, "Capuchino · S/ 12") son contenido ilustrativo.
-- **WhatsApp:** todos los links salen de `src/lib/whatsapp.ts`, con un mensaje distinto para consulta general, demo, proyecto y formulario.
+- **WhatsApp:** todos los links salen de `src/lib/whatsapp.ts`, con un mensaje distinto para consulta general, demo (con el nombre, la descripción y el servicio que escribió el visitante en el hero), proyecto y formulario.
 - **Formulario:** `src/lib/lead.ts` valida y tiene la función aislada `submitLead()`. Hoy abre WhatsApp con el mensaje armado; para conectar un backend, reemplaza el cuerpo de `submitLead()`.
 - **Colores:** solo los tokens de `src/app/globals.css`. Cada token tiene su valor claro en `:root` y su valor oscuro en `:root[data-theme="dark"]`; un componente nuevo funciona en los dos temas si usa tokens.
 
@@ -78,7 +78,7 @@ Todo el contenido está en `src/data/`. **No hace falta tocar componentes.**
 | Sección | Archivo | Qué se mueve |
 | --- | --- | --- |
 | Header | `sections/Header.tsx` | Fijo, gana fondo al bajar; interruptor de tema y menú en celular |
-| Hero | `sections/Hero.tsx` | El celular sube, el chat de la recepcionista con IA aparece mensaje a mensaje y las barras del reporte crecen |
+| Hero | `sections/Hero.tsx`, `HeroPreview.tsx` | El visitante escribe el nombre de su negocio, a qué se dedica y qué necesita (W web, A WhatsApp con IA, S reservas y pedidos, D app). A la derecha se arma en vivo un ejemplo distinto por servicio, con su nombre, su descripción y un color propio. Sin datos, una demo automática recorre negocios de rubros variados. El botón abre WhatsApp con lo que escribió. Textos en `hero` de `src/data/content.ts` |
 | ¿Te pasa esto? | `sections/Problem.tsx` | Aparición suave al entrar en pantalla |
 | Servicios | `sections/Services.tsx` | Las teclas en la forma del logo son las pestañas (clic, flechas o W/A/S/D en el teclado) |
 | Proyecto Woodland | `sections/Project.tsx` | Capturas reales de su web (escritorio y celular) y lo que construimos, por tecla |
