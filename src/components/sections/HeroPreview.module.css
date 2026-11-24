@@ -123,8 +123,8 @@
 .appList,
 .appBtn,
 .push,
-.handoff,
-.msg {
+.msg,
+.action {
   transition:
     opacity 450ms var(--ease-out),
     transform 500ms var(--ease-out);
@@ -354,67 +354,225 @@
   box-shadow: 0 8px 20px rgb(37 211 102 / 0.35);
 }
 
-/* ───────── A: chat de WhatsApp ───────── */
+/* ───────── A: agente especializado en la web ───────── */
 
-.chatFrame {
-  display: flex;
-  flex-direction: column;
-  background: #efeae2;
+.agentPage {
+  position: relative;
+  height: calc(100% - 40px);
+  padding: 16px 20px;
 }
 
-.chatHeader {
+/* La web del negocio queda de fondo, atenuada */
+.agentPage > .webHeader,
+.pageBlock,
+.pageLine {
+  opacity: 0.55;
+}
+
+.pageBlock {
+  display: block;
+  width: 38%;
+  height: 120px;
+  margin-top: 14px;
+  border-radius: 12px;
+  background: #e8ebe5;
+  transition: background-color 500ms var(--ease-state);
+}
+
+.pageBlock[data-on] {
+  background: linear-gradient(150deg, var(--brand), var(--brand-2));
+}
+
+.pageLine {
+  display: block;
+  width: 34%;
+  height: 8px;
+  margin-top: 12px;
+  border-radius: 4px;
+  background: #dfe3dc;
+}
+
+.pageLine:nth-of-type(odd) {
+  width: 26%;
+}
+
+.agent {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  width: min(350px, calc(100% - 32px));
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.06),
+    0 18px 40px rgb(15 30 40 / 0.18);
+}
+
+.agentHeader {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 16px;
-  background: #075e54;
+  padding: 12px 14px;
+  background: #eef0ec;
+  color: var(--mock-ink);
+  transition:
+    background-color 450ms var(--ease-state),
+    color 450ms var(--ease-state);
+}
+
+.agentHeader[data-on] {
+  background: linear-gradient(140deg, var(--brand), var(--brand-2));
   color: #fff;
 }
 
-.chatAvatar {
-  composes: logo;
+.agentAvatar {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgb(255 255 255 / 0.2);
+  background: rgb(255 255 255 / 0.22);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.35);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 800;
 }
 
-.chatTitle {
+/* Punto "en línea" cuando el agente está listo */
+.agentAvatar::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 11px;
+  height: 11px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #2fbf71;
+  transform: scale(0);
+  transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.agentAvatar[data-online]::after {
+  transform: scale(1);
+}
+
+.agentTitle {
   display: flex;
   flex: 1;
   flex-direction: column;
   min-width: 0;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
-.chatTitle b {
+.agentTitle b {
   overflow: hidden;
-  font-size: 15px;
+  font-size: 14.5px;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.chatTitle small {
+/* Su especialidad: hasta dos líneas */
+.agentTitle small {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   font-size: 12px;
-  opacity: 0.85;
+  opacity: 0.88;
 }
 
-.chat {
+.agentStatus {
+  flex: none;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.2);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.agentStatus[data-on] {
+  background: #2fbf71;
+  color: #06331a;
+}
+
+/* Lo que aprendió del negocio */
+.knowledge {
+  padding: 10px 14px 0;
+}
+
+.knowledge p {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--mock-muted);
+}
+
+.knowledge ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.knowledge li {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px 3px 7px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px #dfe3dc;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #9aa19a;
+  transition:
+    background-color 400ms var(--ease-state),
+    color 400ms var(--ease-state),
+    box-shadow 400ms var(--ease-state);
+  transition-delay: calc(var(--i) * 120ms);
+}
+
+.knowledge li svg {
+  opacity: 0;
+  transition: opacity 300ms var(--ease-state);
+  transition-delay: inherit;
+}
+
+.knowledge[data-on] li {
+  background: var(--soft);
+  box-shadow: inset 0 0 0 1px hsl(var(--hue) 35% 82%);
+  color: var(--brand);
+}
+
+.knowledge[data-on] li svg {
+  opacity: 1;
+}
+
+.agentChat {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 8px;
-  padding: 16px;
+  justify-content: flex-end;
+  gap: 7px;
+  min-height: 0;
+  padding: 10px 14px;
   overflow: hidden;
 }
 
 .msg {
-  max-width: 82%;
-  padding: 8px 11px;
-  border-radius: 10px;
-  font-size: 13.5px;
+  max-width: 86%;
+  padding: 7px 11px;
+  border-radius: 12px;
+  font-size: 12.5px;
   line-height: 1.4;
-  box-shadow: 0 1px 1px rgb(0 0 0 / 0.08);
   opacity: 0;
   transform: translateY(8px);
   transition-delay: var(--d, 0ms);
@@ -427,47 +585,96 @@
 }
 
 .in {
-  align-self: flex-start;
-  background: #fff;
-  border-top-left-radius: 3px;
+  align-self: flex-end;
+  background: #eef0ec;
+  border-bottom-right-radius: 4px;
 }
 
 .out {
-  align-self: flex-end;
-  background: #d9fdd3;
-  border-top-right-radius: 3px;
+  align-self: flex-start;
+  background: var(--soft);
+  border-bottom-left-radius: 4px;
 }
 
-.out small {
-  display: block;
-  margin-top: 4px;
-  font-size: 11px;
-  color: #4a7a4a;
-  text-align: right;
-}
-
-.handoff {
-  display: inline-flex;
+/* Acción que el agente hizo por su cuenta */
+.action {
+  display: flex;
   align-items: center;
-  gap: 6px;
-  align-self: center;
-  margin-top: 4px;
-  padding: 5px 12px;
-  border-radius: 8px;
-  background: #fff7d6;
-  color: #6b5414;
-  font-size: 12px;
-  font-weight: 600;
+  gap: 9px;
+  align-self: flex-start;
+  max-width: 92%;
+  padding: 8px 12px 8px 8px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow:
+    inset 0 0 0 1px #dfe3dc,
+    0 4px 12px rgb(0 0 0 / 0.06);
+  font-size: 11.5px;
+  line-height: 1.3;
+  color: var(--mock-muted);
   opacity: 0;
   transform: translateY(8px);
+  transition-delay: var(--d, 0ms);
 }
 
-.handoff[data-on] {
+.action[data-on] {
   opacity: 1;
   transform: none;
 }
 
-.chatFrame .ready,
+.action > span:last-child {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.action b {
+  font-size: 12.5px;
+  color: var(--mock-ink);
+}
+
+.actionIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #2fbf71;
+  color: #fff;
+}
+
+.agentInput {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 12px 12px;
+  padding: 6px 6px 6px 12px;
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px #dfe3dc;
+  font-size: 12px;
+  color: #9aa19a;
+}
+
+.agentInput span {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(140deg, var(--brand), var(--brand-2));
+  color: #fff;
+}
+
+/* Sello: abajo a la izquierda, sobre la web de fondo */
+.agentReady {
+  top: auto;
+  right: auto;
+  bottom: 18px;
+  left: 20px;
+}
+
 .appFrame .ready,
 .system .ready {
   top: auto;
@@ -865,6 +1072,32 @@
   .alerts p:last-child,
   .agenda .row:last-child {
     display: none;
+  }
+
+  .agentPage {
+    padding: 14px;
+  }
+
+  .agent {
+    top: 10px;
+    right: 10px;
+    bottom: 10px;
+    width: calc(100% - 20px);
+  }
+
+  .agentReady {
+    display: none;
+  }
+
+  /* En el celular: una sola fila de temas y mensajes más juntos */
+  .knowledge p,
+  .knowledge li:last-child {
+    display: none;
+  }
+
+  .agentChat {
+    gap: 6px;
+    padding: 8px 12px;
   }
 
   .phone {

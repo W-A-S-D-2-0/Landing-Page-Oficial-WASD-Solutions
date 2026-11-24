@@ -57,7 +57,7 @@ export const hero = {
 
   services: [
     { key: "W", chip: "Página web", name: "una página web", steps: ["Tu marca", "Portada", "Servicios", "Botón de WhatsApp", "Lista"] },
-    { key: "A", chip: "WhatsApp con IA", name: "un WhatsApp con IA", steps: ["Tu marca", "Tu oferta", "Respuestas", "Aviso al equipo", "Lista"] },
+    { key: "A", chip: "Agentes especializados", name: "un agente especializado en mi negocio", steps: ["Tu marca", "Lo que sabe", "Respuestas", "Acciones", "Listo"] },
     { key: "S", chip: "Reservas y pedidos", name: "un sistema de reservas y pedidos", steps: ["Tu marca", "Resumen del día", "Agenda", "Pagos y avisos", "Lista"] },
     { key: "D", chip: "App web o móvil", name: "una app web o móvil", steps: ["Tu marca", "Pantallas", "Catálogo", "Notificaciones", "Lista"] },
   ] as HeroService[],
@@ -76,18 +76,26 @@ export const hero = {
       items: ["Lo que ofrecemos", "Horarios y ubicación", "Opiniones de clientes"],
       action: "Escríbenos por WhatsApp",
       bubble: "Hola, ¿en qué te ayudamos?",
-      bubbleFrom: "Recepcionista IA",
+      bubbleFrom: "Agente de atención",
     },
-    chat: {
-      status: "Recepcionista IA · en línea",
-      customer1: "Hola, ¿qué ofrecen?",
-      /** La respuesta se arma con el nombre y la descripción del negocio. */
-      agent1Before: "¡Hola! Soy la recepcionista virtual de",
-      agent1Middle: "Nos dedicamos a:",
-      customer2: "¿Atienden hoy?",
-      agent2: "Sí, hoy atendemos. ¿Te separo un espacio o prefieres que te llame alguien del equipo?",
-      handoff: "Aviso enviado al equipo: cliente interesado",
-      instant: "Respondido al instante",
+    /** Agente con IA dentro de la web del negocio (no necesariamente WhatsApp). */
+    agent: {
+      /** Cabecera: "Agente de {nombre}" y "Experto en {a qué se dedica}". */
+      title: "Agente de",
+      specialty: "Experto en",
+      training: "Aprendiendo…",
+      online: "En línea",
+      knowledgeLabel: "Aprendió de tu negocio",
+      knowledge: ["Servicios", "Precios", "Horarios", "Preguntas frecuentes"],
+      customer1: "Hola, ¿me ayudas a elegir?",
+      /** La respuesta se arma con el nombre del negocio. */
+      agent1Before: "¡Claro! Soy el agente experto de",
+      agent1After: "Conozco nuestros servicios, precios y horarios. ¿Qué necesitas?",
+      customer2: "¿Me pueden atender mañana?",
+      actionTitle: "Solicitud registrada para mañana",
+      actionText: "Aviso enviado al equipo",
+      input: "Pregúntale lo que quieras…",
+      ready: "Listo para atender",
     },
     system: {
       panel: "Panel de",
@@ -170,11 +178,11 @@ export const services: {
     },
     {
       key: "A",
-      name: "Automatización con IA",
-      description: "Una recepcionista con IA que responde tu WhatsApp.",
-      benefits: ["Responde horarios, precios y carta", "Te pasa las consultas importantes", "Pide reseñas a tus clientes"],
+      name: "Agentes especializados",
+      description: "Un agente con IA experto en tu negocio, que atiende en tu web.",
+      benefits: ["Conoce tus servicios, precios y horarios", "Atiende a cualquier hora y registra solicitudes", "También en tu WhatsApp, si lo quieres"],
       preview: {
-        title: "WhatsApp, 11:48 p. m.",
+        title: "Chat en tu web, 11:48 p. m.",
         lines: ["¿Atienden mañana domingo?", "Sí, de 9 a. m. a 6 p. m. ¿Te separo una mesa?"],
       },
     },
@@ -282,7 +290,7 @@ export const comparison: {
   rows: [
     { label: "Quién lo construye", values: [{ text: "Tú, en tu tiempo libre" }, { text: "Un equipo externo" }, { text: "Nuestro equipo, contigo", good: true }] },
     { label: "Tiempo de entrega", values: [{ text: "Depende de tu tiempo" }, { text: "Varias semanas" }, { text: "48 horas", good: true }] },
-    { label: "IA y WhatsApp", values: [{ text: "No" }, { text: "Por separado" }, { text: "Incluidos", good: true }] },
+    { label: "Agente con IA y WhatsApp", values: [{ text: "No" }, { text: "Por separado" }, { text: "Incluidos", good: true }] },
     { label: "Medición de resultados", values: [{ text: "Por tu cuenta" }, { text: "No siempre" }, { text: "Reporte semanal", good: true }] },
     { label: "Soporte continuo", values: [{ text: "No" }, { text: "Según contrato" }, { text: "Incluido", good: true }] },
   ],
@@ -364,7 +372,7 @@ export const whatsappBubble = {
 };
 
 export const footer = {
-  phrase: "Webs, WhatsApp con IA y reservas para PYMEs. Mueve tu negocio.",
+  phrase: "Webs, agentes con IA y reservas para PYMEs. Mueve tu negocio.",
   columns: { site: "Sitio", contact: "Contacto", legal: "Legal" },
   legalLinks: [
     { label: "Política de privacidad", href: "/privacidad/" },

@@ -27,9 +27,9 @@ export const faq: FaqItem[] = [
       "Te avisamos con anticipación. Si no se regulariza, los servicios mensuales (IA, reservas, reportes y hosting) se pausan. Puedes reactivarlos cuando quieras o pedirnos tus archivos.",
   },
   {
-    question: "¿Cómo funciona la IA en WhatsApp?",
+    question: "¿Cómo funciona un agente especializado?",
     answer:
-      "Configuramos un asistente con la información de tu negocio: horarios, precios, carta o servicios. Responde las preguntas frecuentes al instante y, cuando algo necesita a una persona, te pasa la conversación.",
+      "Lo preparamos con la información de tu negocio: servicios, precios, horarios y preguntas frecuentes. Atiende en tu web (y en WhatsApp, si lo quieres), responde al instante, registra solicitudes y, cuando algo necesita a una persona, te pasa la conversación.",
   },
   {
     question: "¿Puedo cambiar textos y fotos?",

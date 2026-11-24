@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { hero, type KeyLetter } from "@/data/content";
-import { BarChart, Check, WhatsAppIcon } from "@/components/ui/Icons";
+import { ArrowRight, BarChart, Check, WhatsAppIcon } from "@/components/ui/Icons";
 import styles from "./HeroPreview.module.css";
 
 type Props = {
@@ -33,7 +33,7 @@ function Caret({ show }: { show: boolean }) {
 
 /**
  * Ejemplo que se arma en vivo según el servicio elegido:
- * W web, A chat de WhatsApp con IA, S panel de reservas y pedidos, D app.
+ * W web, A agente especializado en la web del negocio, S panel de reservas y pedidos, D app.
  * Cada paso (1 a 5) hace aparecer una parte. Siempre en colores claros:
  * representa la web o app del cliente, no la página de WASD.
  */
@@ -117,41 +117,99 @@ export function HeroPreview({ service, name, description, domain, step, typing }
     );
   }
 
-  /* ───────── A: WhatsApp con IA ───────── */
+  /* ───────── A: agente especializado, dentro de la web del negocio ───────── */
   if (service === "A") {
+    const a = p.agent;
     return (
-      <div className={`${styles.frame} ${styles.chatFrame}`} data-ready={on(5)} style={tone}>
-        <div className={styles.chatHeader}>
-          <span className={styles.chatAvatar} data-on={on(1)}>
-            {initial}
+      <div className={styles.frame} data-ready={on(5)} style={tone}>
+        <div className={styles.bar}>
+          <i />
+          <i />
+          <i />
+          <span className={styles.url}>
+            <span className={styles.lock} />
+            {domain}
           </span>
-          <span className={styles.chatTitle}>
-            <b>{nameNode}</b>
-            <small>{p.chat.status}</small>
+        </div>
+        <div className={styles.agentPage}>
+          {/* La web del negocio, de fondo */}
+          <div className={styles.webHeader}>
+            <span className={styles.logo} data-on={on(1)}>
+              {initial}
+            </span>
+            <span className={styles.webName}>{name}</span>
+          </div>
+          <span className={styles.pageBlock} data-on={on(1)} />
+          <span className={styles.pageLine} />
+          <span className={styles.pageLine} />
+          <span className={styles.pageLine} />
+
+          {/* El agente */}
+          <div className={styles.agent}>
+            <div className={styles.agentHeader} data-on={on(1)}>
+              <span className={styles.agentAvatar} data-online={on(5)}>
+                {initial}
+              </span>
+              <span className={styles.agentTitle}>
+                <b>
+                  {a.title} {nameNode}
+                </b>
+                <small>
+                  {a.specialty} {lowerFirst(description)}
+                  <Caret show={typing === "description"} />
+                </small>
+              </span>
+              <span className={styles.agentStatus} data-on={on(5)}>
+                {step >= 5 ? a.online : a.training}
+              </span>
+            </div>
+
+            <div className={styles.knowledge} data-on={on(2)}>
+              <p>{a.knowledgeLabel}</p>
+              <ul>
+                {a.knowledge.map((item, i) => (
+                  <li key={item} style={{ "--i": i } as CSSProperties}>
+                    <Check size={11} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className={styles.agentChat}>
+              <p className={`${styles.msg} ${styles.in}`} data-on={on(3)}>
+                {a.customer1}
+              </p>
+              <p className={`${styles.msg} ${styles.out}`} data-on={on(3)} style={{ "--d": "250ms" } as CSSProperties}>
+                {a.agent1Before} <b>{name}</b>. {a.agent1After}
+              </p>
+              <p className={`${styles.msg} ${styles.in}`} data-on={on(4)}>
+                {a.customer2}
+              </p>
+              <p className={styles.action} data-on={on(4)} style={{ "--d": "250ms" } as CSSProperties}>
+                <span className={styles.actionIcon}>
+                  <Check size={13} />
+                </span>
+                <span>
+                  <b>{a.actionTitle}</b>
+                  {a.actionText}
+                </span>
+              </p>
+            </div>
+
+            <div className={styles.agentInput}>
+              {a.input}
+              <span>
+                <ArrowRight size={14} />
+              </span>
+            </div>
+          </div>
+
+          <span className={`${styles.ready} ${styles.agentReady}`} data-on={on(5)}>
+            <Check size={13} />
+            {a.ready}
           </span>
-          <WhatsAppIcon size={20} />
         </div>
-        <div className={styles.chat}>
-          <p className={`${styles.msg} ${styles.in}`} data-on={on(2)}>
-            {p.chat.customer1}
-          </p>
-          <p className={`${styles.msg} ${styles.out}`} data-on={on(2)} style={{ "--d": "250ms" } as CSSProperties}>
-            {p.chat.agent1Before} <b>{name}</b>. {p.chat.agent1Middle} {lowerFirst(description)}
-            <Caret show={typing === "description"} />
-            <small>{p.chat.instant}</small>
-          </p>
-          <p className={`${styles.msg} ${styles.in}`} data-on={on(3)}>
-            {p.chat.customer2}
-          </p>
-          <p className={`${styles.msg} ${styles.out}`} data-on={on(3)} style={{ "--d": "250ms" } as CSSProperties}>
-            {p.chat.agent2}
-          </p>
-          <p className={styles.handoff} data-on={on(4)}>
-            <Check size={12} />
-            {p.chat.handoff}
-          </p>
-        </div>
-        {ready}
       </div>
     );
   }
