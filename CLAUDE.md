@@ -16,4 +16,4 @@ Reglas clave:
 - No inventar clientes, testimonios, reseñas, logos ni cifras de resultados. Proyectos reales (hoy, Woodland Perú) solo con datos verificables y con permiso del cliente; las cifras del cliente no se publican sin su validación.
 - WhatsApp siempre a un toque en el celular (botón flotante). Links solo con `whatsappUrl()`.
 - Antes de entregar: `npm run check` (lint + TypeScript + build).
-- Ramas: `main` es producción y `develop` es integración. Las ramas de trabajo (`feature/`, `content/`, `fix/`, `style/`, `chore/`) salen de `develop` y vuelven por pull request. Detalle en `CONTRIBUTING.md`.
+- Ramas: solo `main` (producción). Las ramas de trabajo (`feature/`, `content/`, `fix/`, `style/`, `chore/`) salen de `main` y vuelven a `main` por pull request, con el CI en verde. No hay rama `develop`. Detalle en `CONTRIBUTING.md`.
