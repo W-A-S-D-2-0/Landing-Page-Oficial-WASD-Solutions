@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: site.seo.title,
     description: site.seo.description,
-    images: [{ url: site.seo.ogImage, width: 1200, height: 630, alt: "WASD Solutions: webs, WhatsApp con IA y reservas para PYMEs" }],
+    images: [{ url: site.seo.ogImage, width: 1200, height: 630, alt: "WASD Solutions: webs, agentes con IA y reservas para PYMEs" }],
   },
   twitter: {
     card: "summary_large_image",

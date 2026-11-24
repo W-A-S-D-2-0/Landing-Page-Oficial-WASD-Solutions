@@ -9,7 +9,7 @@ export const site = {
   shortName: "WASD",
   tagline: "Mueve tu negocio.",
   description:
-    "Páginas web para negocios en Lima: web, WhatsApp con IA y reservas para PYMEs, listos en 48 horas y con resultados medidos cada semana.",
+    "Páginas web para negocios en Lima: web, agentes con IA y reservas para PYMEs, listos en 48 horas y con resultados medidos cada semana.",
 
   /** URL pública del sitio. Configúrala con NEXT_PUBLIC_SITE_URL. [DOMINIO] */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
@@ -50,7 +50,7 @@ export const site = {
   seo: {
     title: "Páginas web para negocios en Lima | WASD Solutions",
     description:
-      "Creamos páginas web para negocios en Lima con WhatsApp con IA y reservas. Te mostramos tu web antes de pagar, la publicamos en 48 horas y te enviamos resultados cada semana.",
+      "Creamos páginas web para negocios en Lima con agentes con IA y reservas. Te mostramos tu web antes de pagar, la publicamos en 48 horas y te enviamos resultados cada semana.",
     keywords: [
       "páginas web para negocios en Lima",
       "diseño web Lima",
@@ -58,6 +58,7 @@ export const site = {
       "web para restaurantes Lima",
       "web para barberías",
       "web para consultorio dental",
+      "agente con IA para negocios",
       "chatbot WhatsApp IA",
       "sistema de reservas",
       "PYMEs Perú",
