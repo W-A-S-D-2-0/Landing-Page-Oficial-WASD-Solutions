@@ -67,18 +67,18 @@ export function Services() {
   const item = services.items.find((s) => s.key === selected) ?? services.items[0];
 
   return (
-    <section id="servicios" ref={sectionRef} className={styles.section} aria-labelledby="servicios-title">
+    <section id="servicios" ref={sectionRef} className="section section-alt" aria-labelledby="servicios-title">
       <div className="container">
-        <header className={styles.head} data-reveal="">
-          <div>
-            <p className="eyebrow">{services.eyebrow}</p>
-            <h2 id="servicios-title" className={`section-title ${styles.title}`}>
-              {services.title}
-            </h2>
-          </div>
-          <p className={styles.intro}>{services.intro}</p>
+        <header className="section-head center">
+          <p className="eyebrow">{services.eyebrow}</p>
+          <h2 id="servicios-title" className="section-title">
+            {services.title}
+          </h2>
+          <p className="section-intro">{services.intro}</p>
         </header>
 
+        <div className={styles.layout}>
+        <div className={styles.controls}>
         <div role="tablist" aria-label={services.tablistLabel} className={styles.tabs} data-reveal="">
           {services.items.map((s) => (
             <button
@@ -92,21 +92,17 @@ export function Services() {
               aria-selected={selected === s.key}
               aria-controls={`panel-${s.key}`}
               tabIndex={selected === s.key ? 0 : -1}
-              className={styles.tab}
+              className={`${styles.tab} ${styles[`tab${s.key}`]}`}
               onClick={() => choose(s.key)}
               onKeyDown={onTabKeyDown}
             >
-              <KeyCap
-                letter={s.key}
-                tone={selected === s.key ? "light" : "dark"}
-                pressed={pressed === s.key || selected === s.key}
-                className={styles.cap}
-              />
+              <KeyCap letter={s.key} active={selected === s.key} pressed={pressed === s.key} className={styles.cap} />
               <span className={styles.tabName}>{s.name}</span>
             </button>
           ))}
         </div>
         <p className={styles.hint}>{services.hint}</p>
+        </div>
 
         <div
           key={item.key}
@@ -117,9 +113,6 @@ export function Services() {
           className={styles.panel}
         >
           <div className={styles.panelText}>
-            <p className={styles.panelKey} aria-hidden="true">
-              {item.key}
-            </p>
             <h3 className={styles.panelName}>{item.name}</h3>
             <p className={styles.panelDesc}>{item.description}</p>
             <ul className={styles.benefits}>
@@ -144,6 +137,7 @@ export function Services() {
             </ul>
             <p className={styles.previewNote}>Ejemplo ilustrativo</p>
           </div>
+        </div>
         </div>
 
         <p className={styles.closing} data-reveal="">

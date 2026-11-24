@@ -1,7 +1,5 @@
 .main {
-  padding: 150px 0 100px;
-  background: var(--paper);
-  color: var(--ink);
+  padding: 72px 0 100px;
 }
 
 .inner {
@@ -10,37 +8,37 @@
 
 .title {
   font-family: var(--font-display);
-  font-stretch: 104%;
-  font-weight: 640;
-  font-size: clamp(38px, 6vw, 72px);
-  line-height: 0.95;
-  letter-spacing: -0.05em;
+  font-weight: 800;
+  font-size: clamp(34px, 5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
 }
 
 .updated {
-  margin-top: 14px;
+  margin-top: 12px;
   font-size: 14px;
-  color: var(--ink-muted);
+  color: var(--text-muted);
 }
 
 .body {
   display: grid;
   gap: 18px;
-  margin-top: 40px;
+  margin-top: 36px;
   font-size: 17px;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .body h2 {
-  margin-top: 20px;
+  margin-top: 18px;
+  font-family: var(--font-display);
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
 .body p {
   max-width: 65ch;
-  color: var(--ink-muted);
+  color: var(--text-muted);
 }
 
 .body ul {
@@ -48,9 +46,9 @@
   gap: 6px;
   padding-left: 22px;
   list-style: disc;
-  color: var(--ink-muted);
+  color: var(--text-muted);
 }
 
-.body .lead {
-  color: var(--ink);
+.body :global(.lead) {
+  color: var(--text);
 }

@@ -2,10 +2,10 @@ import Link from "next/link";
 import { footer } from "@/data/content";
 import { isPlaceholder, safeHref, site } from "@/data/site";
 import { whatsappUrl } from "@/lib/whatsapp";
-import { LogoMark } from "@/components/ui/Logo";
+import { Logo } from "@/components/ui/Logo";
 import styles from "./Footer.module.css";
 
-/** Footer con marca gigante, contacto, legales y Libro de Reclamaciones. */
+/** Footer con logo, contacto, legales y Libro de Reclamaciones. */
 export function Footer() {
   const year = new Date().getFullYear();
   const socials = site.social.filter((s) => !isPlaceholder(s.href));
@@ -16,8 +16,7 @@ export function Footer() {
         <div className={styles.top}>
           <div className={styles.brandCol}>
             <p className={styles.brand}>
-              <LogoMark size={26} />
-              {site.name}
+              <Logo width={60} />
             </p>
             <p className={styles.phrase}>{footer.phrase}</p>
           </div>
@@ -78,10 +77,6 @@ export function Footer() {
             </ul>
           </nav>
         </div>
-
-        <p className={styles.giant} aria-hidden="true">
-          WASD
-        </p>
 
         <div className={styles.bottom}>
           <p>

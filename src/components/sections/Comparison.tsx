@@ -1,30 +1,19 @@
 import { comparison, guarantee } from "@/data/content";
-import { ArrowUpRight, Check, Minus } from "@/components/ui/Icons";
+import { ArrowRight, Check, Minus } from "@/components/ui/Icons";
 import styles from "./Comparison.module.css";
 
-/** Garantía destacada + tabla comparativa honesta (sin nombrar a nadie). */
+/** Tabla comparativa honesta (sin nombrar a nadie) y la garantía de 60 días. */
 export function Comparison() {
   return (
-    <section id="comparativa" className={styles.section} aria-labelledby="comparativa-title">
+    <section id="comparativa" className="section section-alt" aria-labelledby="comparativa-title">
       <div className="container">
-        <div className={styles.guarantee} data-reveal="">
-          <p className={styles.guaranteeNumber} aria-hidden="true">
-            60
-          </p>
-          <div>
-            <h2 className={styles.guaranteeTitle}>{guarantee.title}</h2>
-            <p className={styles.guaranteeText}>{guarantee.text}</p>
-            <a href={guarantee.href} className={styles.guaranteeLink}>
-              {guarantee.linkLabel}
-              <ArrowUpRight size={14} />
-            </a>
-          </div>
-        </div>
-
-        <p className="eyebrow">{comparison.eyebrow}</p>
-        <h2 id="comparativa-title" className={`section-title ${styles.title}`} data-reveal="">
-          {comparison.title}
-        </h2>
+        <header className="section-head center">
+          <p className="eyebrow">{comparison.eyebrow}</p>
+          <h2 id="comparativa-title" className="section-title">
+            {comparison.title}
+          </h2>
+          <p className="section-intro">{comparison.intro}</p>
+        </header>
 
         <div className={styles.tableWrap} data-reveal="">
           <table className={styles.table}>
@@ -63,6 +52,21 @@ export function Comparison() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        <div className={styles.guarantee} data-reveal="">
+          <p className={styles.badge} aria-hidden="true">
+            <span>60</span>
+            días
+          </p>
+          <div>
+            <h3 className={styles.guaranteeTitle}>{guarantee.title}</h3>
+            <p className={styles.guaranteeText}>{guarantee.text}</p>
+          </div>
+          <a href={guarantee.href} className={`btn btn-outline btn-sm ${styles.guaranteeLink}`}>
+            {guarantee.linkLabel}
+            <ArrowRight size={15} />
+          </a>
         </div>
       </div>
     </section>

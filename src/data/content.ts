@@ -1,88 +1,78 @@
 /**
  * Textos de las secciones de la landing. Edita aquí sin tocar componentes.
  * Regla: no inventar clientes, testimonios, reseñas ni cifras de resultados.
- * Las cifras que aparecen (48 h, S/ 0, 60 días) son condiciones de la oferta,
- * no resultados de clientes.
+ * Las cifras visibles (48 h, 60 días) son condiciones de la oferta.
  */
 
 export type KeyLetter = "W" | "A" | "S" | "D";
 
+/* ───────────────────────── Header ───────────────────────── */
+
+export const header = {
+  cta: "Habla con nosotros",
+  menuOpen: "Abrir menú",
+  menuClose: "Cerrar menú",
+  theme: { toDark: "Cambiar a tema oscuro", toLight: "Cambiar a tema claro" },
+};
+
 /* ───────────────────────── Hero ───────────────────────── */
 
 export const hero = {
-  /** Cada elemento es una línea del título grande (se cortan a mano). */
-  titleLines: ["Mueve tu", "negocio"],
-  titleMark: "(Lima)",
-  eyebrow: "(Qué hacemos)",
-  about:
-    "Webs, WhatsApp con IA y reservas para PYMEs de Lima. Te mostramos tu web antes de pagar y la publicamos en 48 horas.",
+  badge: { tag: "Lima", text: "Webs para PYMEs, listas en 48 horas" },
+  /** El título se arma así: before + highlight (resaltado en color). */
+  title: { before: "Tu negocio atendiendo y vendiendo", highlight: "las 24 horas" },
+  subtitle: "Web, WhatsApp con IA y reservas con un solo equipo. Te mostramos tu web antes de pagar.",
   primaryCta: "Quiero mi demo gratis",
-  contactCta: "Escríbenos",
-  badge: "Demo gratis antes de pagar",
-  availability: { top: "Te respondemos", bottom: "por WhatsApp" },
-  clockLabel: "Lima",
-  /** Tarjeta oscura del marco de cifras. */
-  offer: {
-    value: "48 h",
-    label: "Tu web publicada",
-    cta: "Pedir mi demo",
-    keys: ["Web", "IA", "Reservas", "Apps"],
+  secondaryCta: "Ver proyecto",
+  guarantees: ["Demo gratis antes de pagar", "Publicada en 48 h", "Reporte semanal"],
+  /** Mockups del lado derecho. Son ilustrativos: no representan a un cliente real. */
+  mockLabel:
+    "Ejemplo ilustrativo: la web de una cafetería en un celular, una conversación con la recepcionista con IA y el reporte semanal",
+  phone: {
+    place: "Tu cafetería · Barranco",
+    headline: "Café de especialidad y postres de la casa",
+    action: "Reservar mesa",
+    menu: [
+      { name: "Capuchino", price: "S/ 12" },
+      { name: "Cheesecake", price: "S/ 14" },
+      { name: "Sándwich de pollo", price: "S/ 18" },
+    ],
   },
-  /** Tarjeta clara del marco de cifras. */
-  entry: {
-    value: "S/ 0",
-    label: "de pago inicial, con mensualidad",
-    tag: "Nivel 1",
+  chat: {
+    name: "Tu cafetería",
+    status: "Recepcionista IA · en línea",
+    messages: [
+      { from: "customer", text: "Hola, ¿tienen mesa para 4 hoy a las 8 p. m.?" },
+      { from: "agent", text: "¡Sí! Te la separo. ¿A nombre de quién?" },
+    ] as Array<{ from: "customer" | "agent"; text: string }>,
+    confirmation: "Reserva confirmada · Hoy, 8 p. m.",
   },
-  /** Tarjeta "Ahora" de la columna derecha: lleva a las demos. */
-  now: { eyebrow: "Ahora", title: "Demo · Cafetería", year: "[2026]", href: "#demos" },
-  plate: "WASD Solutions",
-  /** Las cuatro teclas del hero. */
-  keys: [
-    { key: "W", label: "Web" },
-    { key: "A", label: "IA" },
-    { key: "S", label: "Sistemas" },
-    { key: "D", label: "Desarrollo" },
-  ] as Array<{ key: KeyLetter; label: string }>,
-  keysHint: "Presiona W, A, S o D",
-  strip: ["Web", "WhatsApp con IA", "Reservas", "Apps a medida"],
-};
-
-/* ──────────────────── Barra y manifiesto ──────────────────── */
-
-export const bar = {
-  left: { strong: "Lima", muted: "Perú" },
-  center: "Baja",
-  right: { strong: "Mueve tu", muted: "negocio" },
-};
-
-export const statement = {
-  /** Se ilumina palabra por palabra al hacer scroll. */
-  text: "La mayoría de negocios vende por Instagram y WhatsApp, pero no tiene una web que convierta visitas en clientes. Nosotros te la mostramos antes de que pagues, la publicamos en 48 horas y cada semana te contamos cuántos clientes te trajo.",
-  sub: "Web, WhatsApp con IA y reservas con un solo equipo.",
-  subMuted: "Sin tecnicismos y por WhatsApp.",
-};
-
-/* ──────────────────── Panel "un solo equipo" ──────────────────── */
-
-export const oneTeam = {
-  titleLines: ["Un solo equipo", "para mover", "todo tu", "negocio"],
-  text: "Dejas de pagarle a tres proveedores distintos. Una mensualidad cubre tu web, tu recepcionista con IA y tus reservas.",
-  keysCard: { value: "4", unit: "teclas", label: "Web, IA, sistemas y desarrollo" },
-  guaranteeCard: {
-    value: "60",
-    unit: "días",
-    label: "de garantía",
-    sealTop: "Garantía",
-    sealMain: "WASD",
-    sealBottom: "60 días",
-    note: "Si no llegas al mínimo de contactos acordado, el siguiente mes es gratis.",
-  },
-  reportCard: {
-    eyebrow: "Tu reporte del lunes",
-    rows: ["Visitas", "Clics a WhatsApp", "Reservas"],
+  report: {
+    title: "Tu reporte semanal",
     note: "Ejemplo ilustrativo",
+    rows: ["Visitas", "Clics a WhatsApp", "Reservas"],
   },
+};
+
+/** Franja de garantías bajo el hero (del boceto 3). */
+export const trustStrip = [
+  { icon: "check", title: "Demo gratis antes de pagar", text: "La ves en tu celular y decides." },
+  { icon: "clock", title: "Publicada en 48 horas", text: "Sin reuniones largas ni tecnicismos." },
+  { icon: "chart", title: "Reporte cada semana", text: "Visitas, clics y reservas por WhatsApp." },
+] as const;
+
+/* ───────────────────────── Problema ───────────────────────── */
+
+export const problem = {
+  eyebrow: "¿Te pasa esto?",
+  title: "Vendes por Instagram y WhatsApp, pero se te escapan clientes",
+  intro: "Si tienes un negocio en Lima, seguro reconoces alguno.",
+  items: [
+    { icon: "messages", title: "Respondes lo mismo todo el día", text: "Horarios, precios, ubicación… las mismas preguntas por WhatsApp, una y otra vez." },
+    { icon: "search", title: "No apareces en Google", text: "Te buscan cerca y encuentran a tu competencia, no a ti." },
+    { icon: "chart", title: "Pagaste una web y no sabes si sirvió", text: "Te la entregaron y nunca más supiste cuántos clientes te trajo." },
+    { icon: "calendar", title: "Reservas que no llegan", text: "Te separan la mesa o la cita y no se presentan ni avisan." },
+  ] as Array<{ icon: "messages" | "search" | "chart" | "calendar"; title: string; text: string }>,
 };
 
 /* ───────────────────────── Servicios ───────────────────────── */
@@ -105,9 +95,9 @@ export const services: {
   items: Service[];
   closing: string;
 } = {
-  eyebrow: "(Servicios)",
+  eyebrow: "Servicios",
   title: "Cuatro teclas para mover tu negocio",
-  intro: "WASD son las teclas para moverse en un videojuego. Cada una es una forma de hacer crecer tu negocio.",
+  intro: "WASD son las teclas para moverse en un videojuego. Cada una es una forma de hacer crecer tu negocio, con un solo equipo.",
   hint: "Toca una tecla o presiónala en tu teclado.",
   tablistLabel: "Servicios de WASD Solutions",
   items: [
@@ -158,8 +148,9 @@ export const services: {
 /* ───────────────────────── Cómo funciona ───────────────────────── */
 
 export const howItWorks = {
-  eyebrow: "(Cómo funciona)",
+  eyebrow: "Cómo funciona",
   title: "Cuatro pasos, sin reuniones largas",
+  intro: "Todo por WhatsApp y sin términos técnicos.",
   steps: [
     { title: "Nos cuentas de tu negocio", text: "Llenas un formulario corto o nos escribes. Te toma 2 minutos." },
     { title: "Te enviamos tu demo gratis", text: "Diseñamos una demo personalizada de tu web, sin costo." },
@@ -168,52 +159,45 @@ export const howItWorks = {
   ],
 };
 
-/* ───────────────────────── Demos por sector ───────────────────────── */
+/* ───────────────────────── Proyecto: Woodland Perú ───────────────────────── */
 
 /**
- * Mientras no haya clientes reales, TODAS van rotuladas como "Demo".
- * No inventar nombres de clientes ni resultados.
+ * Nuestro primer cliente. Solo datos verificables del proyecto: no publicar
+ * cifras de ventas ni resultados sin la validación de Woodland.
+ * Capturas en /public/proyectos (tomadas de la web publicada).
  */
-export const demos = {
-  eyebrow: "(Demos por sector)",
-  title: "Así se vería la tuya",
-  intro: "Partimos de una plantilla pensada para tu rubro y la hacemos tuya. Son demos de ejemplo: pronto mostraremos proyectos de clientes reales.",
+export const project = {
+  eyebrow: "Proyecto real",
+  title: "Nuestro primer cliente: Woodland Perú",
+  intro:
+    "Woodland Perú hace tablas artesanales de teca. Les construimos una plataforma comercial completa: su web, un asistente que atiende por chat y un sistema interno para manejar el negocio.",
+  client: "Corporación Wood Land Peru S.A.C.",
+  context: "Desarrollado en la Hackathon Transforma+ MIPYME 2026",
+  url: "https://woodland-peru-web.vercel.app/",
+  urlLabel: "Ver la web de Woodland",
+  images: {
+    desktop: { src: "/proyectos/woodland-web.jpg", alt: "Portada de la web de Woodland Perú: una tabla de teca con carne a la parrilla y el lema «Sostenibilidad hecha lujo»" },
+    mobile: { src: "/proyectos/woodland-celular.jpg", alt: "La web de Woodland Perú vista en un celular, con el botón «Habla con Teca»" },
+    domain: "woodland-peru-web.vercel.app",
+  },
   items: [
     {
-      id: "cafeteria",
-      label: "Demo · Cafetería en Barranco",
-      sector: "Cafeterías y restaurantes",
-      includes: ["Carta digital con precios", "Reservas de mesa", "Pedidos por WhatsApp"],
-      mock: { brand: "Tu cafetería", headline: "Café de especialidad y postres de la casa", action: "Reservar mesa", rows: ["Capuchino · S/ 12", "Cheesecake · S/ 14", "Sándwich · S/ 18"] },
+      key: "W",
+      title: "Web «De nuestro bosque a tu mesa»",
+      text: "Cuenta la historia de la teca y muestra el catálogo por colecciones, con grabado personalizado para regalos y empresas.",
     },
     {
-      id: "barberia",
-      label: "Demo · Barbería en Miraflores",
-      sector: "Peluquerías y barberías",
-      includes: ["Agenda por barbero", "Galería de cortes", "Recordatorio de cita"],
-      mock: { brand: "Tu barbería", headline: "Cortes clásicos y degradados, con cita", action: "Separar cita", rows: ["Corte · S/ 35", "Corte + barba · S/ 50", "Diseño · S/ 15"] },
+      key: "A",
+      title: "Teca, su asistente con IA",
+      text: "Atiende por chat a cualquier hora: resuelve dudas, arma cotizaciones, registra pedidos y explica cómo pagar.",
     },
     {
-      id: "dental",
-      label: "Demo · Consultorio dental en San Borja",
-      sector: "Consultorios dentales",
-      includes: ["Tratamientos en simple", "Reserva de primera cita", "Ubicación y horarios"],
-      mock: { brand: "Tu consultorio", headline: "Tu sonrisa en manos de especialistas", action: "Reservar evaluación", rows: ["Limpieza dental", "Ortodoncia", "Blanqueamiento"] },
+      key: "S",
+      title: "Sistema interno",
+      text: "El equipo de Woodland maneja pedidos, cotizaciones, clientes, inventario, producción y reportes desde un solo panel.",
     },
-  ],
-  priceNote: "Precios de ejemplo dentro de las demos.",
-  cta: "Quiero una demo así",
-};
-
-/* ───────────────────────── Precios ───────────────────────── */
-
-export const pricing = {
-  eyebrow: "(Precios)",
-  title: "Precios claros desde el día uno",
-  intro: "Precios de lanzamiento. Empiezas en el nivel que necesites y subes cuando quieras.",
-  highlightedLabel: "Más elegido",
-  includesPrevious: "Todo lo del nivel anterior",
-  billingLabel: "Forma de pago",
+  ] as Array<{ key: KeyLetter; title: string; text: string }>,
+  cta: "Quiero algo así para mi negocio",
 };
 
 /* ───────────────────────── Garantía y comparativa ───────────────────────── */
@@ -230,11 +214,13 @@ export type ComparisonValue = { text: string; good?: boolean };
 export const comparison: {
   eyebrow: string;
   title: string;
+  intro: string;
   columns: [string, string, string];
   rows: Array<{ label: string; values: [ComparisonValue, ComparisonValue, ComparisonValue] }>;
 } = {
-  eyebrow: "(Comparativa)",
+  eyebrow: "¿Por qué WASD?",
   title: "Una comparación honesta",
+  intro: "Las opciones que tienes, sin nombrar a nadie.",
   columns: ["Hacerlo tú mismo", "Agencia tradicional", "WASD"],
   rows: [
     { label: "Quién lo construye", values: [{ text: "Tú, en tu tiempo libre" }, { text: "Un equipo externo" }, { text: "Nuestro equipo, contigo", good: true }] },
@@ -242,16 +228,16 @@ export const comparison: {
     { label: "IA y WhatsApp", values: [{ text: "No" }, { text: "Por separado" }, { text: "Incluidos", good: true }] },
     { label: "Medición de resultados", values: [{ text: "Por tu cuenta" }, { text: "No siempre" }, { text: "Reporte semanal", good: true }] },
     { label: "Soporte continuo", values: [{ text: "No" }, { text: "Según contrato" }, { text: "Incluido", good: true }] },
-    { label: "Pago inicial", values: [{ text: "Bajo, pero cuesta tu tiempo" }, { text: "Alto" }, { text: "Desde S/ 0", good: true }] },
   ],
 };
 
 /* ───────────────────────── Formulario ───────────────────────── */
 
 export const leadForm = {
-  eyebrow: "(Diagnóstico gratis)",
+  eyebrow: "Diagnóstico gratis",
   title: "¿Cómo está tu negocio en internet? Te lo decimos gratis.",
   intro: "Déjanos tus datos y te enviamos por WhatsApp un diagnóstico de tu presencia digital y una demo de tu web, sin compromiso.",
+  points: ["Respuesta por WhatsApp", "Sin compromiso de compra", "Demo personalizada de tu negocio"],
   submit: "Quiero mi diagnóstico y demo gratis",
   businessTypes: ["Cafetería", "Restaurante", "Peluquería o barbería", "Consultorio dental", "Otro negocio"],
   labels: {
@@ -275,7 +261,6 @@ export const leadForm = {
     text: "Abrimos WhatsApp con tu mensaje listo. Solo envíalo y te respondemos pronto.",
     fallback: "¿No se abrió WhatsApp? Toca aquí",
   },
-  errorSummary: "Revisa los campos marcados.",
   privacyNote: "Usamos tus datos solo para contactarte sobre tu diagnóstico.",
 };
 
@@ -283,16 +268,14 @@ export const leadForm = {
 
 /**
  * Sección OCULTA hasta tener nombres y fotos reales (enabled: false).
- * Fotos en /public/equipo/ (cuadradas, 600×600, WebP, en blanco y negro
- * para que combinen con el diseño). Nunca fotos generadas con IA.
+ * Fotos en /public/equipo/ (cuadradas, 600×600, WebP). Nunca fotos generadas con IA.
  */
 export const team = {
   enabled: false,
-  eyebrow: "(Quiénes somos)",
+  eyebrow: "Quiénes somos",
   title: "Un equipo joven de Lima",
   text: "Creemos que cualquier negocio, por pequeño que sea, merece una web que de verdad le traiga clientes. Trabajamos cerca de ti, por WhatsApp y sin tecnicismos.",
   members: [
-    { name: "[NOMBRE]", role: "[ROL]", photo: "[FOTO]" },
     { name: "[NOMBRE]", role: "[ROL]", photo: "[FOTO]" },
     { name: "[NOMBRE]", role: "[ROL]", photo: "[FOTO]" },
     { name: "[NOMBRE]", role: "[ROL]", photo: "[FOTO]" },
@@ -302,12 +285,14 @@ export const team = {
 /* ───────────────────────── FAQ, cierre y footer ───────────────────────── */
 
 export const faqSection = {
-  eyebrow: "(Preguntas)",
+  eyebrow: "Preguntas frecuentes",
   title: "Lo que nos suelen preguntar",
+  more: "¿Tienes otra pregunta?",
+  moreCta: "Escríbenos por WhatsApp",
 };
 
 export const finalCta = {
-  titleLines: ["Tu demo está", "a un mensaje"],
+  title: "Tu demo está a un mensaje de distancia",
   text: "Escríbenos por WhatsApp y te mostramos cómo se vería la web de tu negocio. Gratis.",
   button: "Pedir mi demo por WhatsApp",
   secondary: "Prefiero llenar el formulario",
@@ -323,11 +308,7 @@ export const whatsappBubble = {
 
 export const footer = {
   phrase: "Webs, WhatsApp con IA y reservas para PYMEs. Mueve tu negocio.",
-  columns: {
-    site: "Sitio",
-    contact: "Contacto",
-    legal: "Legal",
-  },
+  columns: { site: "Sitio", contact: "Contacto", legal: "Legal" },
   legalLinks: [
     { label: "Política de privacidad", href: "/privacidad/" },
     { label: "Términos y condiciones", href: "/terminos/" },

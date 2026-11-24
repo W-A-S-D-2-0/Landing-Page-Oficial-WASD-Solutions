@@ -1,135 +1,131 @@
 import type { CSSProperties } from "react";
-import { hero } from "@/data/content";
+import { hero, trustStrip } from "@/data/content";
 import { site } from "@/data/site";
-import { whatsappUrl } from "@/lib/whatsapp";
-import { CountUp } from "@/components/ui/CountUp";
-import { ArrowUpRight, Check } from "@/components/ui/Icons";
-import { LimaClock } from "@/components/ui/LimaClock";
-import { LogoMark } from "@/components/ui/Logo";
-import { HeroKeys } from "./HeroKeys";
+import { ArrowRight, BarChart, Check, Clock } from "@/components/ui/Icons";
 import styles from "./Hero.module.css";
 
+const stripIcons = { check: Check, clock: Clock, chart: BarChart } as const;
+
 /**
- * Hero editorial sobre papel gris (diseño base: Orvante, de MotionSites).
- * La foto del original se reemplaza por las cuatro teclas W·A·S·D, que son la
- * marca; la placa oscura con el nombre va sobre ellas.
+ * Hero "producto al frente": el mensaje a la izquierda y, a la derecha, lo que
+ * recibe el cliente (su web en el celular, la recepcionista con IA y el
+ * reporte semanal). Debajo, la franja con las tres garantías.
  */
 export function Hero() {
-  const offerHours = Number.parseInt(hero.offer.value, 10);
-
   return (
     <section id="inicio" className={styles.hero} aria-labelledby="hero-title">
-      <p className={styles.clock}>
-        <LimaClock city={hero.clockLabel} />
-      </p>
-
-      <h1 id="hero-title" className={styles.title}>
-        {hero.titleLines.map((line, i) => (
-          <span key={line} className={styles.line} style={{ "--i": i } as CSSProperties}>
-            <span className={styles.lineInner}>
-              {line}
-              {i === 0 && <sup className={styles.mark}>{hero.titleMark}</sup>}
-            </span>
-          </span>
-        ))}
-        <span className="sr-only">: {site.description}</span>
-      </h1>
-
-      <div className={`${styles.about} ${styles.rise}`} style={{ "--d": 1 } as CSSProperties}>
-        <p className="eyebrow">{hero.eyebrow}</p>
-        <p className={styles.aboutText}>{hero.about}</p>
-        <a href="#diagnostico" className="btn" data-track="demo_cta_click" data-track-label="hero">
-          {hero.primaryCta}
-          <span className="btn-arrow">
-            <ArrowUpRight size={15} />
-          </span>
-        </a>
-      </div>
-
-      <div className={styles.visual}>
-        <HeroKeys />
-        <div className={styles.plate} aria-hidden="true">
-          <LogoMark size={26} />
-          <span className={styles.plateName}>{hero.plate}</span>
-          <span className={styles.plateMenu}>
-            <span />
-            <span />
-          </span>
-        </div>
-        <p className={styles.strip}>
-          {hero.strip.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </p>
-      </div>
-
-      <div className={styles.frame}>
-        <div className={`${styles.offer} ${styles.rise}`} style={{ "--d": 4 } as CSSProperties}>
-          <p className={styles.offerValue}>
-            <CountUp value={offerHours} delay={400} /> h
+      <div className={`container ${styles.grid}`}>
+        <div className={styles.copy}>
+          <p className={`${styles.badge} ${styles.rise}`}>
+            <b>{hero.badge.tag}</b> {hero.badge.text}
           </p>
-          <p className={styles.offerLabel}>{hero.offer.label}</p>
-          <ul className={styles.offerKeys} aria-label="Incluye">
-            {hero.offer.keys.map((k) => (
-              <li key={k}>{k}</li>
+          <h1 id="hero-title" className={`${styles.title} ${styles.rise}`} style={{ "--d": 1 } as CSSProperties}>
+            {hero.title.before} <span className={styles.highlight}>{hero.title.highlight}</span>
+            <span className="sr-only">. {site.description}</span>
+          </h1>
+          <p className={`${styles.subtitle} ${styles.rise}`} style={{ "--d": 2 } as CSSProperties}>
+            {hero.subtitle}
+          </p>
+          <div className={`${styles.ctas} ${styles.rise}`} style={{ "--d": 3 } as CSSProperties}>
+            <a href="#diagnostico" className="btn btn-primary" data-track="demo_cta_click" data-track-label="hero">
+              {hero.primaryCta}
+              <ArrowRight size={17} />
+            </a>
+            <a href="#proyectos" className="btn btn-outline">
+              {hero.secondaryCta}
+            </a>
+          </div>
+          <ul className={`${styles.checks} ${styles.rise}`} style={{ "--d": 4 } as CSSProperties}>
+            {hero.guarantees.map((g) => (
+              <li key={g}>
+                <span className={styles.checkDot}>
+                  <Check size={12} />
+                </span>
+                {g}
+              </li>
             ))}
           </ul>
-          <a
-            href={whatsappUrl({ type: "demo" })}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.offerBar}
-            data-track="whatsapp_click"
-            data-track-label="hero-oferta"
-          >
-            {hero.offer.cta}
-            <ArrowUpRight size={14} />
-            <span className="sr-only">(se abre WhatsApp)</span>
-          </a>
         </div>
-        <div className={`${styles.entry} ${styles.rise}`} style={{ "--d": 5 } as CSSProperties}>
-          <p className={styles.entryTag}>{hero.entry.tag}</p>
-          <p className={styles.entryValue}>{hero.entry.value}</p>
-          <p className={styles.entryLabel}>{hero.entry.label}</p>
+
+        <div className={styles.stage} role="img" aria-label={hero.mockLabel}>
+          <svg className={styles.net} viewBox="0 0 560 600" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M380 190 C 460 190, 480 120, 520 80" />
+            <path d="M140 450 C 80 450, 50 360, 30 280" />
+            <path d="M440 420 C 490 470, 520 510, 540 560" />
+            <circle cx="520" cy="80" r="6" />
+            <circle cx="30" cy="280" r="6" />
+            <circle cx="540" cy="560" r="6" />
+          </svg>
+
+          <div className={styles.phone}>
+            <div className={styles.screen}>
+              <div className={styles.siteTop}>
+                <small>{hero.phone.place}</small>
+                <strong>{hero.phone.headline}</strong>
+              </div>
+              <div className={styles.siteBody}>
+                <span className={styles.siteBtn}>{hero.phone.action}</span>
+                {hero.phone.menu.map((item) => (
+                  <span key={item.name} className={styles.menuRow}>
+                    <span>{item.name}</span>
+                    <span>{item.price}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className={`${styles.card} ${styles.chat}`}>
+            <div className={styles.chatHead}>
+              <span className={styles.chatAvatar}>
+                <Check size={15} />
+              </span>
+              <span>
+                {hero.chat.name}
+                <small>{hero.chat.status}</small>
+              </span>
+            </div>
+            {hero.chat.messages.map((m, i) => (
+              <p key={m.text} className={`${styles.bubble} ${m.from === "agent" ? styles.out : styles.in}`} style={{ "--b": i } as CSSProperties}>
+                {m.text}
+              </p>
+            ))}
+            <p className={styles.confirm}>
+              <Check size={14} />
+              {hero.chat.confirmation}
+            </p>
+          </div>
+
+          <div className={`${styles.card} ${styles.report}`}>
+            <p className={styles.reportTitle}>{hero.report.title}</p>
+            <p className={styles.reportNote}>{hero.report.note}</p>
+            {hero.report.rows.map((row, i) => (
+              <p key={row} className={styles.bar}>
+                {row}
+                <span style={{ "--w": `${88 - i * 24}%`, "--b": i } as CSSProperties} data-accent={i === 1 ? "" : undefined} />
+              </p>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className={styles.side}>
-        <p className={`${styles.badge} ${styles.rise}`} style={{ "--d": 2 } as CSSProperties}>
-          <span className={styles.badgeDisc}>
-            <Check size={13} />
-          </span>
-          {hero.badge}
-        </p>
-
-        <p className={`${styles.available} ${styles.rise}`} style={{ "--d": 3 } as CSSProperties}>
-          {hero.availability.top}
-          <br />
-          <span className={styles.availableDot} aria-hidden="true" /> {hero.availability.bottom}
-        </p>
-
-        <a href={hero.now.href} className={`${styles.now} ${styles.rise}`} style={{ "--d": 6 } as CSSProperties}>
-          <span className={styles.nowHead}>
-            <span className={styles.nowEyebrow}>{hero.now.eyebrow}</span>
-            <span className={styles.nowTitle}>{hero.now.title}</span>
-            <span className={styles.nowYear}>{hero.now.year}</span>
-          </span>
-          <span className={styles.nowCard} aria-hidden="true">
-            <span className={styles.nowMock}>
-              <span className={styles.nowMockBar} />
-              <span className={styles.nowMockTitle}>Café de especialidad</span>
-              <span className={styles.nowMockLine} />
-              <span className={styles.nowMockLine} style={{ width: "58%" }} />
-              <span className={styles.nowMockBtn}>Reservar mesa</span>
-            </span>
-            <span className={styles.nowArrow}>
-              <ArrowUpRight size={16} />
-            </span>
-          </span>
-          <span className={styles.nowProgress} aria-hidden="true">
-            <span />
-          </span>
-        </a>
+      <div className="container">
+        <ul className={styles.strip}>
+          {trustStrip.map((item, i) => {
+            const Icon = stripIcons[item.icon];
+            return (
+              <li key={item.title} data-reveal="" style={{ "--reveal-delay": `${i * 90}ms` } as CSSProperties}>
+                <span className={styles.stripIcon}>
+                  <Icon size={20} />
+                </span>
+                <span>
+                  <b>{item.title}</b>
+                  <span>{item.text}</span>
+                </span>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );

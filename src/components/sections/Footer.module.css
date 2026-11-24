@@ -1,8 +1,7 @@
 .footer {
-  padding: calc(90 * var(--u)) 0 32px;
-  border-top: 1px solid var(--line);
-  background: var(--black);
-  overflow: hidden;
+  padding: 72px 0 32px;
+  border-top: 1px solid var(--border);
+  background: var(--surface-alt);
 }
 
 .top {
@@ -12,20 +11,12 @@
 }
 
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--font-display);
-  font-stretch: 125%;
-  font-weight: 600;
-  font-size: 18px;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  display: inline-flex;
 }
 
 .phrase {
   max-width: 30ch;
-  margin-top: 16px;
+  margin-top: 18px;
   font-size: 15px;
   line-height: 1.5;
   color: var(--text-muted);
@@ -33,9 +24,9 @@
 
 .colTitle {
   margin-bottom: 14px;
-  font-size: 12px;
-  font-weight: 650;
-  letter-spacing: 0.08em;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
@@ -53,7 +44,7 @@
 }
 
 .col a:hover {
-  color: var(--text-muted);
+  color: var(--primary);
 }
 
 .complaints {
@@ -62,30 +53,15 @@
   text-underline-offset: 3px;
 }
 
-/* Marca gigante: Archivo ancho al ancho de la página. */
-.giant {
-  margin-top: calc(80 * var(--u));
-  font-family: var(--font-display);
-  font-stretch: 125%;
-  font-weight: 640;
-  font-size: 24.5vw;
-  line-height: 0.78;
-  letter-spacing: -0.05em;
-  text-align: center;
-  color: var(--night-2);
-  user-select: none;
-  white-space: nowrap;
-}
-
 .bottom {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 28px;
+  margin-top: 48px;
   padding-top: 20px;
-  border-top: 1px solid var(--line);
-  font-size: 13px;
+  border-top: 1px solid var(--border);
+  font-size: 13.5px;
   color: var(--text-muted);
 }
 

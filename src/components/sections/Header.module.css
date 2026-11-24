@@ -1,126 +1,118 @@
 .header {
-  position: fixed;
-  inset: max(14px, calc(40 * var(--u))) var(--gutter) auto;
+  position: sticky;
+  top: 0;
   z-index: 50;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 250ms var(--ease-state),
+    border-color 250ms var(--ease-state),
+    box-shadow 250ms var(--ease-state);
+}
+
+.header[data-scrolled] {
+  border-bottom-color: var(--border);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(12px);
+}
+
+.bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  pointer-events: none;
-}
-
-.header > * {
-  pointer-events: auto;
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  height: max(44px, calc(48 * var(--u)));
-  padding: 4px;
-  border-radius: 999px;
-  background: #fff;
-  color: var(--ink);
-  box-shadow: 0 6px 20px rgb(0 0 0 / 0.12);
+  gap: 24px;
+  height: var(--header-h);
 }
 
 .brand {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--ink);
-  color: #fff;
+  display: inline-flex;
   flex: none;
+  border-radius: 8px;
 }
 
-.links {
-  position: relative;
+.nav ul {
   display: flex;
-  height: 100%;
+  gap: 30px;
 }
 
-.pill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  border-radius: 999px;
-  background: var(--ink);
-  transition: transform 380ms var(--ease-out), width 380ms var(--ease-out);
-}
-
-.link {
+.nav a {
   position: relative;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  padding: 0 16px;
-  border-radius: 999px;
-  font-weight: 520;
-  font-size: 14px;
-  letter-spacing: -0.01em;
-  transition: color 250ms var(--ease-state);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 200ms var(--ease-state);
 }
 
-.link[data-on] {
-  color: #fff;
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 250ms var(--ease-out);
 }
 
-.contact {
-  box-shadow: inset 0 0 0 1px var(--line-strong);
+.nav a:hover {
+  color: var(--text);
 }
 
-.waIcon {
+.nav a:hover::after {
+  transform: scaleX(1);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menuButton {
   display: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--border);
 }
 
-@media (max-width: 760px) {
-  .nav {
-    gap: 2px;
-  }
+.mobile {
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
 
-  .brand {
+.mobile nav {
+  display: grid;
+  gap: 16px;
+  padding-block: 12px 24px;
+}
+
+.mobile li a {
+  display: block;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+@media (max-width: 960px) {
+  .nav,
+  .cta {
     display: none;
   }
 
-  .link {
-    padding: 0 calc(11 * var(--u));
-    font-size: calc(13 * var(--u));
+  .menuButton {
+    display: grid;
   }
+}
 
-  .contact {
-    width: 44px;
-    min-height: 44px;
-    padding: 0;
-  }
-
-  .contactLabel {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-  }
-
-  .contactArrow {
-    width: 44px;
-    height: 44px;
-    background: transparent;
-    color: var(--paper);
-  }
-
-  .contact:hover .contactArrow {
-    transform: none;
-  }
-
-  .arrowIcon {
+@media (min-width: 961px) {
+  .mobile {
     display: none;
-  }
-
-  .waIcon {
-    display: block;
   }
 }

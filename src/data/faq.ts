@@ -39,7 +39,7 @@ export const faq: FaqItem[] = [
   {
     question: "¿Emiten factura?",
     answer:
-      "Sí, emitimos boleta o factura electrónica. Los precios publicados no incluyen IGV.",
+      "Sí, emitimos boleta o factura electrónica.",
   },
   {
     question: "¿Trabajan fuera de Lima?",

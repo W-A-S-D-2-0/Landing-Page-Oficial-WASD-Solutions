@@ -1,15 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/archivo/wdth.css";
-import "@fontsource-variable/inter-tight";
+import "@fontsource-variable/plus-jakarta-sans";
+import "@fontsource-variable/inter";
 import { site } from "@/data/site";
 import { Analytics } from "@/components/Analytics";
 import { RevealObserver } from "@/components/ui/RevealObserver";
+import { themeInitScript } from "@/components/ui/ThemeToggle";
 import { TrackClicks } from "@/components/ui/TrackClicks";
 import "./globals.css";
 
 // Fuentes alojadas desde npm (@fontsource-variable, licencia SIL OFL 1.1):
-// el build no depende de Google Fonts. Archivo con eje de ancho (wdth) para
-// los títulos e Inter Tight para la interfaz y el texto.
+// el build no depende de Google Fonts. Plus Jakarta Sans para títulos (la
+// misma familia del logo) e Inter para el texto.
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -36,17 +37,17 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#dadada",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafaf7" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f2b35" },
+  ],
 };
-
-/** Marca el documento cuando hay JavaScript, para activar las animaciones. */
-const jsFlag = `document.documentElement.classList.add('js')`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es-PE" suppressHydrationWarning>
+    <html lang="es-PE" data-theme="light" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: jsFlag }} />
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
         <a className="skip-link" href="#contenido">

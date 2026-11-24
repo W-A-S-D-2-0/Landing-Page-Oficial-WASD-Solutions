@@ -7,7 +7,7 @@ import styles from "./LegalPage.module.css";
 export function LegalPage({ title, updated, children }: { title: string; updated: string; children: ReactNode }) {
   return (
     <>
-      <Header home={false} />
+      <Header />
       <main id="contenido" className={styles.main}>
         <div className={`container ${styles.inner}`}>
           <h1 className={styles.title}>{title}</h1>

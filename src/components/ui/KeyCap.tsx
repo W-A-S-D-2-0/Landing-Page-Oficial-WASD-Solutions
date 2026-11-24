@@ -3,35 +3,32 @@ import type { KeyLetter } from "@/data/content";
 import styles from "./KeyCap.module.css";
 
 /**
- * Tecla de teclado dibujada con CSS (monocroma). `pressed` la hunde.
- * Se usa en el hero, en servicios y en el panel "un solo equipo".
+ * Tecla con contorno, igual que las del logo: la W en ámbar y el resto en
+ * azul petróleo, con su barrita abajo. `active` la marca como elegida y
+ * `pressed` la hunde un instante. El tamaño sale de --cap.
  */
 export function KeyCap({
   letter,
-  label,
+  active = false,
   pressed = false,
-  tone = "light",
   className,
   style,
 }: {
   letter: KeyLetter;
-  label?: string;
+  active?: boolean;
   pressed?: boolean;
-  tone?: "light" | "dark";
   className?: string;
   style?: CSSProperties;
 }) {
   return (
     <span
-      className={`${styles.cap} ${tone === "dark" ? styles.dark : ""} ${className ?? ""}`}
+      className={`${styles.cap} ${letter === "W" ? styles.w : ""} ${className ?? ""}`}
+      data-active={active ? "" : undefined}
       data-pressed={pressed ? "" : undefined}
       style={style}
       aria-hidden="true"
     >
-      <span className={styles.face}>
-        <span className={styles.letter}>{letter}</span>
-        {label && <span className={styles.label}>{label}</span>}
-      </span>
+      {letter}
     </span>
   );
 }
