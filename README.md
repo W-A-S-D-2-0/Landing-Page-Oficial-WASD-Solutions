@@ -1,10 +1,10 @@
-# WASD Solutions · Landing page oficial
+# Kodena · Landing page oficial
 
-Landing page oficial de **WASD Solutions**, startup de Lima que ayuda a PYMEs a conseguir, atender y fidelizar clientes por internet: web, agentes con IA y reservas.
+Landing page oficial de **Kodena**, startup de Lima que ayuda a PYMEs a conseguir, atender y fidelizar clientes por internet: web, agentes con IA y reservas.
 
-**Stack:** Next.js 16 (App Router) + TypeScript + CSS Modules. Se exporta como sitio estático (`/out`). Fuentes Plus Jakarta Sans e Inter desde npm (`@fontsource-variable`), sin depender de Google Fonts. Animaciones con CSS y un poco de JavaScript propio, sin librerías.
+**Stack:** Next.js 16 (App Router) + TypeScript + CSS Modules. Se exporta como sitio estático (`/out`). Fuente Inter desde npm (`@fontsource-variable`), sin depender de Google Fonts. Animaciones con CSS y un poco de JavaScript propio, sin librerías.
 
-**Diseño:** limpio, con poco texto y los colores del logo. Paleta en `src/app/globals.css`: el petróleo manda (texto, botones, bloques oscuros), el ámbar es el único acento y el papel cálido da aire. Dos temas con interruptor en el header: **claro** (blanco cálido) y **oscuro** (azul petróleo profundo, botones ámbar). Sin elección guardada, se usa el tema del sistema. El logo es la versión A de la hoja de marca (teclas juntas) y está en `src/components/ui/Logo.tsx`.
+**Diseño:** pensado para dueños de negocio de 30 a 50 años: letra grande (texto base de 18 px), mensajes concretos, WhatsApp a un toque y nada de jerga. Identidad de Kodena según el tablero oficial: petróleo #123B49, coral #F16E59, durazno #F4AF87 y marfil #FAF7F3, tipografía Inter, botones en píldora, barrita coral sobre los títulos e íconos de línea coral. Dos temas con interruptor en el header: **claro** (marfil) y **oscuro** (petróleo profundo). Sin elección guardada, se usa el tema del sistema. El logo está en `src/components/ui/Logo.tsx` y los archivos del kit en `public/marca/`.
 
 ---
 
@@ -38,11 +38,11 @@ Todo el contenido está en `src/data/`. **No hace falta tocar componentes.**
 | Archivo | Qué contiene |
 | --- | --- |
 | `src/data/site.ts` | Marca, WhatsApp, email, redes, razón social, RUC, Libro de Reclamaciones, menú y SEO |
-| `src/data/content.ts` | Textos de cada sección: header, entrada, hero, servicios W·A·S·D, proyecto Woodland Perú, pasos y garantía, formulario de cierre, equipo (oculto), preguntas y footer. Regla: pocas palabras; que los ejemplos expliquen |
+| `src/data/content.ts` | Textos de cada sección: header, entrada, hero, sobre nosotros, servicios, proyecto Woodland Perú, pasos y garantía, formulario de cierre, equipo (oculto), preguntas y footer. Regla: pocas palabras; que los ejemplos expliquen |
 | `src/data/faq.ts` | Preguntas frecuentes (también alimentan el JSON-LD `FAQPage`) |
 | `src/data/testimonials.ts` | Testimonios (preparado y **oculto** hasta tener datos reales) |
 
-- **Precios:** la landing no muestra precios de WASD; se conversan por WhatsApp. Los montos en el celular de ejemplo del hero (por ejemplo, "Capuchino · S/ 12") son contenido ilustrativo.
+- **Precios:** la landing no muestra precios de Kodena; se conversan por WhatsApp. Los montos en el celular de ejemplo del hero (por ejemplo, "Capuchino · S/ 12") son contenido ilustrativo.
 - **WhatsApp:** todos los links salen de `src/lib/whatsapp.ts`, con un mensaje distinto para consulta general, demo (con el nombre, la descripción y el servicio que escribió el visitante en el hero), proyecto y formulario.
 - **Formulario:** `src/lib/lead.ts` valida y tiene la función aislada `submitLead()`. Hoy abre WhatsApp con el mensaje armado; para conectar un backend, reemplaza el cuerpo de `submitLead()`.
 - **Colores:** solo los tokens de `src/app/globals.css`. Cada token tiene su valor claro en `:root` y su valor oscuro en `:root[data-theme="dark"]`; un componente nuevo funciona en los dos temas si usa tokens.
@@ -77,10 +77,12 @@ Todo el contenido está en `src/data/`. **No hace falta tocar componentes.**
 
 | Sección | Archivo | Qué se mueve |
 | --- | --- | --- |
-| Entrada | `ui/Intro.tsx` | Pantalla petróleo de ≈2 s: las teclas caen, aparece la marca y la página se abre en círculo. Solo CSS, una vez por sesión, nunca con movimiento reducido |
+| Entrada | `ui/Intro.tsx` | Pantalla petróleo de ≈2 s: la K de Kodena se arma pieza por pieza, aparece el nombre y la página se abre en círculo. Solo CSS, una vez por sesión, nunca con movimiento reducido |
 | Header | `sections/Header.tsx` | Fijo, gana fondo al bajar; interruptor de tema (el tema nuevo se abre en círculo desde el botón) y menú en celular |
-| Hero | `sections/Hero.tsx`, `HeroPreview.tsx` | El visitante escribe el nombre de su negocio, a qué se dedica y qué necesita (W web, A agente especializado en su web, S reservas y pedidos, D app). A la derecha se arma en vivo un ejemplo distinto por servicio, con su nombre, su descripción y un color propio. Sin datos, una demo automática recorre negocios de rubros variados. El botón abre WhatsApp con lo que escribió. Textos en `hero` de `src/data/content.ts` |
-| Servicios | `sections/Services.tsx` | Las teclas en la forma del logo son las pestañas (clic, flechas o W/A/S/D en el teclado); cada una arma en vivo su ejemplo con un negocio de muestra |
+| Hero | `sections/Hero.tsx` | Qué se lleva el cliente (web lista en 48 horas, demo gratis), WhatsApp verde como primer botón y una web de ejemplo en un celular con un mensaje entrando. Si se agrega una foto real del equipo en `hero.photo`, reemplaza el fondo |
+| Antes y después | `sections/BeforeAfter.tsx` | Ejemplo ilustrativo: WhatsApp lleno de mensajes sin responder frente a la web con un asistente que registra el turno |
+| Servicios | `sections/Services.tsx` | Cuatro tarjetas con ícono de línea coral, nombre claro y enlace a WhatsApp |
+| Mira cómo quedaría tu negocio | `sections/LiveDemo.tsx`, `HeroPreview.tsx` | El visitante escribe el nombre de su negocio, a qué se dedica y qué necesita (W web, A agente, S reservas y pedidos, D app) y el ejemplo se arma en vivo. Textos en `liveDemo` de `src/data/content.ts` |
 | Proyecto Woodland | `sections/Project.tsx` | Bloque petróleo con capturas reales de su web (escritorio y celular) y lo que construimos, por tecla |
 | Así trabajamos | `sections/HowItWorks.tsx` | La línea de pasos se dibuja y los pasos entran uno a uno; garantía de 60 días en una franja |
 | Preguntas, Formulario (cierre), Footer | `sections/*.tsx` | Títulos que suben desde una máscara y bloques que aparecen al entrar en pantalla |
@@ -115,10 +117,10 @@ src/
 ├── app/                  # layout, página, páginas legales, sitemap, robots, ícono, tokens (globals.css)
 ├── components/
 │   ├── sections/         # una sección por archivo, cada una con su .module.css
-│   ├── ui/               # Logo, ThemeToggle, KeyCap, Icons, RevealObserver, TrackClicks
+│   ├── ui/               # Logo, Intro, ThemeToggle, Icons (LineIcon), RevealObserver, TrackClicks
 │   ├── Analytics.tsx     # GA4 + Meta Pixel
 │   ├── JsonLd.tsx        # ProfessionalService + FAQPage
 │   └── LegalPage.tsx     # plantilla de páginas legales
 ├── data/                 # TODO el contenido editable
-└── lib/                  # whatsapp, analytics, lead (submitLead), teclas
+└── lib/                  # whatsapp, analytics, lead (submitLead), domain
 ```

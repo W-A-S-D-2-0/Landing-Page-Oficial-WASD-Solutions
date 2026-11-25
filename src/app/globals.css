@@ -1,140 +1,148 @@
 /* Primera regla: fondo en html y body para que nunca haya un destello. */
 html,
 body {
-  background: var(--bg, #f6f5f1);
-  color: var(--text, #0f2229);
+  background: var(--bg, #faf7f3);
+  color: var(--text, #123b49);
 }
 
 /*
- * Paleta WASD. Colores solo desde aquí: nunca colores fijos en componentes.
- * Sale del logo y se ordena en tres familias:
- *   petróleo  #071a21 · #0d2630 · #123e4c · #1a5466 · #74c0d2 · #e2eef1
- *   ámbar     #8a5818 · #c7852f · #e6a95c · #f6e7d1
- *   papel     #f6f5f1 · #eeece6 · #e3e0d8 · #ffffff
- * Regla de uso: el petróleo manda (texto, botones, superficies oscuras), el
- * ámbar es el único acento (máximo un detalle por bloque) y el papel da aire.
- * Contrastes de texto ≥ 4.5:1 en los dos temas.
+ * Paleta oficial de Kodena (tablero de marca). Colores solo desde aquí:
+ * nunca colores fijos en componentes, salvo mockups y capturas de webs.
+ *   Petróleo  #123B49  principal: texto, títulos, bloques oscuros
+ *   Coral     #F16E59  acento: formas y detalles
+ *   Durazno   #F4AF87  complementario: fondos suaves, segunda hoja de la K
+ *   Marfil    #FAF7F3  fondo
+ * Para texto blanco sobre coral y palabras resaltadas se usa un coral un tono
+ * más hondo (#E5583F), que llega al contraste mínimo; el coral del logo no.
+ * Tipografía única: Inter (Bold, Medium y Regular).
  */
 :root {
   color-scheme: light;
-  --bg: #f6f5f1;
+  --bg: #faf7f3;
   --surface: #ffffff;
-  --surface-alt: #eeece6;
-  --border: #e3e0d8;
-  --border-strong: #cdc9bf;
-  --text: #0f2229;
-  --text-muted: #4f636b;
+  --surface-alt: #f3ede5;
+  --border: #e8e0d5;
+  --border-strong: #d3c8ba;
+  --text: #123b49;
+  --text-muted: #4a6670;
 
-  --primary: #1a5466;
-  --primary-soft: #e2eef1;
-  --primary-ink: #123e4c;
-  --accent: #c7852f;
-  --accent-soft: #f6e7d1;
-  --accent-ink: #8a5818;
-  --success: #24704f;
-  --live: #d9443f;
+  --primary: #123b49;
+  --primary-soft: #e2ecef;
+  --primary-ink: #0b2630;
+  --accent: #f16e59;
+  --accent-strong: #e5583f;
+  --accent-soft: #fde6e0;
+  --accent-ink: #b8432f;
+  --peach: #f4af87;
+  --peach-soft: #fdede3;
+  --success: #1f7a4f;
+  --good-soft: #dcefe4;
+  --bad: #a3352f;
+  --bad-soft: #f8e3e1;
+  --live: #e5583f;
   --whatsapp: #25d366;
+  /* Verde de WhatsApp: solo para el botón flotante y los mockups de chat */
+  --wa-bg: #25d366;
+  --wa-bg-hover: #2fe075;
+  --wa-fg: #06331a;
+  --wa-shadow: 0 10px 24px rgb(37 211 102 / 0.3);
 
-  /* Botón principal */
-  --cta-bg: #123e4c;
-  --cta-bg-hover: #0d3140;
+  /* Botón principal: coral con texto blanco en negrita (≥ 19 px) */
+  --cta-bg: #e5583f;
+  --cta-bg-hover: #d94f37;
   --cta-fg: #ffffff;
-  --cta-shadow: 0 8px 22px rgb(18 62 76 / 0.24);
+  --cta-shadow: 0 10px 24px rgb(229 88 63 / 0.28);
 
-  /* Palabra destacada del título */
-  --highlight: #1a5466;
+  /* Palabras destacadas de los títulos */
+  --highlight: #e5583f;
 
-  /* Bloque oscuro (proyecto y cierre): petróleo profundo en los dos temas */
-  --deep: #0b2530;
-  --deep-2: #123e4c;
-  --deep-text: #eef5f6;
-  --deep-muted: #a7bec5;
+  /* Bloques petróleo (proyecto, cierre, footer): iguales en los dos temas */
+  --deep: #123b49;
+  --deep-2: #1d5162;
+  --deep-text: #faf7f3;
+  --deep-muted: #a9c0c7;
   --deep-border: rgb(255 255 255 / 0.12);
   --deep-title: #ffffff;
-  --deep-glow: rgb(116 192 210 / 0.14);
-  --deep-cta: #e6a95c;
-  --deep-cta-hover: #efb874;
-  --deep-cta-fg: #1b1206;
-  --deep-shadow: rgb(0 0 0 / 0.45);
-  --deep-device: #04121a;
+  --deep-glow: rgb(244 175 135 / 0.12);
+  --deep-cta: #e5583f;
+  --deep-cta-hover: #d94f37;
+  --deep-cta-fg: #ffffff;
+  --deep-shadow: rgb(0 0 0 / 0.4);
+  --deep-device: #0b2630;
+  --deep-accent: #f4af87;
 
   /* Brillos suaves de fondo */
-  --glow-1: rgb(26 84 102 / 0.12);
-  --glow-2: rgb(199 133 47 / 0.1);
+  --glow-1: rgb(241 110 89 / 0.1);
+  --glow-2: rgb(244 175 135 / 0.16);
 
-  --pattern: radial-gradient(circle, #d9d6cd 1.1px, transparent 1.2px);
+  --pattern: radial-gradient(circle, #e3d9cc 1.1px, transparent 1.2px);
   --pattern-size: 28px 28px;
 
-  --shadow-card: 0 1px 0 var(--border), 0 22px 48px rgb(15 34 41 / 0.1);
-  --shadow-soft: 0 1px 0 var(--border), 0 10px 26px rgb(15 34 41 / 0.06);
+  --shadow-card: 0 1px 0 var(--border), 0 22px 48px rgb(18 59 73 / 0.1);
+  --shadow-soft: 0 1px 0 var(--border), 0 10px 26px rgb(18 59 73 / 0.06);
 
-  /* Logo */
-  --logo-w: #c7852f;
-  --logo-w-bar: #efd8b6;
-  --logo-k: #1a5466;
-  --logo-k-bar: #b4c7cd;
-  --logo-bg: transparent;
-  --logo-word: #0f2229;
-  --logo-sub: #36484f;
+  /* Logo: la barra y el nombre cambian con el tema; las hojas no */
+  --logo-ink: #123b49;
+  --logo-coral: #f16e59;
+  --logo-peach: #f4af87;
 
   /* Mockups de las demos: siempre claros, son webs de ejemplo */
   --mock-bg: #ffffff;
   --mock-ink: #1c2128;
   --mock-muted: #6b7480;
   --mock-line: #e8eae5;
-  --device: #0f2229;
+  --device: #0b2630;
 
-  /* Pantalla de entrada: siempre en petróleo profundo */
-  --intro-bg: #071a21;
-  --intro-glow: rgb(43 115 137 / 0.42);
-  --intro-ring: rgb(116 192 210 / 0.16);
-  --intro-text: #eef5f6;
-  --intro-muted: #8fb0b9;
+  /* Pantalla de entrada: siempre en petróleo */
+  --intro-bg: #0b2630;
+  --intro-glow: rgb(241 110 89 / 0.22);
+  --intro-ring: rgb(244 175 135 / 0.18);
+  --intro-text: #faf7f3;
+  --intro-muted: #a9c0c7;
 
-  --font-display: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-display: "Inter Variable", "Inter", system-ui, sans-serif;
   --font-body: "Inter Variable", "Inter", system-ui, sans-serif;
 
   --radius: 12px;
-  --radius-lg: 20px;
+  --radius-lg: 22px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-state: cubic-bezier(0.4, 0, 0.2, 1);
-  --header-h: 76px;
+  --header-h: 80px;
   /* Cuánto espera la entrada del hero (lo que dura la pantalla de entrada) */
   --intro-delay: 1.6s;
 }
 
-/* Tema oscuro: petróleo profundo, botones ámbar. */
+/* Tema oscuro: fondo petróleo profundo, textos marfil y acentos coral y durazno. */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #071a21;
-  --surface: #0d2630;
-  --surface-alt: #0a2029;
-  --border: rgb(255 255 255 / 0.09);
-  --border-strong: rgb(255 255 255 / 0.18);
-  --text: #eef5f6;
-  --text-muted: #9fb6bd;
+  --bg: #0b2630;
+  --surface: #123b49;
+  --surface-alt: #0e2f3b;
+  --border: rgb(255 255 255 / 0.1);
+  --border-strong: rgb(255 255 255 / 0.2);
+  --text: #faf7f3;
+  --text-muted: #a9c0c7;
 
-  --primary: #74c0d2;
-  --primary-soft: rgb(116 192 210 / 0.14);
-  --primary-ink: #a8dbe6;
-  --accent: #e6a95c;
-  --accent-soft: rgb(230 169 92 / 0.16);
-  --accent-ink: #f2c68d;
+  --primary: #f4af87;
+  --primary-soft: rgb(244 175 135 / 0.14);
+  --primary-ink: #fad3bc;
+  --accent: #f16e59;
+  --accent-soft: rgb(241 110 89 / 0.16);
+  --accent-ink: #f8a08f;
+  --peach-soft: rgb(244 175 135 / 0.14);
   --success: #5cc197;
+  --good-soft: rgb(92 193 151 / 0.14);
+  --bad: #f08a83;
+  --bad-soft: rgb(240 138 131 / 0.14);
 
-  --cta-bg: #e6a95c;
-  --cta-bg-hover: #efb874;
-  --cta-fg: #1b1206;
-  --cta-shadow: 0 8px 22px rgb(0 0 0 / 0.3);
+  --cta-shadow: 0 10px 24px rgb(0 0 0 / 0.3);
+  --highlight: #f16e59;
 
-  --highlight: #e6a95c;
+  --deep: #123b49;
+  --deep-2: #1d5162;
 
-  --deep: #0d2630;
-  --deep-2: #123e4c;
-  --deep-border: rgb(255 255 255 / 0.1);
-
-  --glow-1: rgb(116 192 210 / 0.1);
-  --glow-2: rgb(230 169 92 / 0.07);
+  --glow-1: rgb(241 110 89 / 0.08);
+  --glow-2: rgb(244 175 135 / 0.06);
 
   --pattern: linear-gradient(rgb(255 255 255 / 0.04) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.04) 1px, transparent 1px);
   --pattern-size: 56px 56px;
@@ -142,25 +150,14 @@ body {
   --shadow-card: 0 1px 0 rgb(255 255 255 / 0.04), 0 26px 54px rgb(0 0 0 / 0.4);
   --shadow-soft: 0 14px 30px rgb(0 0 0 / 0.28);
 
-  --logo-w: #e6a95c;
-  --logo-w-bar: #6a4f2c;
-  --logo-k: #74c0d2;
-  --logo-k-bar: #23505d;
-  --logo-word: #ffffff;
-  --logo-sub: #a7bec5;
+  --logo-ink: #faf7f3;
 
-  --device: #04121a;
+  --device: #04161d;
 }
 
-/* Logo sobre fondos oscuros fijos (entrada y bloques petróleo). */
+/* Logo y textos sobre fondos petróleo fijos (entrada, proyecto, footer). */
 .on-deep {
-  --logo-w: #e6a95c;
-  --logo-w-bar: #6a4f2c;
-  --logo-k: #74c0d2;
-  --logo-k-bar: #23505d;
-  --logo-word: #ffffff;
-  --logo-sub: #a7bec5;
-  --surface: transparent;
+  --logo-ink: #faf7f3;
 }
 
 /* Visita repetida en la misma sesión: sin pantalla de entrada ni espera. */
@@ -184,7 +181,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -324,31 +321,59 @@ video {
   }
 }
 
-/* Encabezado de sección: solo el título, alineado a la izquierda. */
+/* Encabezado de sección: título y una línea que lo explica. */
 .section-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px 40px;
+  max-width: 760px;
   margin-bottom: 48px;
 }
 
+/* Barrita coral sobre el título (del tablero de marca) */
+.section-head::before,
+.dash::before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 4px;
+  margin-bottom: 18px;
+  border-radius: 4px;
+  background: var(--accent-strong);
+}
+
+.section-head.center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-head.center::before {
+  margin-inline: auto;
+}
+
+/* Palabras resaltadas en coral dentro de los títulos */
+.hl {
+  color: var(--highlight);
+}
+
 .section-title {
-  max-width: 16ch;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(34px, 4.6vw, 56px);
-  line-height: 1.02;
-  letter-spacing: -0.04em;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
 
 .section-aside {
-  max-width: 30rem;
-  font-size: 16px;
+  margin-top: 14px;
+  font-size: 20px;
+  line-height: 1.55;
   color: var(--text-muted);
   text-wrap: pretty;
+}
+
+@media (max-width: 760px) {
+  .section-aside {
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 760px) {
@@ -364,11 +389,11 @@ video {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  min-height: 52px;
-  padding: 0 24px;
+  min-height: 56px;
+  padding: 0 26px;
   border: 0;
-  border-radius: var(--radius);
-  font: 600 16px/1.2 var(--font-body);
+  border-radius: 999px;
+  font: 700 19px/1.2 var(--font-body);
   white-space: nowrap;
   transition:
     transform 220ms var(--ease-out),
@@ -402,20 +427,31 @@ video {
   background: var(--cta-bg-hover);
 }
 
+/* WhatsApp: verde, el color que el cliente ya reconoce */
+.btn-wa {
+  background: var(--wa-bg);
+  color: var(--wa-fg);
+  box-shadow: var(--wa-shadow);
+}
+
+.btn-wa:hover {
+  background: var(--wa-bg-hover);
+}
+
 .btn-outline {
-  background: var(--surface);
+  background: transparent;
   color: var(--text);
-  box-shadow: inset 0 0 0 1.5px var(--border-strong);
+  box-shadow: inset 0 0 0 2px var(--text);
 }
 
 .btn-outline:hover {
-  box-shadow: inset 0 0 0 1.5px var(--primary);
+  background: var(--primary-soft);
 }
 
 .btn-sm {
-  min-height: 42px;
-  padding: 0 18px;
-  font-size: 15px;
+  min-height: 48px;
+  padding: 0 20px;
+  font-size: 19px;
   border-radius: 10px;
 }
 

@@ -4,12 +4,21 @@
  * Las cifras visibles (48 h, 60 días) son condiciones de la oferta.
  */
 
+/** Identificador interno de cada servicio (no se muestra en la web). */
 export type KeyLetter = "W" | "A" | "S" | "D";
+
+/** Íconos de línea disponibles en src/components/ui/Icons.tsx. */
+export type IconName = "monitor" | "clock" | "whatsapp" | "shield" | "chat" | "calendar" | "phone" | "heart" | "zap" | "check";
+
+/** Ícono de cada servicio. */
+export const serviceIcons: Record<KeyLetter, IconName> = { W: "monitor", A: "chat", S: "calendar", D: "phone" };
 
 /* ───────────────────────── Header ───────────────────────── */
 
 export const header = {
-  cta: "Habla con nosotros",
+  cta: "Contáctanos",
+  /** Encima del número en el header (solo se muestra si el número es real). */
+  phoneLabel: "Escríbenos por WhatsApp",
   menuOpen: "Abrir menú",
   menuClose: "Cerrar menú",
   theme: { toDark: "Cambiar a tema oscuro", toLight: "Cambiar a tema claro" },
@@ -18,10 +27,83 @@ export const header = {
 /* ───────────────────────── Hero ───────────────────────── */
 
 /**
- * Hero "tu solución, en vivo": el visitante escribe el nombre de su negocio,
- * a qué se dedica y qué necesita (W, A, S o D), y a la derecha se arma un
- * ejemplo distinto según el servicio. Sin datos, una demo automática recorre
- * negocios de rubros variados. Todo es ilustrativo.
+ * Hero para dueños de negocio de 30 a 50 años: qué se llevan, en cuánto
+ * tiempo y sin riesgo, con WhatsApp como primer paso. Textos grandes y claros.
+ */
+export const hero = {
+  /** Lema de la marca, con la barrita coral delante. */
+  tagline: "Soluciones digitales para tu negocio",
+  /** El título se arma así: before + highlight (en coral). */
+  title: { before: "Páginas web que hacen crecer", highlight: "tu negocio" },
+  subtitle: "Lista en 48 horas. Te la mostramos gratis en tu celular antes de que pagues.",
+  primaryCta: "Solicita tu demo gratis",
+  secondaryCta: "Conoce más",
+  /** Cuatro garantías con ícono (del tablero de marca). */
+  features: [
+    { icon: "monitor", text: "Demo gratis" },
+    { icon: "clock", text: "Listo en 48 horas" },
+    { icon: "whatsapp", text: "Todo por WhatsApp" },
+    { icon: "shield", text: "Garantía de 60 días" },
+  ] as Array<{ icon: IconName; text: string }>,
+  /**
+   * Foto real del equipo (por ejemplo /equipo/hero.webp, 1000×1100).
+   * Mientras sea null se muestra la web de ejemplo sobre un fondo de marca.
+   * Nunca fotos de stock ni generadas con IA.
+   */
+  photo: null as null | { src: string; alt: string },
+  /** Ejemplo ilustrativo dentro del celular del hero. */
+  example: { name: "Dulce Antojo", description: "Repostería artesanal con delivery en Surco" },
+  message: { from: "Nuevo mensaje", text: "Hola, ¿hacen tortas por encargo para el sábado?" },
+  projectCard: { title: "Woodland Perú", text: "Web, asistente y sistema", tag: "Proyecto real" },
+};
+
+/* ───────────────────────── Quiénes somos ───────────────────────── */
+
+export const about = {
+  title: "Quiénes somos",
+  text: "Somos una startup peruana que ayuda a negocios y pymes a crecer con soluciones digitales simples, rápidas y confiables.",
+  values: [
+    { icon: "heart", title: "Simples", text: "Te hablamos claro, sin palabras técnicas." },
+    { icon: "zap", title: "Rápidas", text: "Tu web publicada en 48 horas." },
+    { icon: "check", title: "Confiables", text: "Demo gratis y garantía de 60 días." },
+  ] as Array<{ icon: IconName; title: string; text: string }>,
+};
+
+/* ───────────────────────── Antes y después ───────────────────────── */
+
+/** Ejemplo ilustrativo de un día sin y con Kodena (no son datos de un cliente). */
+export const beforeAfter = {
+  title: { before: "Tus clientes te buscan en internet.", highlight: "¿Te encuentran?" },
+  aside: "Así cambia el día a día de un negocio cuando tiene su web y un asistente que responde.",
+  before: {
+    tag: "Hoy",
+    title: "Respondes lo mismo todo el día",
+    items: ["No apareces en Google", "Se te pasan mensajes", "No sabes de dónde llegan tus clientes"],
+    chat: { header: "WhatsApp · 23 sin leer", messages: ["¿Precio?", "¿Atienden hoy?", "¿Dónde quedan?", "¿Hola?"], late: "Respondiste 6 horas después" },
+  },
+  after: {
+    tag: "Con Kodena",
+    title: "Tu negocio atiende aunque estés ocupado",
+    items: ["Te encuentran en Google", "Responde al instante, de día y de noche", "Cada semana sabes cuántos te escribieron"],
+    phone: {
+      name: "Taller Rápido",
+      cover: "Mecánica y mantenimiento en San Miguel",
+      agent: "Asistente de Taller Rápido",
+      reply: "Sí, mañana atendemos de 8 a. m. a 6 p. m. ¿Te separo un turno?",
+      doneTitle: "Turno registrado",
+      done: "Mañana, 10:00 a. m.",
+    },
+  },
+  note: "Ejemplo ilustrativo.",
+};
+
+/* ───────────────────────── Armado en vivo ───────────────────────── */
+
+/**
+ * "Mira cómo quedaría tu negocio": el visitante escribe el nombre de su
+ * negocio, a qué se dedica y qué necesita (W, A, S o D), y a la derecha se
+ * arma un ejemplo distinto según el servicio. Sin datos, una demo automática
+ * recorre negocios de rubros variados. Todo es ilustrativo.
  */
 export type HeroService = {
   key: KeyLetter;
@@ -33,12 +115,11 @@ export type HeroService = {
   steps: [string, string, string, string, string];
 };
 
-export const hero = {
+export const liveDemo = {
   /** Etiqueta sobre la vista previa. */
   live: "En vivo",
-  /** El título se arma así: before + highlight (resaltado) + after. */
-  title: { before: "Cuéntanos de tu negocio y", highlight: "míralo cobrar vida", after: "" },
-  subtitle: "Escribe y mira un adelanto aquí mismo. La versión real te la mostramos gratis.",
+  title: "Mira cómo quedaría tu negocio",
+  subtitle: "Escribe el nombre de tu negocio y elige qué necesitas. El ejemplo se arma aquí mismo.",
   fields: {
     name: { label: "¿Cómo se llama tu negocio?", placeholder: "Ej.: Dulce Antojo" },
     description: { label: "¿A qué se dedica?", placeholder: "Ej.: Repostería artesanal con delivery en Surco" },
@@ -48,8 +129,7 @@ export const hero = {
     name: "Tu negocio",
     description: "Lo que hace tu negocio, contado en una línea",
   },
-  primaryCta: "Quiero mi demo gratis",
-  secondaryCta: "Ver un proyecto real",
+  primaryCta: "Quiero esto para mi negocio",
   note: "Ejemplo ilustrativo.",
   previewLabel: "Vista previa que se arma en vivo",
   readyLabel: "Lista para publicar",
@@ -119,62 +199,52 @@ export const hero = {
   },
 };
 
-/** Tres datos de la oferta, en una línea bajo los botones del hero. */
-export const heroFacts = ["Demo gratis", "Lista en 48 horas", "Reporte cada semana"] as const;
 
 /** Pantalla de entrada. */
 export const intro = {
-  tagline: "Webs, agentes y sistemas",
+  tagline: "Soluciones digitales para tu negocio",
 };
 
 /* ───────────────────────── Servicios ───────────────────────── */
 
-/**
- * Cada tecla muestra un ejemplo terminado (la misma vista previa del hero)
- * con un negocio de muestra. Pocas palabras: el ejemplo explica el resto.
- */
+/** Cuatro servicios en tarjetas, con nombres claros (la letra es solo la firma). */
 export type Service = {
   key: KeyLetter;
   name: string;
   description: string;
   /** Lo que incluye, en etiquetas cortas. */
   tags: string[];
-  /** Negocio de muestra para el ejemplo (ilustrativo). */
-  sample: { name: string; description: string };
 };
 
-export const services: { title: string; aside: string; tablistLabel: string; items: Service[] } = {
-  title: "Cuatro teclas, un solo equipo",
-  aside: "Empiezas con una y sumas las demás cuando las necesites.",
-  tablistLabel: "Servicios de WASD Solutions",
+export const services: { title: string; titleHighlight: string; aside: string; cta: string; items: Service[] } = {
+  title: "Lo que hacemos por",
+  titleHighlight: "tu negocio",
+  aside: "Empiezas con la web y sumas lo demás cuando lo necesites.",
+  cta: "Preguntar",
   items: [
     {
       key: "W",
-      name: "Página web",
-      description: "Tu negocio en Google y en el celular, con WhatsApp a un toque.",
-      tags: ["Lista en 48 horas", "Aparece en Google", "Botón de WhatsApp"],
-      sample: { name: "Dulce Antojo", description: "Repostería artesanal con delivery en Surco" },
+      name: "Páginas web profesionales",
+      description: "Que te encuentren en Google y te escriban por WhatsApp con un toque.",
+      tags: ["Lista en 48 horas", "Se ve bien en el celular"],
     },
     {
       key: "A",
       name: "Agentes especializados",
-      description: "Un agente que conoce tu negocio y atiende en tu web a cualquier hora.",
-      tags: ["Responde al instante", "Registra solicitudes", "También en WhatsApp"],
-      sample: { name: "Taller Rápido", description: "Mecánica y mantenimiento de autos en San Miguel" },
+      description: "Un asistente que conoce tu negocio y responde por ti, de día y de noche.",
+      tags: ["En tu web", "También en WhatsApp"],
     },
     {
       key: "S",
       name: "Reservas y pedidos",
-      description: "Tu agenda, tus pedidos y tus pagos en un solo panel.",
-      tags: ["Reservas en línea", "Yape y Plin", "Recordatorios"],
-      sample: { name: "Estudio Vida", description: "Clases de pilates y yoga para todas las edades" },
+      description: "Tu agenda, tus pedidos y tus pagos ordenados en un solo lugar.",
+      tags: ["Yape y Plin", "Recordatorios"],
     },
     {
       key: "D",
-      name: "Apps a medida",
-      description: "Una app web o móvil cuando tu negocio la pida.",
-      tags: ["Web o móvil", "Catálogo y pedidos", "Notificaciones"],
-      sample: { name: "Ferretería Central", description: "Materiales de construcción con envío a obra" },
+      name: "App a tu medida",
+      description: "Una app web o para celular cuando tu negocio necesite algo más grande.",
+      tags: ["Web o móvil", "Hecha para ti"],
     },
   ],
 };
@@ -210,13 +280,13 @@ export const project = {
 /* ───────────────────────── Cómo trabajamos ───────────────────────── */
 
 export const howItWorks = {
-  title: "Así trabajamos",
-  aside: "Todo por WhatsApp, sin reuniones largas.",
+  title: "Cómo trabajamos",
+  aside: "Todo por WhatsApp, sin reuniones largas ni palabras técnicas.",
   steps: [
-    { title: "Nos escribes", text: "Dos minutos." },
-    { title: "Ves tu demo", text: "Gratis, en tu celular." },
-    { title: "La publicamos", text: "En 48 horas." },
-    { title: "Mides resultados", text: "Reporte cada semana." },
+    { icon: "whatsapp" as IconName, title: "Nos escribes", text: "Por WhatsApp. Nos cuentas de tu negocio en dos minutos." },
+    { icon: "monitor" as IconName, title: "Ves tu demo gratis", text: "Te la mandamos gratis para que la veas en tu celular." },
+    { icon: "clock" as IconName, title: "Lista en 48 horas", text: "Hacemos los cambios contigo y queda lista en 48 horas." },
+    { icon: "check" as IconName, title: "Ves resultados", text: "Cada semana te contamos cuántas personas te escribieron." },
   ],
 };
 
@@ -230,8 +300,8 @@ export const guarantee = {
 /* ───────────────────────── Formulario (cierre) ───────────────────────── */
 
 export const leadForm = {
-  title: "Tu demo, gratis",
-  intro: "Déjanos tus datos y te la mandamos por WhatsApp.",
+  title: "Pide tu demo gratis",
+  intro: "Déjanos tus datos y te la mandamos por WhatsApp. Sin compromiso.",
   orWhatsapp: "¿Prefieres escribirnos directo?",
   whatsappCta: "Abrir WhatsApp",
   submit: "Quiero mi demo",
@@ -280,7 +350,7 @@ export const team = {
 /* ───────────────────────── Preguntas y footer ───────────────────────── */
 
 export const faqSection = {
-  title: "Preguntas",
+  title: "Preguntas frecuentes",
   more: "¿Otra duda?",
   moreCta: "Escríbenos",
 };
@@ -294,7 +364,7 @@ export const whatsappBubble = {
 };
 
 export const footer = {
-  phrase: "Webs, agentes y sistemas para negocios del Perú.",
+  phrase: "Soluciones digitales para tu negocio.",
   columns: { site: "Sitio", contact: "Contacto", legal: "Legal" },
   demoLink: "Pide tu demo",
   legalLinks: [

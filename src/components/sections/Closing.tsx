@@ -10,7 +10,7 @@ export function Faq() {
   return (
     <section id="preguntas" className="section section-alt" aria-labelledby="preguntas-title">
       <div className={`container ${styles.faqGrid}`}>
-        <header>
+        <header className="section-head">
           <h2 id="preguntas-title" className="section-title" data-reveal="mask">
             {faqSection.title}
           </h2>

@@ -1,0 +1,63 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: center;
+}
+
+.grid :global(.section-head) {
+  margin-bottom: 0;
+}
+
+.text {
+  margin-top: 18px;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+
+.values {
+  display: grid;
+  gap: 16px;
+}
+
+.values li {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 24px;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  font-size: 17px;
+  color: var(--text-muted);
+}
+
+.values b {
+  display: block;
+  font-size: 19px;
+  color: var(--text);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .text {
+    font-size: 21px;
+  }
+}

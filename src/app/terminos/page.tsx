@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
 
 export const metadata: Metadata = {
-  title: "Términos y condiciones | WASD Solutions",
-  description: "Términos y condiciones de los servicios de WASD Solutions.",
+  title: "Términos y condiciones | Kodena",
+  description: "Términos y condiciones de los servicios de Kodena.",
   alternates: { canonical: "/terminos/" },
 };
 

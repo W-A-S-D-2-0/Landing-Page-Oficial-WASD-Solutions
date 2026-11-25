@@ -5,9 +5,9 @@
  */
 
 export const site = {
-  name: "WASD Solutions",
-  shortName: "WASD",
-  tagline: "Mueve tu negocio.",
+  name: "Kodena",
+  shortName: "Kodena",
+  tagline: "Soluciones digitales para tu negocio.",
   description:
     "Páginas web para negocios en Lima: web, agentes con IA y reservas para PYMEs, listos en 48 horas y con resultados medidos cada semana.",
 
@@ -42,13 +42,13 @@ export const site = {
   /** Menú principal del header. */
   nav: [
     { label: "Servicios", href: "/#servicios" },
-    { label: "Proyecto", href: "/#proyectos" },
-    { label: "Cómo trabajamos", href: "/#como-funciona" },
+    { label: "Proyectos", href: "/#proyectos" },
+    { label: "Nosotros", href: "/#nosotros" },
     { label: "Preguntas", href: "/#preguntas" },
   ],
 
   seo: {
-    title: "Páginas web para negocios en Lima | WASD Solutions",
+    title: "Páginas web para negocios en Lima | Kodena",
     description:
       "Creamos páginas web para negocios en Lima con agentes con IA y reservas. Te mostramos tu web antes de pagar, la publicamos en 48 horas y te enviamos resultados cada semana.",
     keywords: [

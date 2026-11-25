@@ -10,22 +10,24 @@ export type WhatsAppIntent =
   | { type: "demo" }
   | { type: "demoFor"; business: string; description: string; service: string }
   | { type: "project"; projectName: string }
+  | { type: "service"; service: string }
   | { type: "lead"; message: string };
 
 const messages = {
-  general: "Hola WASD, quiero información sobre una web para mi negocio.",
-  demo: "Hola WASD, quiero mi demo gratis. Les cuento de mi negocio:",
+  general: "Hola Kodena, quiero información sobre una web para mi negocio.",
+  demo: "Hola Kodena, quiero mi demo gratis. Les cuento de mi negocio:",
   demoFor: (business: string, description: string, service: string) =>
     [
-      "Hola WASD, quiero mi demo gratis.",
+      "Hola Kodena, quiero mi demo gratis.",
       business && `Mi negocio: ${business}.`,
       description && `A qué se dedica: ${description}.`,
       `Me interesa ${service}.`,
     ]
       .filter(Boolean)
       .join(" "),
+  service: (service: string) => `Hola Kodena, quiero información sobre ${service} para mi negocio.`,
   project: (projectName: string) =>
-    `Hola WASD, vi el proyecto de ${projectName} y quiero algo así para mi negocio.`,
+    `Hola Kodena, vi el proyecto de ${projectName} y quiero algo así para mi negocio.`,
 } as const;
 
 export function whatsappMessage(intent: WhatsAppIntent): string {
@@ -38,6 +40,8 @@ export function whatsappMessage(intent: WhatsAppIntent): string {
       return messages.demoFor(intent.business.trim(), intent.description.trim().replace(/\.$/, ""), intent.service);
     case "project":
       return messages.project(intent.projectName);
+    case "service":
+      return messages.service(intent.service.toLowerCase());
     case "lead":
       return intent.message;
   }

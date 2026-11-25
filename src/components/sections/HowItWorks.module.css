@@ -13,7 +13,7 @@
   left: 0;
   right: 0;
   height: 1.5px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: linear-gradient(90deg, var(--accent-strong), var(--peach));
   transform-origin: 0 50%;
 }
 
@@ -41,10 +41,15 @@
   box-shadow:
     inset 0 0 0 1.5px var(--border-strong),
     var(--shadow-soft);
-  font-family: var(--font-display);
-  font-size: 18px;
+  color: var(--accent-strong);
+}
+
+.stepNo {
+  margin-top: 20px;
+  font-size: 15px;
   font-weight: 800;
-  color: var(--primary);
+  letter-spacing: 0.04em;
+  color: var(--accent-ink);
 }
 
 :global(.js) .step {
@@ -62,16 +67,16 @@
 }
 
 .title {
-  margin-top: 22px;
+  margin-top: 4px;
   font-family: var(--font-display);
-  font-size: 21px;
+  font-size: 22px;
   font-weight: 800;
   letter-spacing: -0.02em;
 }
 
 .text {
   margin-top: 4px;
-  font-size: 15.5px;
+  font-size: 17px;
   color: var(--text-muted);
 }
 
@@ -83,28 +88,24 @@
   margin-top: 64px;
   padding: 20px 24px;
   border-radius: var(--radius-lg);
-  background: var(--accent-soft);
+  background: var(--peach-soft);
 }
 
 .days {
+  display: grid;
   flex: none;
-  font-family: var(--font-display);
-  font-size: 44px;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  color: var(--accent-ink);
+  color: var(--accent-strong);
 }
 
 .guarantee p {
   flex: 1;
-  font-size: 15.5px;
+  font-size: 17px;
   color: var(--text-muted);
 }
 
 .guarantee b {
   display: block;
-  font-size: 16px;
+  font-size: 17.5px;
   color: var(--text);
 }
 
@@ -113,7 +114,7 @@
   flex: none;
   align-items: center;
   gap: 6px;
-  font-size: 15px;
+  font-size: 16.5px;
   font-weight: 600;
   color: var(--accent-ink);
 }

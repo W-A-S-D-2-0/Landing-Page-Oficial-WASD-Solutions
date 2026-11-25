@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import { guarantee, howItWorks } from "@/data/content";
-import { ArrowRight } from "@/components/ui/Icons";
+import { ArrowRight, LineIcon } from "@/components/ui/Icons";
 import styles from "./HowItWorks.module.css";
 
 /** Cuatro pasos en una línea que se dibuja al entrar, y la garantía. */
@@ -22,8 +22,11 @@ export function HowItWorks() {
           {howItWorks.steps.map((step, i) => (
             <li key={step.title} className={styles.step} style={{ "--i": i } as CSSProperties}>
               <span className={styles.number} aria-hidden="true">
-                {String(i + 1).padStart(2, "0")}
+                <LineIcon name={step.icon} size={26} />
               </span>
+              <p className={styles.stepNo} aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </p>
               <h3 className={styles.title}>{step.title}</h3>
               <p className={styles.text}>{step.text}</p>
             </li>
@@ -32,7 +35,7 @@ export function HowItWorks() {
 
         <div className={styles.guarantee} data-reveal="">
           <span className={styles.days} aria-hidden="true">
-            60
+            <LineIcon name="shield" size={40} />
           </span>
           <p>
             <b>{guarantee.title}</b>

@@ -151,3 +151,113 @@ export function WhatsAppIcon({ size = 20, className }: IconProps) {
     </svg>
   );
 }
+
+/* ───────── Íconos de línea de la marca (coral en el tablero) ───────── */
+
+export function Monitor({ size = 24, className }: IconProps) {
+  return (
+    <svg {...base(size)} className={className}>
+      <rect x="3" y="4" width="18" height="12" rx="2" />
+      <path d="M8 20h8M12 16v4" />
+    </svg>
+  );
+}
+
+export function Shield({ size = 24, className }: IconProps) {
+  return (
+    <svg {...base(size)} className={className}>
+      <path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6Z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  );
+}
+
+export function ChatBubble({ size = 24, className }: IconProps) {
+  return (
+    <svg {...base(size)} className={className}>
+      <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z" />
+      <path d="M8.5 12h.01M12 12h.01M15.5 12h.01" />
+    </svg>
+  );
+}
+
+export function Calendar({ size = 24, className }: IconProps) {
+  return (
+    <svg {...base(size)} className={className}>
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M3 10h18M8 3v4M16 3v4M8 14h3" />
+    </svg>
+  );
+}
+
+export function Smartphone({ size = 24, className }: IconProps) {
+  return (
+    <svg {...base(size)} className={className}>
+      <rect x="6" y="2" width="12" height="20" rx="3" />
+      <path d="M11 18h2" />
+    </svg>
+  );
+}
+
+export function Heart({ size = 24, className }: IconProps) {
+  return (
+    <svg {...base(size)} className={className}>
+      <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z" />
+    </svg>
+  );
+}
+
+export function Zap({ size = 24, className }: IconProps) {
+  return (
+    <svg {...base(size)} className={className}>
+      <path d="M13 2 4 14h7l-1 8 9-12h-7Z" />
+    </svg>
+  );
+}
+
+export function CheckCircle({ size = 24, className }: IconProps) {
+  return (
+    <svg {...base(size)} className={className}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m8 12 3 3 5-6" />
+    </svg>
+  );
+}
+
+/** WhatsApp en trazo de línea (para listas con íconos de línea). */
+export function WhatsAppLine({ size = 24, className }: IconProps) {
+  return (
+    <svg {...base(size)} className={className}>
+      <path d="M4 20l1.3-3.9A8 8 0 1 1 8 19.2Z" />
+      <path d="M9 9.5c.3 2 2.2 4.2 4.6 4.9l1.2-1.2 1.7.8c-.2 1.3-1.3 2-2.6 1.8-3-.5-5.6-3.2-6-6-.2-1.3.6-2.4 1.8-2.6l.8 1.7Z" />
+    </svg>
+  );
+}
+
+function ClockLine({ size = 24, className }: IconProps) {
+  return (
+    <svg {...base(size)} className={className}>
+      <circle cx="12" cy="13" r="8" />
+      <path d="M12 9v4l2.5 2M9 2h6" />
+    </svg>
+  );
+}
+
+const LINE_ICONS = {
+  monitor: Monitor,
+  clock: ClockLine,
+  whatsapp: WhatsAppLine,
+  shield: Shield,
+  chat: ChatBubble,
+  calendar: Calendar,
+  phone: Smartphone,
+  heart: Heart,
+  zap: Zap,
+  check: CheckCircle,
+} as const;
+
+/** Ícono de línea por nombre (los nombres viven en src/data/content.ts). */
+export function LineIcon({ name, size = 24, className }: IconProps & { name: keyof typeof LINE_ICONS }) {
+  const Icon = LINE_ICONS[name];
+  return <Icon size={size} className={className} />;
+}

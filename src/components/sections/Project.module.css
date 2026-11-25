@@ -25,11 +25,19 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 6px 12px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--deep-cta);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--deep-accent);
+}
+
+.label::before {
+  content: "";
+  width: 34px;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--logo-coral);
 }
 
 .label span {
@@ -47,7 +55,7 @@
 .intro {
   max-width: 28rem;
   margin-top: 16px;
-  font-size: 17px;
+  font-size: 19px;
   color: var(--deep-muted);
 }
 
@@ -64,19 +72,43 @@
 }
 
 .cap {
-  --cap: 46px;
+  display: grid;
+  place-items: center;
   flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--deep-border);
+  color: var(--deep-accent);
+}
+
+/* Hoja coral del isotipo, de fondo */
+.blade {
+  position: absolute;
+  right: -240px;
+  bottom: -110px;
+  width: 520px;
+  height: 200px;
+  border-radius: 60px 180px 60px 180px;
+  background: var(--logo-coral);
+  opacity: 0.9;
+  transform: skewX(-40deg);
+  pointer-events: none;
+}
+
+.layout {
+  position: relative;
 }
 
 .items h3 {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--deep-title);
 }
 
 .items p {
-  font-size: 14.5px;
+  font-size: 16.5px;
   color: var(--deep-muted);
 }
 
@@ -89,16 +121,12 @@
 }
 
 .visit {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 600;
   color: var(--deep-title);
+  box-shadow: inset 0 0 0 2px var(--deep-border);
 }
 
 .visit:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  box-shadow: inset 0 0 0 2px var(--deep-title);
 }
 
 /* Captura de escritorio en una ventana + celular encima (siempre claras) */

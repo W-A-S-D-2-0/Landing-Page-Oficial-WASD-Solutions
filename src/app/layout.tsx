@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/plus-jakarta-sans";
 import "@fontsource-variable/inter";
 import { site } from "@/data/site";
 import { Analytics } from "@/components/Analytics";
@@ -27,7 +26,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: site.seo.title,
     description: site.seo.description,
-    images: [{ url: site.seo.ogImage, width: 1200, height: 630, alt: "WASD Solutions: webs, agentes con IA y reservas para PYMEs" }],
+    images: [{ url: site.seo.ogImage, width: 1200, height: 630, alt: "Kodena: soluciones digitales para tu negocio" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -39,8 +38,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f5f1" },
-    { media: "(prefers-color-scheme: dark)", color: "#071a21" },
+    { media: "(prefers-color-scheme: light)", color: "#faf7f3" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b2630" },
   ],
 };
 

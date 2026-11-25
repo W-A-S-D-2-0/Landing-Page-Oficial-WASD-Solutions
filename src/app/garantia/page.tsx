@@ -3,8 +3,8 @@ import { LegalPage } from "@/components/LegalPage";
 import { guarantee } from "@/data/content";
 
 export const metadata: Metadata = {
-  title: "Condiciones de la garantía | WASD Solutions",
-  description: "Condiciones de la garantía de resultados de WASD Solutions.",
+  title: "Condiciones de la garantía | Kodena",
+  description: "Condiciones de la garantía de resultados de Kodena.",
   alternates: { canonical: "/garantia/" },
 };
 

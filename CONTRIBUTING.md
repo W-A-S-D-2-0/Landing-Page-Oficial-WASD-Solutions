@@ -1,4 +1,4 @@
-# Cómo trabajamos en la landing de WASD
+# Cómo trabajamos en la landing de Kodena
 
 ## Ramas
 
@@ -53,14 +53,14 @@ src/
 ├── app/                  # rutas de Next.js (page.tsx, layout.tsx, sitemap.ts…)
 ├── components/
 │   ├── sections/         # una sección por archivo + su .module.css
-│   └── ui/               # piezas reutilizables (Logo, ThemeToggle, KeyCap, Icons…)
+│   └── ui/               # piezas reutilizables (Logo, ThemeToggle, Intro, Icons…)
 ├── data/                 # TODO el contenido editable
 └── lib/                  # lógica sin interfaz (whatsapp, analytics, lead)
 ```
 
 | Qué | Convención | Ejemplo |
 | --- | --- | --- |
-| Componentes | `PascalCase.tsx`, un componente principal por archivo, exportación con nombre | `KeyCap`, `export function Services()` |
+| Componentes | `PascalCase.tsx`, un componente principal por archivo, exportación con nombre | `LineIcon`, `export function Services()` |
 | Secciones nuevas | En `components/sections/` y agregadas en orden en `src/app/page.tsx` | `Testimonials.tsx` |
 | Datos | En `src/data/`, archivos en minúscula, exportaciones en `camelCase` | `faq.ts` → `export const faq` |
 | Helpers | En `src/lib/`, archivos en minúscula | `whatsapp.ts` |
@@ -69,7 +69,7 @@ src/
 
 ## Reglas que no se rompen
 
-1. **Textos solo en `src/data/`.** La landing no publica precios de WASD.
+1. **Textos solo en `src/data/`.** La landing no publica precios de Kodena.
 2. **Colores y medidas solo con tokens** de `src/app/globals.css` (`var(--surface)`, `var(--text)`, `var(--primary)`, `var(--cta-bg)`…), que cambian solos con el tema claro/oscuro. Estilos en el `.module.css` de cada componente.
 3. **Animaciones con intención:** usa `data-reveal` para la aparición al hacer scroll. Entradas de 0.6–1.2 s con `ease-out`, nada en bucle infinito, siempre respetando `prefers-reduced-motion` y sin depender del JavaScript para ver el contenido.
 4. **Nada inventado:** ni clientes, ni testimonios, ni reseñas, ni logos, ni cifras de resultados. Lo ilustrativo va rotulado como "Ejemplo ilustrativo" y los clientes reales se muestran con su permiso.

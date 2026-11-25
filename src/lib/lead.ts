@@ -64,7 +64,7 @@ export function validateLead(lead: Lead): LeadErrors {
 
 function leadMessage(lead: Lead): string {
   const lines = [
-    "Hola WASD, quiero mi demo gratis.",
+    "Hola Kodena, quiero mi demo gratis.",
     "",
     `• Nombre: ${lead.name.trim()}`,
     `• Negocio: ${lead.business.trim()}`,

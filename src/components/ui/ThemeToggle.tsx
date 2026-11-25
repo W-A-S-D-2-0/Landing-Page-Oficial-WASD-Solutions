@@ -4,14 +4,14 @@ import { useSyncExternalStore, type MouseEvent } from "react";
 import { Moon, Sun } from "@/components/ui/Icons";
 import styles from "./ThemeToggle.module.css";
 
-const STORAGE_KEY = "wasd-theme";
+const STORAGE_KEY = "kodena-theme";
 type Theme = "light" | "dark";
 
 /**
  * Se ejecuta en <head> antes de pintar: aplica el tema guardado o, si no hay,
  * el del sistema. Así no hay destello del tema equivocado.
  */
-export const themeInitScript = `(function(){try{var t=localStorage.getItem('${STORAGE_KEY}');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme='light'}document.documentElement.classList.add('js');try{if(sessionStorage.getItem('wasd-intro'))document.documentElement.classList.add('intro-seen');else sessionStorage.setItem('wasd-intro','1')}catch(e){}})()`;
+export const themeInitScript = `(function(){try{var t=localStorage.getItem('${STORAGE_KEY}');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme='light'}document.documentElement.classList.add('js');try{if(sessionStorage.getItem('kodena-intro'))document.documentElement.classList.add('intro-seen');else sessionStorage.setItem('kodena-intro','1')}catch(e){}})()`;
 
 /** El tema vive en <html data-theme>: se lee de ahí y se observa si cambia. */
 function subscribe(onChange: () => void) {
