@@ -18,7 +18,6 @@
 .bladePeach {
   position: absolute;
   border-radius: 60px 180px 60px 180px;
-  animation: blade 1200ms var(--ease-out) both;
 }
 
 .bladeCoral {
@@ -28,7 +27,6 @@
   height: 240px;
   background: var(--logo-coral);
   transform: skewX(-40deg);
-  animation-delay: calc(var(--intro-delay) + 100ms);
 }
 
 .bladePeach {
@@ -38,14 +36,6 @@
   height: 260px;
   background: var(--logo-peach);
   transform: skewX(40deg);
-  animation-delay: calc(var(--intro-delay) + 250ms);
-}
-
-@keyframes blade {
-  from {
-    opacity: 0;
-    translate: 80px 0;
-  }
 }
 
 .grid {
@@ -136,11 +126,49 @@
   color: var(--accent-strong);
 }
 
+/* ───────── Proyecto real ───────── */
+
+.project {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  min-height: 52px;
+  margin-top: 32px;
+  padding: 10px 18px;
+  border-radius: 18px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-card);
+  font-size: 15.5px;
+  line-height: 1.4;
+}
+
+.project b {
+  font-size: 17px;
+}
+
+.project small {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+
+.project small::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
 /* ───────── Lado derecho ───────── */
 
 .visual {
   position: relative;
-  min-height: 580px;
   animation: rise 1100ms var(--ease-out) calc(var(--intro-delay) + 200ms) both;
 }
 
@@ -154,175 +182,6 @@
 
 .photo img {
   object-fit: cover;
-}
-
-/* Celular con la web de ejemplo */
-.phone {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 280px;
-  padding: 10px;
-  border-radius: 42px;
-  background: var(--device);
-  box-shadow: 0 40px 80px rgb(11 38 48 / 0.32);
-  transform: translate(-50%, -50%) rotate(-3deg);
-}
-
-.screen {
-  height: 540px;
-  overflow: hidden;
-  border-radius: 33px;
-  background: var(--mock-bg);
-  color: var(--mock-ink);
-}
-
-.status {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 20px 8px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.siteHead {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 6px 16px 12px;
-  font-size: 16px;
-  font-weight: 800;
-}
-
-.siteHead i {
-  width: 26px;
-  height: 26px;
-  border-radius: 8px;
-  background: linear-gradient(140deg, #8a3b2f, #c46a3c);
-}
-
-.siteCover {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  height: 190px;
-  margin: 0 14px;
-  padding: 18px;
-  border-radius: 18px;
-  background: linear-gradient(150deg, #8a3b2f, #c46a3c);
-  color: #fff;
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1.15;
-}
-
-.siteCover span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  align-self: flex-start;
-  margin-top: 12px;
-  padding: 7px 12px;
-  border-radius: 9px;
-  background: #fff;
-  color: #1f6a45;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.siteRow {
-  display: block;
-  height: 54px;
-  margin: 10px 14px 0;
-  border-radius: 12px;
-  background: #f1efea;
-}
-
-/* Mensaje que entra por WhatsApp */
-.message {
-  position: absolute;
-  left: -16px;
-  bottom: 70px;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  max-width: 300px;
-  padding: 14px 16px;
-  border-radius: 18px;
-  background: var(--mock-bg);
-  color: var(--mock-ink);
-  box-shadow: 0 20px 44px rgb(11 38 48 / 0.22);
-  font-size: 15.5px;
-  line-height: 1.4;
-  animation: pop 700ms cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--intro-delay) + 1100ms) both;
-}
-
-.message b {
-  display: block;
-  font-size: 13px;
-  color: #1f6a45;
-}
-
-.messageIcon {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: var(--wa-bg);
-  color: var(--wa-fg);
-}
-
-@keyframes pop {
-  from {
-    opacity: 0;
-    transform: translateY(16px) scale(0.92);
-  }
-}
-
-/* Tarjeta del proyecto real */
-.project {
-  position: absolute;
-  top: 330px;
-  right: -16px;
-  display: flex;
-  flex-direction: column;
-  padding: 14px 18px;
-  border-radius: 18px;
-  background: var(--surface);
-  color: var(--text);
-  box-shadow: var(--shadow-card);
-  font-size: 15px;
-  line-height: 1.4;
-  transition: transform 250ms var(--ease-out);
-  animation: pop 700ms cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--intro-delay) + 800ms) both;
-}
-
-.project:hover {
-  transform: translateY(-3px);
-}
-
-.project b {
-  font-size: 17px;
-}
-
-.project small {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 4px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--accent-ink);
-}
-
-.project small::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: currentColor;
 }
 
 @media (max-width: 1060px) {
@@ -375,29 +234,5 @@
   .features li {
     gap: 10px;
     font-size: 16px;
-  }
-
-  .visual {
-    min-height: 500px;
-  }
-
-  .phone {
-    width: 230px;
-  }
-
-  .screen {
-    height: 460px;
-  }
-
-  .message {
-    left: 0;
-    bottom: 10px;
-    max-width: 220px;
-    font-size: 14.5px;
-  }
-
-  /* En el celular la tarjeta taparía la web de ejemplo */
-  .project {
-    display: none;
   }
 }

@@ -1,0 +1,356 @@
+/*
+ * Ejemplo ilustrativo del hero: un pedido contado una sola vez.
+ * Los estilos sin animación son la pantalla FINAL (chat completo y avisos):
+ * es lo que se ve con movimiento reducido. Cada momento es --t0 + --at.
+ * Los colores del celular son fijos porque los mockups siempre son claros.
+ */
+.demo {
+  /* Empieza cuando la pantalla de entrada ya dejó ver la portada. */
+  --t0: calc(var(--intro-delay) + 0.9s);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.stage,
+.scene {
+  width: 100%;
+  height: 580px;
+}
+
+.scene {
+  position: relative;
+}
+
+/* ───────── Celular ───────── */
+
+.phone {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 290px;
+  padding: 10px;
+  border-radius: 42px;
+  background: var(--device);
+  box-shadow: 0 40px 80px rgb(11 38 48 / 0.32);
+  transform: translate(-50%, -50%) rotate(-3deg);
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 540px;
+  overflow: hidden;
+  border-radius: 33px;
+  background: var(--mock-bg);
+  color: var(--mock-ink);
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 20px 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 16px 12px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.head i {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: linear-gradient(140deg, #8a3b2f, #c46a3c);
+}
+
+.views {
+  position: relative;
+  flex: 1;
+}
+
+.site,
+.chat {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ───────── 1. La web del negocio ───────── */
+
+.site {
+  padding: 0 14px 16px;
+  opacity: 0;
+  animation: site-leave 600ms var(--ease-out) calc(var(--t0) + 1.8s) both;
+}
+
+.cover {
+  display: flex;
+  align-items: flex-end;
+  height: 150px;
+  padding: 16px;
+  border-radius: 18px;
+  background: linear-gradient(150deg, #8a3b2f, #c46a3c);
+  color: #fff;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.products {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.products li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: #f1efea;
+  font-size: 13.5px;
+  line-height: 1.3;
+}
+
+.products i {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: linear-gradient(140deg, #c46a3c, #e3a36b);
+}
+
+.products span {
+  flex: 1;
+}
+
+.products b {
+  white-space: nowrap;
+}
+
+.siteCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  padding: 12px;
+  border-radius: 999px;
+  background: var(--wa-bg);
+  color: var(--wa-fg);
+  font-size: 14px;
+  font-weight: 700;
+  animation: press 600ms var(--ease-out) calc(var(--t0) + 1.2s);
+}
+
+/* ───────── 2. El chat con el asistente ───────── */
+
+.chat {
+  gap: 9px;
+  padding: 0 12px;
+  animation: enter 600ms var(--ease-out) calc(var(--t0) + 1.8s) both;
+}
+
+.assistant {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid #e8eae5;
+  color: #1f6a45;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.assistant::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.bubble {
+  align-self: flex-start;
+  max-width: 84%;
+  padding: 9px 12px;
+  border-radius: 15px;
+  background: #f1efea;
+  font-size: 14px;
+  line-height: 1.4;
+  animation: enter 600ms var(--ease-out) calc(var(--t0) + var(--at)) both;
+}
+
+.mine {
+  align-self: flex-end;
+  background: #123b49;
+  color: #fff;
+}
+
+/* «Escribiendo…» ocupa el mismo lugar que la respuesta que viene. */
+.reply {
+  display: grid;
+  justify-items: start;
+}
+
+.reply > * {
+  grid-area: 1 / 1;
+}
+
+.typing {
+  align-self: start;
+  padding: 9px 12px;
+  border-radius: 15px;
+  background: #f1efea;
+  color: #6b7480;
+  font-size: 13px;
+  opacity: 0;
+  animation: typing var(--lasts) linear calc(var(--t0) + var(--at));
+}
+
+/* ───────── 3. Lo que recibe el negocio ───────── */
+
+.card {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 250px;
+  padding: 13px 16px;
+  border-radius: 18px;
+  background: var(--mock-bg);
+  color: var(--mock-ink);
+  box-shadow: 0 20px 44px rgb(11 38 48 / 0.24);
+  font-size: 15px;
+  line-height: 1.4;
+  animation: enter 700ms var(--ease-out) calc(var(--t0) + var(--at)) both;
+}
+
+.card b {
+  display: block;
+}
+
+.cardIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fde6e0;
+  color: #b8432f;
+}
+
+.order {
+  bottom: 28px;
+  left: -16px;
+}
+
+.alert {
+  top: 28px;
+  right: -16px;
+}
+
+/* ───────── Rótulo ───────── */
+
+.note {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 12.5px;
+}
+
+/* El celular aún no está a la vista: todo espera. */
+.demo[data-waiting] * {
+  animation-play-state: paused !important;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+  }
+}
+
+@keyframes site-leave {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes press {
+  50% {
+    scale: 0.94;
+  }
+}
+
+@keyframes typing {
+  20%,
+  80% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 760px) {
+  .stage,
+  .scene {
+    height: 590px;
+  }
+
+  /* El celular baja para que el aviso quede arriba sin tapar el nombre. */
+  .phone {
+    top: calc(50% + 30px);
+    width: 260px;
+  }
+
+  .screen {
+    height: 480px;
+  }
+
+  .cover {
+    height: 120px;
+    font-size: 17px;
+  }
+
+  .bubble {
+    font-size: 13.5px;
+  }
+
+  .card {
+    max-width: 215px;
+    padding: 11px 13px;
+    font-size: 14px;
+  }
+
+  .order {
+    bottom: 0;
+    left: -6px;
+  }
+
+  .alert {
+    top: 0;
+    right: -6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo * {
+    animation: none !important;
+  }
+}

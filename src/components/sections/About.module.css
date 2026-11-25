@@ -1,6 +1,6 @@
 .grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
   gap: 64px;
   align-items: center;
 }
@@ -9,46 +9,146 @@
   margin-bottom: 0;
 }
 
-.text {
-  margin-top: 18px;
-  font-size: 25px;
-  font-weight: 500;
-  line-height: 1.45;
-  letter-spacing: -0.01em;
-}
-
-.values {
-  display: grid;
-  gap: 16px;
-}
-
-.values li {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 22px 24px;
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+.eyebrow {
+  margin-bottom: 8px;
   font-size: 17px;
+  font-weight: 500;
   color: var(--text-muted);
 }
 
-.values b {
-  display: block;
-  font-size: 19px;
-  color: var(--text);
+.text {
+  margin-top: 20px;
+  font-size: 21px;
+  line-height: 1.6;
+  color: var(--text-muted);
 }
 
-.icon {
+/* ───────── Foto sobre las hojas del isotipo ───────── */
+
+/* 16:9 como la foto: así no se recorta a nadie de los costados. */
+.picture {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.leafCoral,
+.leafPeach {
+  position: absolute;
+  width: 58%;
+  height: 48%;
+}
+
+.leafCoral {
+  top: 0;
+  right: 0;
+  border-radius: 40px 120px;
+  background: var(--logo-coral);
+}
+
+.leafPeach {
+  bottom: 0;
+  left: 0;
+  border-radius: 120px 40px;
+  background: var(--logo-peach);
+}
+
+.photo {
+  position: absolute;
+  inset: 16px;
+  overflow: hidden;
+  border-radius: 32px 96px 8px 8px;
+  background: var(--surface);
+}
+
+.photo img {
+  object-fit: cover;
+}
+
+.pending {
   display: grid;
   place-items: center;
-  flex: none;
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  background: var(--accent-soft);
-  color: var(--accent-strong);
+  height: 100%;
+  padding: 20px;
+  border: 2px dashed var(--border-strong);
+  border-radius: inherit;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* ───────── La cuerda con nudos: un hilo bajo cada persona ───────── */
+
+.rope {
+  display: block;
+  height: 3px;
+  margin: -3px 16px 0;
+  border-radius: 3px;
+  background: var(--primary);
+  position: relative;
+}
+
+.members {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: -1px 16px 0;
+  text-align: center;
+}
+
+.members svg {
+  margin: 0 auto;
+}
+
+.members path {
+  fill: none;
+  stroke: var(--accent-strong);
+  stroke-width: 3;
+}
+
+.members circle {
+  fill: var(--accent-strong);
+}
+
+.members b {
+  display: block;
+  margin-top: 6px;
+  font-size: 20px;
+}
+
+/*
+ * La entrada: aparece la foto (data-reveal), se tiende la cuerda y bajan los
+ * hilos. Sin JavaScript no existe .js y todo se ve en su estado final.
+ */
+:global(.js) .rope {
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 800ms var(--ease-out) 400ms;
+}
+
+:global(.js) .members li {
+  opacity: 0;
+  translate: 0 12px;
+  transition:
+    opacity 700ms var(--ease-out) var(--d),
+    translate 700ms var(--ease-out) var(--d);
+}
+
+:global(.js) .members path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 700ms var(--ease-out) var(--d);
+}
+
+:global(.js) .team:global(.is-visible) .rope {
+  transform: none;
+}
+
+:global(.js) .team:global(.is-visible) .members li {
+  opacity: 1;
+  translate: none;
+}
+
+:global(.js) .team:global(.is-visible) .members path {
+  stroke-dashoffset: 0;
 }
 
 @media (max-width: 900px) {
@@ -58,6 +158,39 @@
   }
 
   .text {
-    font-size: 21px;
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 760px) {
+  .photo {
+    inset: 12px;
+    border-radius: 24px 64px 6px 6px;
+  }
+
+  .rope,
+  .members {
+    margin-inline: 4px;
+  }
+
+  .members b {
+    font-size: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(.js) .rope {
+    transform: none;
+  }
+
+  :global(.js) .members li {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+
+  :global(.js) .members path {
+    stroke-dashoffset: 0;
+    transition: none;
   }
 }

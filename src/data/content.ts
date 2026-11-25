@@ -51,22 +51,60 @@ export const hero = {
    * Nunca fotos de stock ni generadas con IA.
    */
   photo: null as null | { src: string; alt: string },
-  /** Ejemplo ilustrativo dentro del celular del hero. */
-  example: { name: "Dulce Antojo", description: "Repostería artesanal con delivery en Surco" },
-  message: { from: "Nuevo mensaje", text: "Hola, ¿hacen tortas por encargo para el sábado?" },
+  /**
+   * Ejemplo ilustrativo dentro del celular del hero: un pedido de principio a
+   * fin en un negocio ficticio. Sus precios no son de Kodena. Los textos del
+   * chat son cortos para que entren en el celular.
+   */
+  demo: {
+    name: "Dulce Antojo",
+    description: "Repostería artesanal con delivery en Surco",
+    products: [
+      { name: "Torta de chocolate", price: "S/ 65" },
+      { name: "Tres leches", price: "S/ 55" },
+      { name: "Caja de alfajores", price: "S/ 28" },
+    ],
+    siteCta: "Pedir por WhatsApp",
+    assistant: "Asistente en línea",
+    typing: "Escribiendo…",
+    chat: {
+      ask: "Hola, ¿hacen tortas para el sábado?",
+      offer: "¡Sí! Tenemos chocolate y tres leches. ¿Para cuántas personas?",
+      detail: "Para 15, de chocolate.",
+      confirm: "Listo, queda separada para el sábado.",
+    },
+    order: { title: "Pedido registrado", text: "Torta de chocolate, 15 personas, sábado" },
+    alert: { title: "Aviso a tu celular", text: "Te llegó un pedido mientras atendías" },
+    note: "Ejemplo ilustrativo.",
+  },
+  /** Enlace al proyecto real, bajo las garantías (fuera del ejemplo ficticio). */
   projectCard: { title: "Woodland Perú", text: "Web, asistente y sistema", tag: "Proyecto real" },
 };
 
 /* ───────────────────────── Quiénes somos ───────────────────────── */
 
+/**
+ * El significado de Kodena en dos frases, una sola foto de los tres y la cuerda
+ * con nudos (como un quipu) con un hilo bajo cada integrante.
+ */
 export const about = {
-  title: "Quiénes somos",
-  text: "Somos una startup peruana que ayuda a negocios y pymes a crecer con soluciones digitales simples, rápidas y confiables.",
-  values: [
-    { icon: "heart", title: "Simples", text: "Te hablamos claro, sin palabras técnicas." },
-    { icon: "zap", title: "Rápidas", text: "Tu web publicada en 48 horas." },
-    { icon: "check", title: "Confiables", text: "Demo gratis y garantía de 60 días." },
-  ] as Array<{ icon: IconName; title: string; text: string }>,
+  eyebrow: "Quiénes somos",
+  title: "Código con raíz peruana.",
+  text: "Nuestros antepasados construyeron, conectaron y ordenaron información. Nosotros lo hacemos en digital.",
+  /**
+   * Foto real de los tres juntos, horizontal 16:9. Si es null se ve el espacio
+   * marcado. Nunca fotos de stock ni con IA.
+   */
+  photo: {
+    src: "/equipo/equipo.webp",
+    alt: "Los tres integrantes de Kodena, sentados y con polos negros de la Hackathon Transforma+ MIPYME",
+  } as null | { src: string; alt: string },
+  photoPending: "Foto de los tres juntos",
+  /**
+   * Una palabra bajo cada persona de la foto, de izquierda a derecha. Sin
+   * nombres ni roles: el equipo prefiere no exponerse de más.
+   */
+  verbs: ["Construir", "Conectar", "Organizar"],
 };
 
 /* ───────────────────────── Antes y después ───────────────────────── */
@@ -262,12 +300,12 @@ export const project = {
   intro: "Tablas artesanales de teca. Les hicimos la web, su asistente y su sistema interno.",
   client: "Corporación Wood Land Peru S.A.C.",
   context: "Hackathon Transforma+ MIPYME 2026",
-  url: "https://woodland-peru-web.vercel.app/",
+  url: "https://woodlandpe.com/",
   urlLabel: "Ver la web",
   images: {
     desktop: { src: "/proyectos/woodland-web.jpg", alt: "Portada de la web de Woodland Perú: una tabla de teca con carne a la parrilla y el lema «Sostenibilidad hecha lujo»" },
     mobile: { src: "/proyectos/woodland-celular.jpg", alt: "La web de Woodland Perú vista en un celular, con el botón «Habla con Teca»" },
-    domain: "woodland-peru-web.vercel.app",
+    domain: "woodlandpe.com",
   },
   items: [
     { key: "W", title: "Web y catálogo", text: "Colecciones y grabado para regalos." },
@@ -328,23 +366,6 @@ export const leadForm = {
     fallback: "¿No se abrió WhatsApp? Toca aquí",
   },
   privacyNote: "Solo usamos tus datos para enviarte tu demo.",
-};
-
-/* ───────────────────────── Equipo ───────────────────────── */
-
-/**
- * Sección OCULTA hasta tener nombres y fotos reales (enabled: false).
- * Fotos en /public/equipo/ (cuadradas, 600×600, WebP). Nunca fotos generadas con IA.
- */
-export const team = {
-  enabled: false,
-  title: "Un equipo joven de Lima",
-  text: "Trabajamos cerca de ti, por WhatsApp y sin tecnicismos.",
-  members: [
-    { name: "[NOMBRE]", role: "[ROL]", photo: "[FOTO]" },
-    { name: "[NOMBRE]", role: "[ROL]", photo: "[FOTO]" },
-    { name: "[NOMBRE]", role: "[ROL]", photo: "[FOTO]" },
-  ],
 };
 
 /* ───────────────────────── Preguntas y footer ───────────────────────── */
