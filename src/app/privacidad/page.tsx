@@ -3,8 +3,8 @@ import { LegalPage } from "@/components/LegalPage";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Política de privacidad | WASD Solutions",
-  description: "Cómo WASD trata tus datos personales, conforme a la Ley N.º 29733.",
+  title: "Política de privacidad | Kodena",
+  description: "Cómo Kodena trata tus datos personales, conforme a la Ley N.º 29733.",
   alternates: { canonical: "/privacidad/" },
 };
 
@@ -12,7 +12,7 @@ export default function PrivacidadPage() {
   return (
     <LegalPage title="Política de privacidad" updated="[FECHA]">
       <p>
-        Esta política explica cómo {site.legal.businessName} (RUC {site.legal.ruc}), en adelante “WASD Solutions”, trata los
+        Esta política explica cómo {site.legal.businessName} (RUC {site.legal.ruc}), en adelante “Kodena”, trata los
         datos personales que nos compartes, conforme a la Ley N.º 29733, Ley de Protección de Datos Personales, y su
         reglamento.
       </p>

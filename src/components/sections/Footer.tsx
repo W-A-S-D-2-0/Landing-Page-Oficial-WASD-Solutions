@@ -11,12 +11,12 @@ export function Footer() {
   const socials = site.social.filter((s) => !isPlaceholder(s.href));
 
   return (
-    <footer className={styles.footer}>
+    <footer className={`${styles.footer} on-deep`}>
       <div className="container">
         <div className={styles.top}>
           <div className={styles.brandCol}>
             <p className={styles.brand}>
-              <Logo width={60} />
+              <Logo width={160} />
             </p>
             <p className={styles.phrase}>{footer.phrase}</p>
           </div>
@@ -82,7 +82,6 @@ export function Footer() {
           <p>
             © {year} {site.legal.businessName} · RUC {site.legal.ruc}. {footer.rights}
           </p>
-          <p>{site.tagline}</p>
         </div>
       </div>
     </footer>

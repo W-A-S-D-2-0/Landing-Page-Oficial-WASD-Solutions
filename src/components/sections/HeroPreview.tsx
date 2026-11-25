@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { hero, type KeyLetter } from "@/data/content";
+import { liveDemo, type KeyLetter } from "@/data/content";
 import { ArrowRight, BarChart, Check, WhatsAppIcon } from "@/components/ui/Icons";
 import styles from "./HeroPreview.module.css";
 
@@ -14,7 +14,7 @@ type Props = {
   typing: "name" | "description" | null;
 };
 
-const p = hero.preview;
+const p = liveDemo.preview;
 
 function lowerFirst(text: string) {
   return text ? text.charAt(0).toLowerCase() + text.slice(1) : text;
@@ -35,7 +35,7 @@ function Caret({ show }: { show: boolean }) {
  * Ejemplo que se arma en vivo según el servicio elegido:
  * W web, A agente especializado en la web del negocio, S panel de reservas y pedidos, D app.
  * Cada paso (1 a 5) hace aparecer una parte. Siempre en colores claros:
- * representa la web o app del cliente, no la página de WASD.
+ * representa la web o app del cliente, no la página de Kodena.
  */
 export function HeroPreview({ service, name, description, domain, step, typing }: Props) {
   const on = (n: number) => (step >= n ? "" : undefined);
@@ -58,7 +58,7 @@ export function HeroPreview({ service, name, description, domain, step, typing }
   const ready = (
     <span className={styles.ready} data-on={on(5)}>
       <Check size={13} />
-      {hero.readyLabel}
+      {liveDemo.readyLabel}
     </span>
   );
 

@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { header } from "@/data/content";
-import { site } from "@/data/site";
+import { isPlaceholder, site } from "@/data/site";
 import { whatsappUrl } from "@/lib/whatsapp";
-import { Close, Menu } from "@/components/ui/Icons";
+import { Close, Menu, WhatsAppIcon } from "@/components/ui/Icons";
 import { Logo } from "@/components/ui/Logo";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import styles from "./Header.module.css";
@@ -42,7 +42,7 @@ export function Header() {
     <header className={styles.header} data-scrolled={scrolled || open ? "" : undefined}>
       <div className={`container ${styles.bar}`}>
         <Link href="/" className={styles.brand} aria-label={`${site.name}, ir al inicio`}>
-          <Logo width={60} />
+          <Logo width={150} />
         </Link>
 
         <nav aria-label="Principal" className={styles.nav}>
@@ -56,6 +56,12 @@ export function Header() {
         </nav>
 
         <div className={styles.actions}>
+          {!isPlaceholder(site.contact.whatsappDisplay) && (
+            <p className={styles.phone}>
+              {header.phoneLabel}
+              <b>{site.contact.whatsappDisplay}</b>
+            </p>
+          )}
           <ThemeToggle labels={header.theme} />
           <a
             href={whatsappUrl({ type: "general" })}
@@ -65,6 +71,7 @@ export function Header() {
             data-track="whatsapp_click"
             data-track-label="header"
           >
+            <WhatsAppIcon size={18} />
             {header.cta}
             <span className="sr-only">(se abre WhatsApp)</span>
           </a>
@@ -100,6 +107,7 @@ export function Header() {
             data-track="whatsapp_click"
             data-track-label="menu-movil"
           >
+            <WhatsAppIcon size={20} />
             {header.cta}
           </a>
         </nav>

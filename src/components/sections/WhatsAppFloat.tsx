@@ -6,7 +6,7 @@ import { whatsappUrl } from "@/lib/whatsapp";
 import { Close, WhatsAppIcon } from "@/components/ui/Icons";
 import styles from "./WhatsAppFloat.module.css";
 
-const SEEN_KEY = "wasd-bubble-seen";
+const SEEN_KEY = "kodena-bubble-seen";
 
 /**
  * Botón flotante de WhatsApp, siempre a un toque en el celular.

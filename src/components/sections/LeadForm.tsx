@@ -72,7 +72,7 @@ export function LeadForm() {
   return (
     <section id="diagnostico" className="section" aria-labelledby="diagnostico-title">
       <div className={`container ${styles.grid}`}>
-        <div className={styles.intro}>
+        <div className={`${styles.intro} dash`}>
           <h2 id="diagnostico-title" className="section-title" data-reveal="mask">
             {leadForm.title}
           </h2>

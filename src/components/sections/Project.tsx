@@ -1,9 +1,8 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
-import { project } from "@/data/content";
+import { project, serviceIcons } from "@/data/content";
 import { whatsappUrl } from "@/lib/whatsapp";
-import { ArrowRight, ArrowUpRight } from "@/components/ui/Icons";
-import { KeyCap } from "@/components/ui/KeyCap";
+import { ArrowRight, ArrowUpRight, LineIcon } from "@/components/ui/Icons";
 import styles from "./Project.module.css";
 
 /**
@@ -13,6 +12,7 @@ import styles from "./Project.module.css";
 export function Project() {
   return (
     <section id="proyectos" className={`section ${styles.band} on-deep`} aria-labelledby="proyectos-title">
+      <span className={styles.blade} aria-hidden="true" />
       <div className={`container ${styles.layout}`}>
         <div className={styles.info}>
           <p className={styles.label} data-reveal="">
@@ -29,7 +29,9 @@ export function Project() {
           <ul className={styles.items}>
             {project.items.map((item, i) => (
               <li key={item.key} data-reveal="" style={{ "--reveal-delay": `${120 + i * 110}ms` } as CSSProperties}>
-                <KeyCap letter={item.key} className={styles.cap} />
+                <span className={styles.cap}>
+                  <LineIcon name={serviceIcons[item.key]} size={24} />
+                </span>
                 <div>
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
@@ -51,7 +53,7 @@ export function Project() {
               <ArrowRight size={17} />
               <span className="sr-only">(se abre WhatsApp)</span>
             </a>
-            <a href={project.url} target="_blank" rel="noopener noreferrer" className={styles.visit}>
+            <a href={project.url} target="_blank" rel="noopener noreferrer" className={`btn ${styles.visit}`}>
               {project.urlLabel}
               <ArrowUpRight size={16} />
               <span className="sr-only">(se abre en otra pestaña)</span>
