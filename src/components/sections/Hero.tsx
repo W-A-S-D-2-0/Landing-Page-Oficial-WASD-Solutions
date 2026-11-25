@@ -3,16 +3,18 @@ import Image from "next/image";
 import { hero } from "@/data/content";
 import { site } from "@/data/site";
 import { whatsappUrl } from "@/lib/whatsapp";
-import { LineIcon, WhatsAppIcon } from "@/components/ui/Icons";
+import { ArrowRight, LineIcon, WhatsAppIcon } from "@/components/ui/Icons";
+import { HeroDemo } from "./HeroDemo";
 import styles from "./Hero.module.css";
 
 const rise = (d: number) => ({ "--d": d }) as CSSProperties;
 
 /**
  * Hero con el estilo del tablero de Kodena: lema con barrita coral, título
- * con «tu negocio» en coral, botón coral a WhatsApp y cuatro garantías con
- * íconos. A la derecha, las hojas del isotipo y una web de ejemplo en un
- * celular (o la foto real del equipo, cuando exista en hero.photo).
+ * con «tu negocio» en coral, botón coral a WhatsApp, cuatro garantías con
+ * íconos y el enlace al proyecto real. A la derecha, las hojas del isotipo y
+ * un ejemplo animado en un celular (HeroDemo), sobre la foto real del equipo
+ * cuando exista en hero.photo.
  */
 export function Hero() {
   return (
@@ -57,6 +59,12 @@ export function Hero() {
               </li>
             ))}
           </ul>
+          <a href="#proyectos" className={`${styles.project} ${styles.rise}`} style={rise(5)}>
+            <small>{hero.projectCard.tag}</small>
+            <b>{hero.projectCard.title}</b>
+            <span>{hero.projectCard.text}</span>
+            <ArrowRight size={18} />
+          </a>
         </div>
 
         <div className={styles.visual}>
@@ -66,45 +74,7 @@ export function Hero() {
             </div>
           )}
 
-          {/* Web de ejemplo en un celular (ilustrativa, siempre clara) */}
-          <div className={styles.phone} aria-hidden="true">
-            <div className={styles.screen}>
-              <p className={styles.status}>
-                <span>9:41</span>
-                <span>●●●</span>
-              </p>
-              <p className={styles.siteHead}>
-                <i />
-                {hero.example.name}
-              </p>
-              <div className={styles.siteCover}>
-                {hero.example.description}
-                <span>
-                  <WhatsAppIcon size={12} />
-                  WhatsApp
-                </span>
-              </div>
-              <span className={styles.siteRow} />
-              <span className={styles.siteRow} />
-              <span className={styles.siteRow} />
-            </div>
-          </div>
-
-          <p className={styles.message} aria-hidden="true">
-            <span className={styles.messageIcon}>
-              <WhatsAppIcon size={18} />
-            </span>
-            <span>
-              <b>{hero.message.from}</b>
-              {hero.message.text}
-            </span>
-          </p>
-
-          <a href="#proyectos" className={styles.project}>
-            <b>{hero.projectCard.title}</b>
-            {hero.projectCard.text}
-            <small>{hero.projectCard.tag}</small>
-          </a>
+          <HeroDemo />
         </div>
       </div>
     </section>

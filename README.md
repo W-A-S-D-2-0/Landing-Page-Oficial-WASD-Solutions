@@ -38,7 +38,7 @@ Todo el contenido está en `src/data/`. **No hace falta tocar componentes.**
 | Archivo | Qué contiene |
 | --- | --- |
 | `src/data/site.ts` | Marca, WhatsApp, email, redes, razón social, RUC, Libro de Reclamaciones, menú y SEO |
-| `src/data/content.ts` | Textos de cada sección: header, entrada, hero, sobre nosotros, servicios, proyecto Woodland Perú, pasos y garantía, formulario de cierre, equipo (oculto), preguntas y footer. Regla: pocas palabras; que los ejemplos expliquen |
+| `src/data/content.ts` | Textos de cada sección: header, entrada, hero, sobre nosotros, servicios, proyecto Woodland Perú, pasos y garantía, formulario de cierre, preguntas y footer. Regla: pocas palabras; que los ejemplos expliquen |
 | `src/data/faq.ts` | Preguntas frecuentes (también alimentan el JSON-LD `FAQPage`) |
 | `src/data/testimonials.ts` | Testimonios (preparado y **oculto** hasta tener datos reales) |
 
@@ -60,7 +60,6 @@ Todo el contenido está en `src/data/`. **No hace falta tocar componentes.**
 | Redes sociales | `src/data/site.ts` → `social` (las que sigan con `[URL …]` no se muestran) |
 | `[RAZÓN SOCIAL]`, `[RUC]` | `src/data/site.ts` → `legal` |
 | `[URL LIBRO DE RECLAMACIONES]` | `src/data/site.ts` → `legal.complaintsBookUrl` (obligatorio en Perú) |
-| Equipo: `[NOMBRE]`, `[ROL]`, `[FOTO]` | `src/data/content.ts` → `team` (sección oculta con `enabled: false`; falta el componente) |
 | `[CONDICIONES DE LA GARANTÍA]` | `src/app/garantia/page.tsx` |
 | Política de privacidad (Ley N.º 29733) y términos | `src/app/privacidad/page.tsx`, `src/app/terminos/page.tsx` |
 | `[FECHA]` de las páginas legales | Las 3 páginas legales |
@@ -79,9 +78,10 @@ Todo el contenido está en `src/data/`. **No hace falta tocar componentes.**
 | --- | --- | --- |
 | Entrada | `ui/Intro.tsx` | Pantalla petróleo de ≈2,9 s: la K de Kodena se arma, «odena» se escribe como en un teclado y entra el lema; al salir, la marca se desvanece y un círculo se abre desde el centro. Solo CSS, una vez por sesión, nunca con movimiento reducido |
 | Header | `sections/Header.tsx` | Fijo, gana fondo al bajar; interruptor de tema (el tema nuevo se abre en círculo desde el botón) y menú en celular |
-| Hero | `sections/Hero.tsx` | Qué se lleva el cliente (web lista en 48 horas, demo gratis), WhatsApp verde como primer botón y una web de ejemplo en un celular con un mensaje entrando. Si se agrega una foto real del equipo en `hero.photo`, reemplaza el fondo |
+| Hero | `sections/Hero.tsx`, `HeroDemo.tsx` | Qué se lleva el cliente, botón coral a WhatsApp, enlace al proyecto real y un celular que cuenta un pedido una sola vez (web, chat con el asistente, pedido registrado y aviso). En celular empieza cuando se ve. Textos en `hero.demo`; tiempos en `HeroDemo.tsx`. Si se agrega una foto real del equipo en `hero.photo`, queda de fondo |
 | Antes y después | `sections/BeforeAfter.tsx` | Ejemplo ilustrativo: WhatsApp lleno de mensajes sin responder frente a la web con un asistente que registra el turno |
 | Servicios | `sections/Services.tsx` | Cuatro tarjetas con ícono de línea coral, nombre claro y enlace a WhatsApp |
+| Quiénes somos | `sections/About.tsx` | Texto al costado de una sola foto del equipo; de ella cuelga una cuerda con nudos (como un quipu) con un hilo y una palabra bajo cada integrante, sin nombres ni roles. La foto es `public/equipo/equipo.webp`. La cuerda se tiende y los hilos bajan al llegar a la sección |
 | Mira cómo quedaría tu negocio | `sections/LiveDemo.tsx`, `HeroPreview.tsx` | El visitante escribe el nombre de su negocio, a qué se dedica y qué necesita (W web, A agente, S reservas y pedidos, D app) y el ejemplo se arma en vivo. Textos en `liveDemo` de `src/data/content.ts` |
 | Proyecto Woodland | `sections/Project.tsx` | Bloque petróleo con capturas reales de su web (escritorio y celular) y lo que construimos, por tecla |
 | Así trabajamos | `sections/HowItWorks.tsx` | La línea de pasos se dibuja y los pasos entran uno a uno; garantía de 60 días en una franja |
