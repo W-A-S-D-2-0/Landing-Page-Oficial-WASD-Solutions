@@ -77,7 +77,7 @@ Todo el contenido está en `src/data/`. **No hace falta tocar componentes.**
 
 | Sección | Archivo | Qué se mueve |
 | --- | --- | --- |
-| Entrada | `ui/Intro.tsx` | Pantalla petróleo de ≈2 s: la K de Kodena se arma pieza por pieza, aparece el nombre y la página se abre en círculo. Solo CSS, una vez por sesión, nunca con movimiento reducido |
+| Entrada | `ui/Intro.tsx` | Pantalla petróleo de ≈2,9 s: la K de Kodena se arma, «odena» se escribe como en un teclado y entra el lema; al salir, la marca se desvanece y un círculo se abre desde el centro. Solo CSS, una vez por sesión, nunca con movimiento reducido |
 | Header | `sections/Header.tsx` | Fijo, gana fondo al bajar; interruptor de tema (el tema nuevo se abre en círculo desde el botón) y menú en celular |
 | Hero | `sections/Hero.tsx` | Qué se lleva el cliente (web lista en 48 horas, demo gratis), WhatsApp verde como primer botón y una web de ejemplo en un celular con un mensaje entrando. Si se agrega una foto real del equipo en `hero.photo`, reemplaza el fondo |
 | Antes y después | `sections/BeforeAfter.tsx` | Ejemplo ilustrativo: WhatsApp lleno de mensajes sin responder frente a la web con un asistente que registra el turno |

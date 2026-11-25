@@ -109,7 +109,7 @@ body {
   --ease-state: cubic-bezier(0.4, 0, 0.2, 1);
   --header-h: 80px;
   /* Cuánto espera la entrada del hero (lo que dura la pantalla de entrada) */
-  --intro-delay: 1.6s;
+  --intro-delay: 1.95s;
 }
 
 /* Tema oscuro: fondo petróleo profundo, textos marfil y acentos coral y durazno. */
