@@ -35,7 +35,7 @@ export const hero = {
   tagline: "Soluciones digitales para tu negocio",
   /** El título se arma así: before + highlight (en coral). */
   title: { before: "Páginas web que hacen crecer", highlight: "tu negocio" },
-  subtitle: "Lista en 48 horas. Te la mostramos gratis en tu celular antes de que pagues.",
+  subtitle: "Lista en 48 horas. La ves antes de pagar.",
   primaryCta: "Solicita tu demo gratis",
   secondaryCta: "Conoce más",
   /** Cuatro garantías con ícono (del tablero de marca). */
@@ -112,17 +112,17 @@ export const about = {
 /** Ejemplo ilustrativo de un día sin y con Kodena (no son datos de un cliente). */
 export const beforeAfter = {
   title: { before: "Tus clientes te buscan en internet.", highlight: "¿Te encuentran?" },
-  aside: "Así cambia el día a día de un negocio cuando tiene su web y un asistente que responde.",
+  aside: "",
   before: {
     tag: "Hoy",
     title: "Respondes lo mismo todo el día",
-    items: ["No apareces en Google", "Se te pasan mensajes", "No sabes de dónde llegan tus clientes"],
+    items: ["No apareces en Google", "Se te pasan mensajes"],
     chat: { header: "WhatsApp · 23 sin leer", messages: ["¿Precio?", "¿Atienden hoy?", "¿Dónde quedan?", "¿Hola?"], late: "Respondiste 6 horas después" },
   },
   after: {
     tag: "Con Kodena",
-    title: "Tu negocio atiende aunque estés ocupado",
-    items: ["Te encuentran en Google", "Responde al instante, de día y de noche", "Cada semana sabes cuántos te escribieron"],
+    title: "Atiende aunque estés ocupado",
+    items: ["Te encuentran en Google", "Responde al instante"],
     phone: {
       name: "Taller Rápido",
       cover: "Mecánica y mantenimiento en San Miguel",
@@ -157,7 +157,7 @@ export const liveDemo = {
   /** Etiqueta sobre la vista previa. */
   live: "En vivo",
   title: "Mira cómo quedaría tu negocio",
-  subtitle: "Escribe el nombre de tu negocio y elige qué necesitas. El ejemplo se arma aquí mismo.",
+  subtitle: "Escribe tu nombre y míralo.",
   fields: {
     name: { label: "¿Cómo se llama tu negocio?", placeholder: "Ej.: Dulce Antojo" },
     description: { label: "¿A qué se dedica?", placeholder: "Ej.: Repostería artesanal con delivery en Surco" },
@@ -257,32 +257,32 @@ export type Service = {
 export const services: { title: string; titleHighlight: string; aside: string; cta: string; items: Service[] } = {
   title: "Lo que hacemos por",
   titleHighlight: "tu negocio",
-  aside: "Empiezas con la web y sumas lo demás cuando lo necesites.",
+  aside: "",
   cta: "Preguntar",
   items: [
     {
       key: "W",
       name: "Páginas web profesionales",
-      description: "Que te encuentren en Google y te escriban por WhatsApp con un toque.",
-      tags: ["Lista en 48 horas", "Se ve bien en el celular"],
+      description: "Que te encuentren y te escriban.",
+      tags: ["Lista en 48 horas"],
     },
     {
       key: "A",
       name: "Agentes especializados",
-      description: "Un asistente que conoce tu negocio y responde por ti, de día y de noche.",
-      tags: ["En tu web", "También en WhatsApp"],
+      description: "Responde por ti, de día y de noche.",
+      tags: ["Web y WhatsApp"],
     },
     {
       key: "S",
       name: "Reservas y pedidos",
-      description: "Tu agenda, tus pedidos y tus pagos ordenados en un solo lugar.",
-      tags: ["Yape y Plin", "Recordatorios"],
+      description: "Agenda, pedidos y pagos en orden.",
+      tags: ["Yape y Plin"],
     },
     {
       key: "D",
       name: "App a tu medida",
-      description: "Una app web o para celular cuando tu negocio necesite algo más grande.",
-      tags: ["Web o móvil", "Hecha para ti"],
+      description: "Para cuando necesites más.",
+      tags: ["Web o móvil"],
     },
   ],
 };
@@ -297,7 +297,7 @@ export const services: { title: string; titleHighlight: string; aside: string; c
 export const project = {
   label: "Proyecto real",
   title: "Woodland Perú",
-  intro: "Tablas artesanales de teca. Les hicimos la web, su asistente y su sistema interno.",
+  intro: "Tablas artesanales de teca.",
   client: "Corporación Wood Land Peru S.A.C.",
   context: "Hackathon Transforma+ MIPYME 2026",
   url: "https://woodlandpe.com/",
@@ -308,9 +308,9 @@ export const project = {
     domain: "woodlandpe.com",
   },
   items: [
-    { key: "W", title: "Web y catálogo", text: "Colecciones y grabado para regalos." },
-    { key: "A", title: "Teca, su asistente", text: "Cotiza y registra pedidos por chat." },
-    { key: "S", title: "Sistema interno", text: "Pedidos, inventario y producción." },
+    { key: "W", title: "Web y catálogo", text: "Colecciones y regalos." },
+    { key: "A", title: "Teca, su asistente", text: "Cotiza por chat." },
+    { key: "S", title: "Sistema interno", text: "Pedidos e inventario." },
   ] as Array<{ key: KeyLetter; title: string; text: string }>,
   cta: "Quiero algo así",
 };
@@ -319,18 +319,18 @@ export const project = {
 
 export const howItWorks = {
   title: "Cómo trabajamos",
-  aside: "Todo por WhatsApp, sin reuniones largas ni palabras técnicas.",
+  aside: "",
   steps: [
-    { icon: "whatsapp" as IconName, title: "Nos escribes", text: "Por WhatsApp. Nos cuentas de tu negocio en dos minutos." },
-    { icon: "monitor" as IconName, title: "Ves tu demo gratis", text: "Te la mandamos gratis para que la veas en tu celular." },
-    { icon: "clock" as IconName, title: "Lista en 48 horas", text: "Hacemos los cambios contigo y queda lista en 48 horas." },
-    { icon: "check" as IconName, title: "Ves resultados", text: "Cada semana te contamos cuántas personas te escribieron." },
+    { icon: "whatsapp" as IconName, title: "Nos escribes", text: "Por WhatsApp, en dos minutos." },
+    { icon: "monitor" as IconName, title: "Ves tu demo gratis", text: "En tu celular." },
+    { icon: "clock" as IconName, title: "Lista en 48 horas", text: "Con tus cambios." },
+    { icon: "check" as IconName, title: "Ves resultados", text: "Cada semana, cuántos te escribieron." },
   ],
 };
 
 export const guarantee = {
   title: "Garantía de 60 días",
-  text: "Si no llegan los contactos que acordamos, el siguiente mes va por nuestra cuenta.",
+  text: "Sin los contactos acordados, el siguiente mes es gratis.",
   linkLabel: "Condiciones",
   href: "/garantia/",
 };
@@ -339,7 +339,7 @@ export const guarantee = {
 
 export const leadForm = {
   title: "Pide tu demo gratis",
-  intro: "Déjanos tus datos y te la mandamos por WhatsApp. Sin compromiso.",
+  intro: "Te la mandamos por WhatsApp.",
   orWhatsapp: "¿Prefieres escribirnos directo?",
   whatsappCta: "Abrir WhatsApp",
   submit: "Quiero mi demo",
