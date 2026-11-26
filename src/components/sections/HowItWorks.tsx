@@ -13,9 +13,11 @@ export function HowItWorks() {
           <h2 id="como-funciona-title" className="section-title" data-reveal="mask">
             {howItWorks.title}
           </h2>
-          <p className="section-aside" data-reveal="">
-            {howItWorks.aside}
-          </p>
+          {howItWorks.aside && (
+            <p className="section-aside" data-reveal="">
+              {howItWorks.aside}
+            </p>
+          )}
         </header>
 
         <ol className={styles.steps} data-reveal="">

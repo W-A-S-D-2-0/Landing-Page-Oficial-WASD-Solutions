@@ -16,9 +16,11 @@ export function BeforeAfter() {
           <h2 id="antes-title" className="section-title" data-reveal="mask">
             {beforeAfter.title.before} <span className={styles.highlight}>{beforeAfter.title.highlight}</span>
           </h2>
-          <p className="section-aside" data-reveal="">
-            {beforeAfter.aside}
-          </p>
+          {beforeAfter.aside && (
+            <p className="section-aside" data-reveal="">
+              {beforeAfter.aside}
+            </p>
+          )}
         </header>
 
         <div className={styles.compare}>

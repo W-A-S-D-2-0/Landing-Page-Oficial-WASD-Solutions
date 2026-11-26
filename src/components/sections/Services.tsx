@@ -13,9 +13,11 @@ export function Services() {
           <h2 id="servicios-title" className="section-title" data-reveal="mask">
             {services.title} <span className="hl">{services.titleHighlight}</span>
           </h2>
-          <p className="section-aside" data-reveal="">
-            {services.aside}
-          </p>
+          {services.aside && (
+            <p className="section-aside" data-reveal="">
+              {services.aside}
+            </p>
+          )}
         </header>
 
         <ul className={styles.grid}>
